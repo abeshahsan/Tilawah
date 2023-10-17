@@ -55,6 +55,11 @@
     background-color: #e1e1e1;
 }
 
+.hamburger:hover:active {
+    box-shadow: none;
+    scale: .95;
+}
+
 
 .login-register{
     display: flex;
