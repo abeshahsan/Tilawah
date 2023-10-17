@@ -1,12 +1,25 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/header.css">
 
 
-<div class="header" style="display: flex; flex-direction: row">
+<div class="header" style="display: flex; flex-direction: row;">
+    <div class="hamburger">
+        <div style="user-select: none; user-focus: none">
+            &#9776
+        </div>
+    </div>
+
+    <!--    <div style="width: 15px"></div>-->
+
     <div class="home-route">
         <a href="/">
-            <div class="logo" style="width: 60px">
-                <img src="images/logo.png" alt="Tilawah" width="100%" height="100%">
+            <div class="logo">
+                <img src="images/logo.png" alt="Tilawah">
             </div>
         </a>
+    </div>
+    <div class="others" style="width: 75%; border: 2px solid black"></div>
+    <div class="login-register">
+        <button type="button" class="login-button">Login</button>
+        <button type="button" class="register-button">Register</button>
     </div>
 </div>

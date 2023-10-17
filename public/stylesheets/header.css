@@ -1,21 +1,91 @@
-.header{
+.header {
     width: 100%;
-    height: 50px;
+    height: 40px;
     background-color: white;
     align-items: center;
-    border-bottom: 2px solid #949393;
-    box-shadow: 0 0 10px 1px #aba9a9;
-    padding: 10px 20px 10px 20px;
+    border-bottom: 1px solid #949393;
+    box-shadow: 0 -3px 15px 1px #aba9a9;
+    padding: 10px 30px 10px 30px;
     margin-bottom: 20px;
+    gap: 25px;
 }
 
-.header .home-route a{
+.header .home-route a {
     font-size: 30px;
     text-decoration: none;
     color: #444343;
 }
-.header .home-route a .logo{
+
+.header .home-route a .logo {
     border: thin solid #cbcaca;
     background-color: #f1f0f0;
     border-radius: 50px;
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header .home-route a .logo img{
+    width: 70%;
+    height: 70%;
+    user-focus: none;
+    user-select: none;
+}
+
+.hamburger {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    align-content: center;
+    font-size: 25px;
+    padding: 6px 6px 6px 6px;
+    border-radius: 25px;
+    display: flex;
+
+    /*Place it in center*/
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.hamburger:hover {
+    background-color: #e1e1e1;
+}
+
+
+.login-register{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.login-register button{
+    padding: 10px 15px 10px 15px;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.login-register .register-button{
+    background-color: lightblue;
+}
+
+.login-register .register-button:hover{
+    box-shadow: 0 0 6px 1px lightblue;
+}
+
+.login-register .login-button{
+    background-color: lightgreen;
+}
+
+.login-register .login-button:hover{
+    box-shadow: 0 0 6px 1px lightgreen;
+}
+
+.login-register button:hover:active{
+    box-shadow: none;
 }
