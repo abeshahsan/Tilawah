@@ -2,7 +2,13 @@
 
 
 <div class="header" style="display: flex; flex-direction: row;">
-    <div class="hamburger">
+    <div
+    <% if (options.hamburger) { %>
+        class="hamburger"
+    <% } else{ %>
+        class="hamburger hidden"
+            <% } %>
+    >
         <div style="user-select: none; user-focus: none">
             &#9776
         </div>
@@ -18,7 +24,13 @@
         </a>
     </div>
     <div class="others" style="width: 75%;"></div>
-    <div class="login-register">
+    <div
+    <% if (options.loginRegister) { %>
+        class="login-register"
+    <% } else { %>
+        class="login-register hidden"
+            <% } %>
+    >
         <button type="button" class="login-button">Login</button>
         <button type="button" class="register-button">Register</button>
     </div>
