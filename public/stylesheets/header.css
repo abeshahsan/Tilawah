@@ -1,0 +1,21 @@
+.header{
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    align-items: center;
+    border-bottom: 2px solid #949393;
+    box-shadow: 0 0 10px 1px #aba9a9;
+    padding: 10px 20px 10px 20px;
+    margin-bottom: 20px;
+}
+
+.header .home-route a{
+    font-size: 30px;
+    text-decoration: none;
+    color: #444343;
+}
+.header .home-route a .logo{
+    border: thin solid #cbcaca;
+    background-color: #f1f0f0;
+    border-radius: 50px;
+}
