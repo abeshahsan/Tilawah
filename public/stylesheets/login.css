@@ -1,6 +1,6 @@
 .login-container {
     width: 420px;
-    height: 60%;
+    height: 70%;
     min-width: 420px;
     min-height: 60%;
     background-color: rgb(226, 226, 252);
@@ -14,7 +14,7 @@
     vertical-align: middle;
 }
 
-form {
+.login-container form {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -22,45 +22,55 @@ form {
     align-items: center;
 }
 
-form div{
+.login-container form.hidden {
+    display: none;
+}
+
+.login-container form div{
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-form div.submit-button-container {
+.login-container form div.submit-button-container {
     display: flex;
     align-items: center;
 }
 
-form div text {
+.login-container form div text {
     font-size: 20px;
     font-weight: bold;
 }
 
-form div input[type="text"], input[type="password"]{
+.login-container form div input[type="text"], input[type="password"]{
     height: 30px;
     border: thin solid #949393;
     border-radius: 6px;
+    color: black;
+    background-color: whitesmoke;
 }
 
-form div input[type="submit"] {
-    height: 30px;
-    width: 70%;
+.login-container form div input[type="submit"] {
+    height: 35px;
+    width: 75%;
     border: none;
-    border-radius: 8px;
-    background-color: rgba(144, 238, 144);
+    border-radius: 6px;
+    background-color: rgb(96, 252, 96);
     cursor: pointer;
     letter-spacing: 1px;
     font-size: 16px;
     font-weight: bold;
 }
 
-form div input[type="submit"]:hover {
-    box-shadow: 0 0 6px 1px rgba(144, 238, 144, 0.65);
+.login-container form div input[type="submit"]:hover {
+    box-shadow: 0 0 6px 1px rgba(96, 252, 96, 0.60);
 }
 
-form div tspan {
+.login-container form div input[id="login-submit"] {
+    margin-top: 30px;
+}
+
+.login-container form div tspan {
     font-size: small;
     font-weight: bold;
     float: right;
@@ -70,14 +80,50 @@ form div tspan {
 }
 
 
-form div input[type="submit"]:hover:active {
+.login-container form div input[type="submit"]:hover:active {
     box-shadow: none;
 }
-
 
 .forgot-password.email.hidden {
     display: none;
 }
 .forgot-password.otp.hidden {
     display: none;
+}
+
+.error{
+    font-size: small;
+    color: red;
+}
+
+.alert{
+    display: block;
+    transform: translateY(40px);
+    background: #f55252;
+    padding: 7px 100px 7px 100px;
+    border-radius: 5px;
+    color: whitesmoke;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    letter-spacing: 2px;
+}
+
+.alert .close{
+    width: 20px;
+    height: 20px;
+    position: absolute; right: 1px; top: 1px;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.alert .close:hover{
+    background-color: #ec7f7f;
+}
+
+.alert.hidden{
+    visibility: hidden;
 }

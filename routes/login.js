@@ -15,4 +15,22 @@ router.get('/login', function (req, res) {
     );
 });
 
+router.post('/login', function (req, res) {
+    res.send({
+        success: 1
+    })
+});
+
+router.post('/forgot-mail', function (req, res) {
+    res.send({
+        success: 1
+    })
+});
+
+router.post('/forgot-otp', function (req, res) {
+    res.send({
+        success: 1
+    })
+});
+
 module.exports = router;
