@@ -88,7 +88,7 @@
 }
 
 .login-register .register-button:hover{
-    box-shadow: 0 0 6px 1px lightblue;
+    box-shadow: 0 0 6px 1px rgba(173, 216, 230, 0.65);
 }
 
 .login-register .login-button{
@@ -96,9 +96,10 @@
 }
 
 .login-register .login-button:hover{
-    box-shadow: 0 0 6px 1px lightgreen;
+    box-shadow: 0 0 6px 1px rgba(144, 238, 144, 0.65);
 }
 
 .login-register button:hover:active{
     box-shadow: none;
 }
+

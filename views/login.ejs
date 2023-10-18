@@ -3,12 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Tilawah | Login</title>
+
+    <%- include('necessary-imports.ejs') %>
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
 </head>
 <body>
 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column">
     <%- include('header.ejs') %>
-    <div style="display: flex; flex-direction: row; width: 100%; height: 100%;">
-
+    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center">
+        <div class="login-container">
+            <form class="login-form" action="/login" method="post" autocomplete="off">
+                <div class="login-form-element">
+                    <text>Username</text>
+                    <input class="login-input" type="text" id="login-username" name="username" required>
+                    <label for="login-username" class="error"></label>
+                </div>
+                <div class="login-form-element">
+                    <text>
+                        Password
+                        <tspan class="forgot-password">
+                            forgot password?
+                        </tspan>
+                    </text>
+                    <input class="login-input" type="password" id="login-password" name="password" required>
+                    <label for="login-password" class="error"></label>
+                </div>
+                <div class="login-form-element submit-button-container">
+                    <input type="submit" id="login-submit" value="Login">
+                </div>
+            </form>
+            <form class="forgot-password email hidden" action="/forgot-mail" method="post" autocomplete="off">
+                <div class="email">
+                    <text>Enter Your Email</text>
+                    <input class="mail-input" type="text" id="forgot-mail-input" name="username" required>
+                    <label for="forgot-mail-input" class="error"></label>
+                </div>
+                <div class="submit-button-container">
+                    <input type="submit" id="email-submit" value="Send OTP">
+                </div>
+            </form>
+            <form class="forgot-password email hidden" action="/forgot-mail" method="post" autocomplete="off">
+                <div class="email">
+                    <text>Enter Your Email</text>
+                    <input class="mail-input" type="text" id="forgot-mail-input" name="username" required>
+                    <label for="forgot-mail-input" class="error"></label>
+                </div>
+                <div class="submit-button-container">
+                    <input type="submit" id="email-submit" value="Send OTP">
+                </div>
+            </form>
+            <form class="forgot-password otp hidden" action="/forgot-otp" method="post" autocomplete="off">
+                <div class="otp">
+                    <text>Enter The OTP</text>
+                    <input class="otp-input" type="text" id="forgot-otp-input" name="username" required>
+                    <label for="forgot-otp-input" class="error"></label>
+                </div>
+                <div class="submit-button-container">
+                    <input type="submit" id="otp-submit" value="Verify">
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 <script src="javascripts/login.js"></script>

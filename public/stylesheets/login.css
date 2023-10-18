@@ -1,0 +1,83 @@
+.login-container {
+    width: 420px;
+    height: 60%;
+    min-width: 420px;
+    min-height: 60%;
+    background-color: rgb(226, 226, 252);
+    border-radius: 20px;
+    box-shadow: 0 0 15px 2px rgba(229, 227, 227, 0.75);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 70%;
+    align-items: center;
+}
+
+form div{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+form div.submit-button-container {
+    display: flex;
+    align-items: center;
+}
+
+form div text {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+form div input[type="text"], input[type="password"]{
+    height: 30px;
+    border: thin solid #949393;
+    border-radius: 6px;
+}
+
+form div input[type="submit"] {
+    height: 30px;
+    width: 70%;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(144, 238, 144);
+    cursor: pointer;
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+form div input[type="submit"]:hover {
+    box-shadow: 0 0 6px 1px rgba(144, 238, 144, 0.65);
+}
+
+form div tspan {
+    font-size: small;
+    font-weight: bold;
+    float: right;
+    color: #6519fd;
+    cursor: pointer;
+    align-content: center;
+}
+
+
+form div input[type="submit"]:hover:active {
+    box-shadow: none;
+}
+
+
+.forgot-password.email.hidden {
+    display: none;
+}
+.forgot-password.otp.hidden {
+    display: none;
+}
