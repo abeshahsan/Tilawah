@@ -14,4 +14,16 @@ router.get('/register', function (req, res) {
     );
 });
 
+router.post('/register-email', function (req, res) {
+    res.send({
+        success : 1
+    })
+});
+
+router.post('/register-otp', function (req, res) {
+    res.send({
+        success : 1
+    })
+});
+
 module.exports = router;

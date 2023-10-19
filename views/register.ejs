@@ -2,15 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tilawah | Register</title>
+    <title>Tilawah | register</title>
 
     <%- include('necessary-imports.ejs') %>
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/register.css">
 </head>
 <body>
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column">
+<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center">
     <%- include('header.ejs') %>
-    <div style="display: flex; flex-direction: row; width: 100%; height: 100%;">
-
+    <div class="alert hidden">
+        <div class="close">
+            &times;
+        </div>
+        <p></p>  <!--        putting the text in <p> tag to change the text dynamically by JS.
+                    otherwise, The 'Close' icon vanishes
+                    -->
+    </div>
+    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center">
+        <div class="register-container">
+            <form class="register email" action="/register-email" method="post" autocomplete="on">
+                <div class="register-form-element">
+                    <text>Enter your email</text>
+                    <input class="register-input" type="text" id="register-email" name="email" required>
+                    <label for="register-email" class="error"></label>
+                </div>
+<!--                <div class="register-form-element">-->
+<!--                    <text>-->
+<!--                        Password-->
+<!--                        <tspan class="forgot-password">-->
+<!--                            forgot password?-->
+<!--                        </tspan>-->
+<!--                    </text>-->
+<!--                    <input class="register-input" type="password" id="register-password" name="password" required>-->
+<!--                    <label for="register-password" class="error"></label>-->
+<!--                </div>-->
+                <div class="register-form-element submit-button-container">
+                    <input type="submit" id="register-submit" value="Send OTP">
+                </div>
+            </form>
+            <form class="register otp hidden" action="/register-otp" method="post" autocomplete="off">
+                <div class="otp">
+                    <text>Enter The OTP</text>
+                    <input class="otp-input" type="text" id="register-otp-input" name="otp" required>
+                    <label for="register-otp-input" class="error"></label>
+                </div>
+                <div class="submit-button-container">
+                    <input type="submit" id="otp-submit" value="Verify">
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 <script src="javascripts/register.js"></script>
