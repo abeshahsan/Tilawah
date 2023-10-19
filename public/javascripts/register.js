@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
     let registerEmail = document.querySelector('.register.email')
     let registerOTP = document.querySelector('.register.otp')
+    let registerPassword = document.querySelector('.register.password')
 
 
     alertClose.addEventListener('click', function () {
@@ -56,10 +57,50 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 dataType: 'json'
             })
                 .done(function (response) {
-                    if (response.success === 0) {    //success
-                        window.location.href = '/';
+                    if (response.success === 1) {    //success
+                        bringPasswordForm()
                     } else {
                         showAlert('Wrong OTP!')
+                    }
+                });
+            return false; // required to block normal submit since you used ajax
+        },
+    })
+
+    $(registerPassword).validate({
+        rules: {
+
+            name: {
+                minlength: 0
+            },
+            'confirm-password': {
+                equalTo: '#register-password'
+            },
+        },
+        messages: {
+            name: {
+                required: "Please enter your name"
+            },
+            password: {
+                required: "Please enter a password",
+            },
+            'confirm-password': {
+                required: "Please retype the password",
+                equalTo: "Passwords don't match"
+            },
+        },
+        submitHandler: function (form) {
+            $.ajax({
+                type: $(form).attr('method'),
+                url: $(form).attr('action'),
+                data: $(form).serialize(),
+                dataType: 'json'
+            })
+                .done(function (response) {
+                    if (response.success === 1) {    //success
+                        window.location.href = '/';
+                    } else {
+                        showAlert('Some error Occurred. Please try again')
                     }
                 });
             return false; // required to block normal submit since you used ajax
@@ -69,6 +110,11 @@ document.addEventListener('DOMContentLoaded', function (event) {
     function bringOTPForm() {
         registerEmail.classList.add('hidden')
         registerOTP.classList.remove('hidden')
+    }
+
+    function bringPasswordForm() {
+        registerOTP.classList.add('hidden')
+        registerPassword.classList.remove('hidden')
     }
 
     function showAlert(text) {
