@@ -62,20 +62,20 @@
                     <input type="submit" id="otp-submit" value="Verify">
                 </div>
             </form>
-            <form class="forgot-password-form recover-password hidden" action="/register-otp" method="post"
+            <form class="forgot-password-form recover-password hidden" action="/reset-password" method="post"
                   autocomplete="off">
-                <h3>Recover your password</h3>
+                <h3>Reset your password</h3>
                 <div class="register-form-element">
                     <text>Password</text>
-                    <input class="recover-password-input" type="password" id="recover-password" name="password"
+                    <input class="reset-password-input" type="password" id="password" name="password"
                            required>
-                    <label for="recover-password" class="error"></label>
+                    <label for="password" class="error"></label>
                 </div>
                 <div class="register-form-element">
                     <text>Confirm Password</text>
-                    <input class="recover-password-input" type="password" id="recover-confirm-password" name="confirm-password"
+                    <input class="reset-password-input" type="password" id="confirm-password" name="confirm-password"
                            required>
-                    <label for="recover-confirm-password" class="error"></label>
+                    <label for="confirm-password" class="error"></label>
                 </div>
                 <div class="submit-button-container">
                     <input type="submit" id="password-submit" value="Done">

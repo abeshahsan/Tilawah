@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 minlength: 0
             },
             'confirm-password': {
-                equalTo: '#recover-password'
+                equalTo: '#confirm-password'
             },
         },
         messages: {

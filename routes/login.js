@@ -61,4 +61,20 @@ router.post('/forgot-otp', function (req, res) {
     }
 });
 
+router.post('/reset-password', function (req, res) {
+    let password = req.body['password'].trim()
+    database.updatePassword(req.session.forgot.email, password, function (updated) {
+        if(updated) {
+            database.findUser(req.session.forgot.email, password, function (user) {
+                req.session.user = user;
+                req.session.user.email = user.email
+                delete req.session.forgot
+                return res.send({success: 1})
+            })
+        } else {
+            return res.send({success: 0})
+        }
+    })
+});
+
 module.exports = router;

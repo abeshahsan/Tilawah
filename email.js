@@ -42,8 +42,9 @@ function sendPasswordResetMail(email, callback = function () {
         html: `
 <html lang="en">
 <body>
-        <div style="padding: 20px; background-color: rgb(255, 255, 255); display: flex; flex-direction: column; align-items: center; justify-content: center">
-            <div style="color: rgb(0, 0, 0); text-align: left;">
+        <div style="padding: 20px; background-color: rgb(255, 255, 255); 
+        display: flex; flex-direction: column; align-items: center; justify-content: center; border: thin solid black">
+            <div style="color: rgb(0, 0, 0)">
 <pre style="font-family: sans-serif; font-size: 14px;">
 We received a request to reset the password for your <span style="font-weight: bold; font-family: Arial, sans-serif">Tilawah</span> account.
 To reset your password, please use the following OTP code:
