@@ -13,8 +13,8 @@ const pool = mysql.createPool({
 function findUser(email, password, callback) {
     const sqlCredentials = `SELECT *
                             FROM credentials
-                            WHERE EMAIL = ${pool.escape(email.trim())}
-                              and PASSWORD_HASH = ${pool.escape(password.trim())};`;
+                            WHERE EMAIL = ${pool.escape(email)}
+                              and PASSWORD_HASH = SHA2(${pool.escape(password)}, 256);`;
 
     const sqlProfile = `SELECT *
                         FROM PROFILE
@@ -100,9 +100,9 @@ function updatePassword(email, password, callback) {
     pool.query(sql, (err) => {
         if (err) {
             console.log(err.sqlMessage + '\n' + err.sql);
-            callback(true);
+            callback(false);
         }
-        return callback(false);
+        return callback(true);
     });
 }
 

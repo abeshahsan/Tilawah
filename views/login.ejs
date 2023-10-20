@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
 </head>
-<body style="display: -ms-flexbox">
+<body style="width: 100vw; height: 100vh; overflow: hidden">
 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; justify-content: center">
     <%- include('header.ejs') %>
     <div class="alert hidden">
@@ -42,7 +42,7 @@
                     <input type="submit" id="login-submit" value="Login">
                 </div>
             </form>
-            <form class="forgot-password-form email hidden" action="/forgot-mail" method="post" autocomplete="off">
+            <form class="forgot-password-form email hidden" action="/forgot-mail" method="post" autocomplete="on">
                 <div class="email">
                     <text>Enter Your Email</text>
                     <input class="mail-input" type="text" id="forgot-mail-input" name="email" required>
@@ -60,6 +60,25 @@
                 </div>
                 <div class="submit-button-container">
                     <input type="submit" id="otp-submit" value="Verify">
+                </div>
+            </form>
+            <form class="forgot-password-form recover-password hidden" action="/register-otp" method="post"
+                  autocomplete="off">
+                <h3>Recover your password</h3>
+                <div class="register-form-element">
+                    <text>Password</text>
+                    <input class="recover-password-input" type="password" id="recover-password" name="password"
+                           required>
+                    <label for="recover-password" class="error"></label>
+                </div>
+                <div class="register-form-element">
+                    <text>Confirm Password</text>
+                    <input class="recover-password-input" type="password" id="recover-confirm-password" name="confirm-password"
+                           required>
+                    <label for="recover-confirm-password" class="error"></label>
+                </div>
+                <div class="submit-button-container">
+                    <input type="submit" id="password-submit" value="Done">
                 </div>
             </form>
         </div>

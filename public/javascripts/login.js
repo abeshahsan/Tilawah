@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
     let forgotPass = document.querySelector('.forgot-password')
     let forgotFormMail = document.querySelector('.forgot-password-form.email')
     let forgotFormOTP = document.querySelector('.forgot-password-form.otp')
+    let recoverPassword = document.querySelector('.forgot-password-form.recover-password')
 
     forgotPass.addEventListener('click', bringForgotMailForm)
 
@@ -69,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 dataType: 'json'
             })
                 .done(function (response) {
-                    if (response.success === 0) {    //success
+                    if (response.success === 1) {    //success
                         bringForgotOTPForm()
                     } else {
                         alert.classList.remove('hidden')
@@ -94,11 +95,50 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 dataType: 'json'
             })
                 .done(function (response) {
-                    if (response.success === 0) {    //success
-                        window.location.href = '/';
+                    if (response.success === 1) {    //success
+                        bringRecoverPasswordForm()
                     } else {
                         alert.classList.remove('hidden')
                         alertText.textContent = 'Wrong OTP!'
+                    }
+                });
+            return false; // required to block normal submit since you used ajax
+        },
+    })
+
+    $(recoverPassword).validate({
+        rules: {
+            password: {
+                minlength: 0
+            },
+            'confirm-password': {
+                equalTo: '#recover-password'
+            },
+        },
+        messages: {
+            name: {
+                required: "Please enter your name"
+            },
+            password: {
+                required: "Please enter a password",
+            },
+            'confirm-password': {
+                required: "Please retype the password",
+                equalTo: "Passwords don't match"
+            },
+        },
+        submitHandler: function (form) {
+            $.ajax({
+                type: $(form).attr('method'),
+                url: $(form).attr('action'),
+                data: $(form).serialize(),
+                dataType: 'json'
+            })
+                .done(function (response) {
+                    if (response.success === 1) {    //success
+                        window.location.href = '/';
+                    } else {
+                        showAlert('Some error Occurred. Please try again')
                     }
                 });
             return false; // required to block normal submit since you used ajax
@@ -113,5 +153,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
     function bringForgotOTPForm() {
         forgotFormMail.classList.add('hidden')
         forgotFormOTP.classList.remove('hidden')
+    }
+
+    function bringRecoverPasswordForm() {
+        forgotFormOTP.classList.add('hidden')
+        recoverPassword.classList.remove('hidden')
     }
 })

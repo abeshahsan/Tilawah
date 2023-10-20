@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
     $(registerPassword).validate({
         rules: {
-            name: {
+            password: {
                 minlength: 0
             },
             'confirm-password': {

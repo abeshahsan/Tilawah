@@ -42,19 +42,8 @@ router.post('/forgot-mail', function (req, res) {
 });
 
 router.post('/forgot-otp', function (req, res) {
-    let email = req.body.email
-    let password = req.body.password.trim()
-    database.updatePassword(email, password, function (updated) {
-        if(updated) {
-            delete req.session.forgot
-            database.findUser(email, password, function (user) {
-                req.session.user = user;
-                req.session.user.email = user.email
-                return res.send({success: 1})
-            })
-        }
-        else return res.send({success: 0})
-    })
+    let email = req.body.otp
+    res.send({success: 1})
 });
 
 module.exports = router;
