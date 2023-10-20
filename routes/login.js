@@ -3,6 +3,7 @@ const router = express.Router();
 
 const database = require('../database')
 const {data} = require("express-session/session/cookie");
+const mailer = require("../email");
 
 const controls = require
 
@@ -36,14 +37,28 @@ router.post('/forgot-mail', function (req, res) {
             return res.send({success: 0})
         } else { //One user is found.
             req.session.forgot = user
-            return res.send({success: 1})
+            mailer.sendPasswordResetMail(req.session.forgot.email, function (sentOTP) {
+                // Callback function to handle the result of sending the email
+                if (sentOTP) {
+                    req.session.forgot.otp = sentOTP;
+                    console.log(req.session.forgot.otp);
+                    res.send({ success: 1 });
+                } else {
+                    res.send({ success: 0 });
+                }
+            });
         }
     })
 });
 
 router.post('/forgot-otp', function (req, res) {
-    let email = req.body.otp
-    res.send({success: 1})
+    console.log(req.session.forgot)
+    let otp = req.body.otp.trim()
+    if (otp === req.session.forgot.otp) {
+        return res.send({success: 1})
+    } else {
+        return res.send({success: 0})
+    }
 });
 
 module.exports = router;

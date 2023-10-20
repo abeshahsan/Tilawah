@@ -63,7 +63,7 @@ function verifyMail(email, callback) {
         }
         let user = {
             userID: results[0][dbTables.credentials.userID],
-            email: results[0][dbTables.credentials.email]
+            email: email
         }
         return callback(user)
     });

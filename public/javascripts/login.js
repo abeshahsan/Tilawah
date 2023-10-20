@@ -63,6 +63,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
             },
         },
         submitHandler: function (form) {
+            forgotFormMail.style.pointerEvents = 'none'
+            forgotFormMail.style.opacity = '.5'
             $.ajax({
                 type: $(form).attr('method'),
                 url: $(form).attr('action'),
