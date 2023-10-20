@@ -1,49 +1,54 @@
 const mysql = require('mysql');
-
+const dbTables = require('./database-tables');
 const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'system',
-    database: 'ibadah',
+    database: 'tilawah',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
 });
 
-function checkCredentials(email, password, callback) {
+function findUser(email, password, callback) {
     const sqlCredentials = `SELECT *
                             FROM credentials
-                            WHERE EMAIL = ${pool.escape(email)}
-                              and PASSWORD_HASH = SHA2(${pool.escape(password)}, 256);`;
+                            WHERE EMAIL = ${pool.escape(email.trim())}
+                              and PASSWORD_HASH = ${pool.escape(password.trim())};`;
 
     const sqlProfile = `SELECT *
                         FROM PROFILE
                         WHERE USER_ID = ?`;
 
-    pool.query(sqlCredentials, (err, results) => {
+    let user = {};
+
+    pool.query(sqlCredentials, (err, credentialResults) => {
         if (err) {
-            return console.log(err.sql);
+            console.error(err.sql);
+            return callback(null)
+        } else if (!credentialResults.length) {
+            console.log(credentialResults.length)
+            console.log('credentials not found')
+            return callback(null);
         }
-        if (!results.length) {
-            return callback(0);
-        }
-        ({USER_ID: user.userID, EMAIL: user.email} = results[0]);
-        pool.query(sqlProfile, results[0].USER_ID, (err, results) => {
+        //else the user has been found
+        user.userID = credentialResults[0][dbTables.credentials.userID]
+        pool.query(sqlProfile, user.userID, (err, profileResults) => {
             if (err) {
-                return console.log(err.sql);
+                console.log(err.sql);
+                return callback(null)
             }
-            const {GENDER, COUNTRY, FIRST_NAME, LAST_NAME} = results[0];
-            user.userName = FIRST_NAME + (LAST_NAME ? LAST_NAME : "");
+            const {GENDER, COUNTRY, NAME} = profileResults[0];
+            user.userName = NAME
             user.gender = GENDER === 0 || null ? "Female" : "Male"
             user.country = COUNTRY
-            return callback(1);
+            user.email = email
+            return callback(user);
         });
     });
 }
 
 function verifyMail(email, callback) {
-
-    let MAIL_HAS_BEEN_FOUND = true
 
     const sql = `SELECT USER_ID
                  FROM credentials
@@ -51,12 +56,16 @@ function verifyMail(email, callback) {
     pool.query(sql, (err, results) => {
         if (err) {
             console.log(err.sqlMessage + '\n' + err.sql);
-            MAIL_HAS_BEEN_FOUND = false;
+            callback(null)
         }
         if (!results.length) {//mail isn't found
-            MAIL_HAS_BEEN_FOUND = false;
+            callback(null)
         }
-        return callback(MAIL_HAS_BEEN_FOUND)
+        let user = {
+            userID: results[0][dbTables.credentials.userID],
+            email: results[0][dbTables.credentials.email]
+        }
+        return callback(user)
     });
 }
 
@@ -65,7 +74,7 @@ function insertUser(name, password, email, callback) {
                             VALUES (${pool.escape(email)},
                                     SHA2(${pool.escape(password)}, 256))`;
 
-    const sqlProfile = `INSERT INTO profile (USER_ID, FIRST_NAME)
+    const sqlProfile = `INSERT INTO profile (USER_ID, NAME)
                         VALUES (?,
                                 ${pool.escape(name)})`;
 
@@ -91,9 +100,9 @@ function updatePassword(email, password, callback) {
     pool.query(sql, (err) => {
         if (err) {
             console.log(err.sqlMessage + '\n' + err.sql);
-            callback(0);
+            callback(true);
         }
-        return callback(1);
+        return callback(false);
     });
 }
 
@@ -105,9 +114,9 @@ function updatePersonalInfo(userID, name, gender, country, callback = function (
     let SUCCESSFULLY_UPDATED = true
 
     const sql = `UPDATE profile
-                 SET FIRST_NAME = ${name},
-                     GENDER     = ${gender},
-                     COUNTRY    = ${country}
+                 SET NAME    = ${name},
+                     GENDER  = ${gender},
+                     COUNTRY = ${country}
                  WHERE USER_ID = ${pool.escape(userID)}`;
     pool.query(sql, (err) => {
         if (err) {
@@ -136,7 +145,7 @@ function updateEmail(userID, email, callback) {
 }
 
 module.exports = {
-    checkCredentials,
+    findUser,
     insertUser,
     verifyMail,
     updatePassword,

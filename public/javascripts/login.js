@@ -37,12 +37,15 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 dataType: 'json'
             })
                 .done(function (response) {
-                    if (response.success === 0) {    //success
+                    if (response.success === 1) {    //success
                         window.location.href = '/';
                     } else {
                         alert.classList.remove('hidden')
                     }
-                });
+                })
+                .fail(function (message, error) {
+                    console.log(message, error)
+                })
             return false; // required to block normal submit since you used ajax
         },
     })
