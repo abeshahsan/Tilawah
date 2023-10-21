@@ -1,5 +1,8 @@
+@import "style.css";
+
 .user-profile-container {
     border-radius: 5px;
+    width: 100%;
     height: auto;
     padding-top: 25px;
     padding-bottom: 25px;

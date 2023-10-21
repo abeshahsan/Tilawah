@@ -10,7 +10,7 @@ router.get('/register', function (req, res) {
     res.render('register',
         {
             options: {
-                loginRegister: !req.session.user,
+                loginRegister: false,
                 hamburger: true
             },
             user: req.session.user

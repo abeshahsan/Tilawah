@@ -12,7 +12,7 @@ router.get('/login', function (req, res) {
     res.render('login',
         {
             options: {
-                loginRegister: !req.session.user,
+                loginRegister: false,
                 hamburger: true
             },
             user: req.session.user
