@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             }
         },
         submitHandler: function (form) {
+            form.classList.add('no-events')
             $.ajax({
                 type: $(form).attr('method'),
                 url: $(form).attr('action'),
@@ -41,7 +42,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
                     if (response.success === 1) {    //success
                         window.location.href = '/';
                     } else {
-                        alert.classList.remove('hidden')
+                        form.classList.remove('no-events')
+                        showAlert('Wrong email or password. Please try again')
                     }
                 })
                 .fail(function (message, error) {
@@ -63,8 +65,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             },
         },
         submitHandler: function (form) {
-            forgotFormMail.style.pointerEvents = 'none'
-            forgotFormMail.style.opacity = '.5'
+            form.classList.add('no-events')
             $.ajax({
                 type: $(form).attr('method'),
                 url: $(form).attr('action'),
@@ -75,8 +76,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
                     if (response.success === 1) {    //success
                         bringForgotOTPForm()
                     } else {
-                        alert.classList.remove('hidden')
-                        alertText.textContent = 'No account exists with this email'
+                        form.classList.remove('no-events')
+                        showAlert('No account exists with this email')
                     }
                 });
             return false; // required to block normal submit since you used ajax
@@ -90,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             },
         },
         submitHandler: function (form) {
+            form.classList.add('no-events')
             $.ajax({
                 type: $(form).attr('method'),
                 url: $(form).attr('action'),
@@ -100,8 +102,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
                     if (response.success === 1) {    //success
                         bringRecoverPasswordForm()
                     } else {
-                        alert.classList.remove('hidden')
-                        alertText.textContent = 'Wrong OTP!'
+                        form.classList.remove('no-events')
+                        showAlert('Wrong OTP!')
                     }
                 });
             return false; // required to block normal submit since you used ajax
@@ -130,6 +132,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             },
         },
         submitHandler: function (form) {
+            form.classList.add('no-events')
             $.ajax({
                 type: $(form).attr('method'),
                 url: $(form).attr('action'),
@@ -140,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
                     if (response.success === 1) {    //success
                         window.location.href = '/';
                     } else {
+                        form.classList.remove('no-events')
                         showAlert('Some error Occurred. Please try again')
                     }
                 });
@@ -160,5 +164,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
     function bringRecoverPasswordForm() {
         forgotFormOTP.classList.add('hidden')
         recoverPassword.classList.remove('hidden')
+    }
+
+    function showAlert(text) {
+        alert.classList.remove('hidden')
+        alertText.textContent = text
     }
 })

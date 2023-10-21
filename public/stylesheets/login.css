@@ -103,7 +103,7 @@
     margin: auto;
     transform: translateY(0);
     background: #f55252;
-    padding: 7px 100px 7px 100px;
+    padding: 7px 50px 7px 50px;
     border-radius: 5px;
     color: whitesmoke;
     font-weight: bold;
@@ -129,4 +129,9 @@
 
 .alert.hidden{
     visibility: hidden;
+}
+
+form.no-events {
+    pointer-events: none;
+    opacity: .6;
 }

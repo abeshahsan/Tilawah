@@ -57,6 +57,7 @@ router.post('/register-complete', function (req, res) {
                 email: req.session.register.email,
                 name: name,
             }
+            delete req.session.register
             res.send({success: 1})
         } else {
             res.send({success: 0})
