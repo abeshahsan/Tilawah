@@ -12,9 +12,10 @@ router.get('/login', function (req, res) {
     res.render('login',
         {
             options: {
-                loginRegister: false,
-                hamburger: false
-            }
+                loginRegister: !req.session.user,
+                hamburger: true
+            },
+            user: req.session.user
         }
     );
 });

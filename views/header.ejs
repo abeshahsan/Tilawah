@@ -9,7 +9,7 @@
             <% } %>
     >
         <div style="user-select: none; user-focus: none">
-            &#9776
+            &#9776;
         </div>
     </div>
 
@@ -22,7 +22,7 @@
             </div>
         </a>
     </div>
-    <div class="others" style="width: 75%;"></div>
+    <div class="others" style="width: 73%;"></div>
     <div
     <% if (options.loginRegister) { %>
         class="login-register"
@@ -33,4 +33,45 @@
         <button type="button" class="login-button">Login</button>
         <button type="button" class="register-button">Register</button>
     </div>
+
+
+    <div
+    <% if (!options.loginRegister) { %>
+        class="profile-panel"
+    <% } else { %>
+        class="profile-panel hidden"
+            <% } %>
+    >
+        <button id="profile-button">
+            <% if(user){ %>
+                <%= user.name %>
+            <% } %>
+        </button>
+        <div class="profile-menu hidden" style="position: absolute">
+            <ul style="list-style: none">
+                <li>
+                    <a style="text-decoration: none; color: black;" href="/profile">
+                        <div class="profile-menu-item">
+                            Profile
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a style="text-decoration: none; color: black;" href="">
+                        <div class="profile-menu-item">
+                            Settings
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a style="text-decoration: none; color: black;" href="/logout">
+                        <div class="profile-menu-item">
+                            Logout
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
+<script src="javascripts/header.js" ></script>

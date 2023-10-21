@@ -39,7 +39,7 @@ function findUser(email, password, callback) {
                 return callback(null)
             }
             const {GENDER, COUNTRY, NAME} = profileResults[0];
-            user.userName = NAME
+            user.name = NAME
             user.gender = GENDER === 0 || null ? "Female" : "Male"
             user.country = COUNTRY
             user.email = email

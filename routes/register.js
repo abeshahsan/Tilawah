@@ -10,9 +10,10 @@ router.get('/register', function (req, res) {
     res.render('register',
         {
             options: {
-                loginRegister: false,
-                hamburger: false
-            }
+                loginRegister: !req.session.user,
+                hamburger: true
+            },
+            user: req.session.user
         }
     );
 });
