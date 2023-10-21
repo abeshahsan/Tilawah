@@ -22,11 +22,7 @@
     align-items: center;
 }
 
-.register-container form.hidden {
-    display: none;
-}
-
-.register-container form div{
+.register-container form div {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -42,7 +38,7 @@
     font-weight: bold;
 }
 
-.register-container form div input[type="text"], input[type="password"]{
+.register-container form div input[type="text"], input[type="password"] {
     height: 30px;
     border: thin solid #949393;
     border-radius: 6px;
@@ -84,19 +80,12 @@
     box-shadow: none;
 }
 
-.forgot-password.email.hidden {
-    display: none;
-}
-.forgot-password.otp.hidden {
-    display: none;
-}
-
-.error{
+.error {
     font-size: small;
     color: red;
 }
 
-.alert{
+.alert {
     display: block;
     transform: translateY(40px);
     background: #f55252;
@@ -108,10 +97,12 @@
     letter-spacing: 2px;
 }
 
-.alert .close{
+.alert .close {
     width: 20px;
     height: 20px;
-    position: absolute; right: 1px; top: 1px;
+    position: absolute;
+    right: 1px;
+    top: 1px;
     cursor: pointer;
     border-radius: 10px;
     font-size: 16px;
@@ -120,10 +111,26 @@
     align-items: center;
     justify-content: center;
 }
-.alert .close:hover{
+
+.alert .close:hover {
     background-color: #ec7f7f;
 }
 
-.alert.hidden{
+.alert.hidden {
     visibility: hidden;
+}
+
+.register-container form.hidden {
+    display: none;
+}
+
+/*.register-container .email, .otp, .password {*/
+/*    transform: translateY(0);*/
+/*    background-color: red;*/
+/*    transition: .5s ease-in-out;*/
+/*}*/
+
+form.no-events {
+    pointer-events: none;
+    opacity: .6;
 }

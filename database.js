@@ -48,7 +48,14 @@ function findUser(email, password, callback) {
     });
 }
 
-function verifyMail(email, callback) {
+/**
+ * Checks if a user with the given email exists in the database
+ * @param email The email provided by the client
+ * @param callback takes a JSON object having the user's database ID and email
+ */
+function verifyMail(email, callback = function () {
+
+}) {
 
     const sql = `SELECT USER_ID
                  FROM credentials
@@ -56,10 +63,10 @@ function verifyMail(email, callback) {
     pool.query(sql, (err, results) => {
         if (err) {
             console.log(err.sqlMessage + '\n' + err.sql);
-            callback(null)
+            return callback(null)
         }
         if (!results.length) {//mail isn't found
-            callback(null)
+            return callback(null)
         }
         let user = {
             userID: results[0][dbTables.credentials.userID],
@@ -69,7 +76,16 @@ function verifyMail(email, callback) {
     });
 }
 
-function insertUser(name, password, email, callback) {
+/**
+ *
+ * @param name
+ * @param password
+ * @param email
+ * @param callback The callback takes the userID
+ */
+function insertUser(email, password, name, callback = function () {
+
+}) {
     const sqlCredentials = `INSERT INTO credentials (EMAIL, PASSWORD_HASH)
                             VALUES (${pool.escape(email)},
                                     SHA2(${pool.escape(password)}, 256))`;
@@ -81,13 +97,13 @@ function insertUser(name, password, email, callback) {
     pool.query(sqlCredentials, (err, results) => {
         if (err) {
             console.log(err.sqlMessage + '\n' + err.sql);
-            return callback(err)
+            return callback(null)
         } else {
             pool.query(sqlProfile, results.insertId, (err) => {
                 if (err) {
                     console.log(err.sqlMessage + '\n' + err.sql);
                 }
-                return callback(err)
+                else return callback(results.insertId)
             })
         }
     });

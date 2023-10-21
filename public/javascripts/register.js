@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             },
         },
         submitHandler: function (form) {
+            form.classList.add('no-events')
             $.ajax({
                 type: $(form).attr('method'),
                 url: $(form).attr('action'),
@@ -36,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
                     if (response.success === 1) {    //success
                         bringOTPForm()
                     } else {
+                        form.classList.remove('no-events')
                         showAlert('An account with this email already exists!')
                     }
                 });
@@ -50,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             },
         },
         submitHandler: function (form) {
+            form.classList.add('no-events')
             $.ajax({
                 type: $(form).attr('method'),
                 url: $(form).attr('action'),
@@ -60,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
                     if (response.success === 1) {    //success
                         bringPasswordForm()
                     } else {
+                        form.classList.remove('no-events')
                         showAlert('Wrong OTP!')
                     }
                 });
@@ -89,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             },
         },
         submitHandler: function (form) {
+            form.classList.add('no-events')
             $.ajax({
                 type: $(form).attr('method'),
                 url: $(form).attr('action'),
@@ -99,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
                     if (response.success === 1) {    //success
                         window.location.href = '/';
                     } else {
+                        form.classList.remove('no-events')
                         showAlert('Some error Occurred. Please try again')
                     }
                 });
