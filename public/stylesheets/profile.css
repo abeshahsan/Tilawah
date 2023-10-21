@@ -1,0 +1,78 @@
+.user-profile-container {
+    border-radius: 5px;
+    height: auto;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background-color: rgb(231, 221, 252, .5)
+}
+
+.error {
+    font-size: small;
+    color: red;
+}
+
+.form-input {
+    padding: 5px;
+    margin: 0 0 10px 0;
+}
+
+.form-input .profile-button {
+    width: 150px;
+    height: 40px;
+    font-size: 1em;
+    background-color: rgb(89, 11, 184);
+    border-radius: 5px;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.form-input input:not([type="radio"]), #country {
+    width: 350px;
+    height: 60px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: thin;
+    border-color: rgb(169, 166, 166);
+    padding: 0 10px 0 10px;
+    font-size: 16px;
+}
+
+.form-input input:disabled, #country:disabled {
+    background-color: rgb(215, 212, 243);
+    border-color: rgb(169, 166, 166);
+    color: #494949;
+}
+
+.changes-saved.active {
+    display: inline;
+    font-family: Arial, sans-serif;
+    font-size: small;
+    color: forestgreen;
+}
+
+.changes-saved {
+    display: none;
+}
+
+.edit-button {
+    background-color: transparent;
+    color: rgb(42, 5, 231);
+    width: auto;
+    height: auto;
+    font-size: small;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+
+.save-button {
+    font-size: 1em;
+    border-radius: 5px;
+    color: whitesmoke;
+    cursor: pointer;
+    background-color: rgb(4, 190, 41);
+    width: 90px;
+    height: 40px;
+    margin: 5px 0 5px 0;
+    border: none;
+}

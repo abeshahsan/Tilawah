@@ -1,0 +1,18 @@
+<div>
+    <label for="country">Country</label>
+</div>
+<!--<span style="color: red !important; display: inline; float: none;">*</span>-->
+
+<select id="country" name="country" disabled>
+    <option style="display: none" value=""></option>
+    <% data.forEach((option) => { %>
+        <option value="<%= option %>"
+        <% if (user.country === option) { %>
+                selected
+                <% } %>
+        >
+            <%= option %>
+        </option>
+        <br>
+    <% }); %>
+</select>

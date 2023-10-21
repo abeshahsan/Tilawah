@@ -17,12 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     profileButton.addEventListener('click', function (event) {
         if(profileMenu.classList.contains('hidden')) profileMenu.classList.remove('hidden')
+        else profileMenu.classList.add('hidden')
     })
 
     document.addEventListener("click", function (event) {
-        let eventSource = event.target
-        if (!(eventSource.id === profileButton.id || eventSource.id === profileMenu.id)) {
-            profileMenu.style.display = "none"
+        if(event.target.id !== profileButton.id) {
+            profileMenu.classList.add('hidden')
         }
     })
+
+
 })

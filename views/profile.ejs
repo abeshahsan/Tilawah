@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tilawah</title>
+
+    <%- include('necessary-imports.ejs') %>>
+
+    <link rel='stylesheet' href='/stylesheets/profile.css'/>
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+</head>
+<body>
+<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column">
+    <%- include('header.ejs') %>
+    <div style="display: flex; flex-direction: row; width: 100%; height: 100%;">
+        <%- include('sidebar.ejs') %>
+
+        <div class="user-profile-container">
+            <div class="profile-personal-information" style="margin-left: 30px; margin-bottom: 30px;">
+                <form id="edit-personal-info-form" action="/edit-personal-info" method="post">
+                    <!--Edit name of the user-->
+                    <div class="form-input">
+                        <div class="name-area" style="margin: 10px 0 10px 0">
+                            <div>
+                                <label for="full-name">Your Name</label>
+                            </div>
+                            <div>
+                                <input type="text" id="full-name" name="name" disabled required
+                                       value="<%= user.name %>">
+                            </div>
+                            <div>
+                                <label for="full-name" class="error"></label>
+                            </div>
+                        </div>
+                        <div class="gender-area" style="margin: 10px 0 10px 0">
+                            <div>
+                                Gender
+                            </div>
+                            <div>
+                                <label class="gender-select-label" for="gender">Male
+                                    <input type="radio" class="gender" id="gender-male" value="Male" name="gender"
+                                           disabled
+                                    <% if (user.gender === "Male") { %>
+                                           checked
+                                            <% } %>
+                                    >
+                                </label>
+
+                                <label class="gender-select-label" for="gender">Female
+                                    <input type="radio" class="gender" id="gender-female" value="Female" name="gender"
+                                           disabled
+                                    <% if (user.gender !== "Male") { %>
+                                           checked
+                                            <% } %>
+                                    >
+                                </label>
+                            </div>
+                        </div>
+                        <div class="gender-area" style="margin: 10px 0 10px 0">
+                            <%- include("country-dropdown.ejs") %>
+                        </div>
+                        <div id="edit-name">
+                            <button type="button" id="edit-name-button" class="edit-button">Edit</button>
+                            <label class="changes-saved" id="name-saved-label">Saved</label>
+                        </div>
+                        <div id="save-name" style="display: none;">
+                            <button type="submit" id="save-name-button" class="save-button">Save</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!--Edit email of the user-->
+                <form id="edit-email-form" action="/edit-email" method="post">
+                    <div class="form-input">
+                        <div>
+                            <label for="email">Your Email</label>
+                        </div>
+                        <div>
+                            <input type="email" id="email" name="email" disabled required value="<%= user.email %>">
+                        </div>
+                        <div>
+                            <label for="email" class="error"></label>
+                        </div>
+                        <div id="edit-email">
+                            <button type="button" id="edit-email-button" class="edit-button">Edit</button>
+                            <label class="changes-saved" id="email-saved-label">Saved</label>
+                        </div>
+                        <div id="save-email" style="display: none;">
+                            <button type="submit" id="save-email-button" class="save-button">Send OTP</button>
+                        </div>
+                    </div>
+                </form>
+                <form id="change-email-otp-form" action="/change-email-otp" method="post"
+                      style="display: none;">
+                    <div class="form-input">
+                        <div>
+                            <label for="otp">Enter The OTP</label>
+                        </div>
+                        <div>
+                            <input type="text" id="otp" name="otp" required>
+                        </div>
+                        <div>
+                            <label for="otp" class="error"></label>
+                        </div>
+                        <div>
+                            <button type="submit" id="verify-otp-button" class="save-button">Verify</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="javascripts/profile.js"></script>
+</body>
+</html>
