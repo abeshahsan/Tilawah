@@ -1,5 +1,4 @@
 node_modules/
 .idea/
-bin/
 package.json
 package-lock.json
