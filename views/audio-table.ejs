@@ -1,5 +1,5 @@
 <div class="audio-table-container">
-    <link rel='stylesheet' href='/stylesheets/audio-table.css'/>
+    <link rel='stylesheet' href='stylesheets/audio-table.css'/>
     <table class="audio-table">
         <tr>
             <th>#</th>
@@ -8,7 +8,7 @@
             <th>Length</th>
         </tr>
         <% for (let i = 0; i < tableRows.length; i++) { %>
-        <tr class="audio-row" onclick="playAudio()">
+        <tr class="audio-row" onclick="playAudio(this)">
             <td class="row-num"> <%= i + 1 %> </td>
             <td class="title"> <%= tableRows[i].title %> </td>
             <td class="creator"> <%= tableRows[i].creator %> </td>

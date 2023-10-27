@@ -1,5 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
+
 })
-function playAudio() {
-    console.log('lol')
+
+let selectedRow;
+
+function playAudio(row) {
+    if(selectedRow) {
+        selectedRow.classList.remove('selected')
+    }
+    row.classList.add('selected')
+    selectedRow = row
 }
