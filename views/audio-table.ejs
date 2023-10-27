@@ -8,7 +8,7 @@
             <th>Length</th>
         </tr>
         <% for (let i = 0; i < tableRows.length; i++) { %>
-        <tr>
+        <tr class="audio-row" onclick="playAudio()">
             <td class="row-num"> <%= i + 1 %> </td>
             <td class="title"> <%= tableRows[i].title %> </td>
             <td class="creator"> <%= tableRows[i].creator %> </td>
