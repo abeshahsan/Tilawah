@@ -10,7 +10,29 @@ router.get('/', function (req, res) {
             loginRegister: !req.session.user,
             hamburger: true
         },
-        user: req.session.user
+        user: req.session.user,
+        audioList: [
+            {
+                title: "a",
+                creator: "abc",
+                length: "00:00"
+            },
+            {
+                title: "b",
+                creator: "xyz",
+                length: "00:00"
+            },
+            {
+                title: "c",
+                creator: "wpm",
+                length: "00:00"
+            },
+            {
+                title: "d",
+                creator: "lsd",
+                length: "00:00"
+            },
+        ]
     });
 });
 
