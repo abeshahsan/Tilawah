@@ -160,11 +160,16 @@ function updateEmail(userID, email, callback) {
     });
 }
 
+function loadAllAudios(callback = function () {}) {
+    return callback();
+}
+
 module.exports = {
     findUser,
     insertUser,
     verifyMail,
     updatePassword,
     updatePersonalInfo,
-    updateEmail
+    updateEmail,
+    loadAllAudios
 }
