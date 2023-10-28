@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const path = require('path');
 const controls = require('./controls')
 
 /* GET home page. */
@@ -14,6 +14,10 @@ router.get('/', function (req, res) {
         user: req.session.user,
         audioList: req.session.allAudio
     });
+});
+
+router.get("/song",function(req,res){
+    res.sendFile(path.join(__dirname, "/../../Songs/Playlist1/Adele_-_Hello_Olagist.co_.mp3"));
 });
 
 module.exports = router;
