@@ -12,10 +12,10 @@ function playAudio(row) {
     row.classList.add('selected')
     selectedRow = row
 
-    current_track = document.getElementById("current_track");
-    current_src = document.getElementById("current_src");
-    console.log(current_src);
-    current_src.setAttribute("src", "/song"); 
+    current_track = row.querySelector("#current_track");
+    current_src = row.querySelector("#current_src");
+    rowId = row.getAttribute("id");
+    current_src.setAttribute("src", "/song"+ rowId); 
     current_track.load();
     current_track.play();
 }

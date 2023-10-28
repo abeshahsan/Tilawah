@@ -17,7 +17,7 @@ router.get('/', function (req, res) {
 });
 
 router.get("/song",function(req,res){
-    res.sendFile("H:/Random Pics/Kya Khub Lagti Ho - Abeer Bhai.mp3");
+    res.sendFile("D:/Songs/Playlist1/Adele_-_Hello_Olagist.co_.mp3");
 });
 
 module.exports = router;
