@@ -42,36 +42,46 @@
         class="profile-panel hidden"
             <% } %>
     >
-        <button id="profile-button">
-            <% if(user){ %>
-                <%= user.name %>
-            <% } %>
+        <button class="profile-button">
+            <img type="image" src="images/user.png" alt="User" style="pointer-events: none; width: 100%">
         </button>
         <div class="profile-menu hidden" style="position: absolute">
-            <ul style="list-style: none">
-                <li>
-                    <a style="text-decoration: none; color: black;" href="/profile">
-                        <div class="profile-menu-item">
-                            Profile
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a style="text-decoration: none; color: black;" href="">
-                        <div class="profile-menu-item">
-                            Settings
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a style="text-decoration: none; color: black;" href="/logout">
-                        <div class="profile-menu-item">
-                            Logout
-                        </div>
-                    </a>
-                </li>
-            </ul>
+            <div class="name-email">
+                <% if(user){ %>
+                    <div>
+                        <%= user.name %>
+                    </div>
+                    <div>
+                        <%= user.email %>
+                    </div>
+                <% } %>
+            </div>
+            <div class="menu-options">
+                <ul style="list-style: none">
+                    <li>
+                        <a style="text-decoration: none; color: black;" href="/profile">
+                            <div class="profile-menu-item">
+                                Profile
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a style="text-decoration: none; color: black;" href="">
+                            <div class="profile-menu-item">
+                                Settings
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a style="text-decoration: none; color: black;" href="/logout">
+                            <div class="profile-menu-item">
+                                Logout
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
-<script src="javascripts/header.js" ></script>
+<script src="javascripts/header.js"></script>

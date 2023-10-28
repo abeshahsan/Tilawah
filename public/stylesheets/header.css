@@ -31,7 +31,7 @@
     justify-content: center;
 }
 
-.header .home-route a .logo img{
+.header .home-route a .logo img {
     width: 70%;
     height: 70%;
     user-focus: none;
@@ -68,17 +68,17 @@
 }
 
 
-.login-register{
+.login-register {
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
 
-.login-register.hidden{
+.login-register.hidden {
     display: none;
 }
 
-.login-register button{
+.login-register button {
     padding: 10px 15px 10px 15px;
     border: 0;
     border-radius: 8px;
@@ -86,85 +86,111 @@
     font-weight: bold;
 }
 
-.login-register .register-button{
+.login-register .register-button {
     background-color: lightblue;
 }
 
-.login-register .register-button:hover{
+.login-register .register-button:hover {
     box-shadow: 0 0 6px 1px rgba(173, 216, 230, 0.65);
 }
 
-.login-register .login-button{
+.login-register .login-button {
     background-color: lightgreen;
 }
 
-.login-register .login-button:hover{
+.login-register .login-button:hover {
     box-shadow: 0 0 6px 1px rgba(144, 238, 144, 0.65);
 }
 
-.login-register button:hover:active{
+.login-register button:hover:active {
     box-shadow: none;
 }
 
+.profile-panel {
+    display: flex;
+    align-items: center;
+}
 
-.profile-panel #profile-button {
-    width: auto;
-    height: 35px;
-    background-color: #c19ef6;
+:root{
+    --profile-button-translate-from-right: 75px;
+}
+
+.profile-panel .profile-button {
+    --user-logo-length: 40px;
+    width: var(--user-logo-length);
+    height: var(--user-logo-length);
+    border-radius: var(--user-logo-length);
+    background-color: transparent;
     cursor: pointer;
-    padding-left: 5px;
-    padding-right: 5px;
-    max-width: 200px;
-    min-width: 50px;
-    vertical-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    border-radius: 5px;
-    color: #2c2b2b;
-    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: var(--profile-button-translate-from-right);
 }
 
-.profile-panel #profile-button:hover {
-    box-shadow: 0 0 0 2px #d0cdcc;
+.profile-panel .profile-button:hover {
+    box-shadow: 0 0 10px 3px #d0cdcc;
 }
 
-.profile-panel #profile-button.pressed {
-    scale: .9555;
+.profile-panel .profile-button.pressed {
+    background-color: #888686;
 }
 
-.profile-panel .profile-menu{
+.profile-panel .profile-menu {
+    position: absolute;
+    right: var(--profile-button-translate-from-right);
+    top: 45px;
     background-color: white;
-    width: 250px;
+    width: 300px;
     height: auto;
     margin-top: 10px;
-    right: calc(4%);
     /*padding: 10px 0 10px 0;*/
     border-radius: 10px;
-    box-shadow: 0 0 15px 2px #c5c5c5;
+    box-shadow: 0 0 10px 1px #c5c5c5;
 }
 
-.profile-panel .profile-menu ul{
+.profile-panel .profile-menu ul {
     list-style: none;
     color: #bdb9fa;
     margin: 10px auto;
-    padding: 0 20px 0 20px ;
+    padding: 0 20px 0 20px;
 }
 
-.profile-panel .profile-menu-item{
+.profile-panel .profile-menu .name-email {
+    border: thin solid #dad7d7;
+    border-radius: 8px;
+    box-shadow: 0 0 10px 1px #d2d2d2;
+    padding: 8px 8px 8px 8px;
+    width: 90%;
+    height: 90%;
+    font-size: 12px;
+    font-family: "Times New Roman", sans-serif;
+    text-overflow: ellipsis;
+    text-align: center;
+    margin: 10px auto;
+    z-index: 3;
+}
+
+.profile-panel .profile-menu .name-email div {
+    pointer-events: none;
+}
+
+.profile-panel .profile-menu-item {
     cursor: pointer;
     text-align: center;
     padding: 5px 5px 5px 5px;
     border-radius: 7px;
 }
 
-.profile-panel .profile-menu-item:hover{
+.profile-panel .profile-menu-item:hover {
     background-color: #ded1f8;
 }
 
-.profile-panel.hidden{
+.profile-panel.hidden {
     display: none;
 }
 
-.profile-panel .profile-menu.hidden{
+.profile-panel .profile-menu.hidden {
     display: none;
 }

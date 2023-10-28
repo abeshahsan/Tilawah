@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
 
-    let profileButton = document.querySelector("#profile-button")
+    let profileButton = document.querySelector(".profile-button")
     let profileMenu = document.querySelector(".profile-menu")
 
     profileButton.addEventListener('click', function (event) {
@@ -21,10 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     document.addEventListener("click", function (event) {
-        if(event.target.id !== profileButton.id) {
+        console.log('lol')
+        if(event.target.id !== profileButton.id && event.target.className !== "name-email") {
             profileMenu.classList.add('hidden')
         }
     })
-
-
 })
