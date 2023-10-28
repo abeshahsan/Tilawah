@@ -9,7 +9,9 @@
         </tr>
         <% for (let i = 0; i < tableRows.length; i++) { %>
         <tr class="audio-row" onclick="playAudio(this)">
-            <td class="row-num"> <%= i + 1 %> </td>
+            <td class="row-num"> <%= i + 1 %> 
+                <audio id='current_track'><source id="current_src" type='audio/mpeg'></audio>
+            </td>
             <td class="title"> <%= tableRows[i].title %> </td>
             <td class="creator"> <%= tableRows[i].creator %> </td>
             <td class="length"> <%= tableRows[i].length %> </td>
