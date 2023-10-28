@@ -17,8 +17,7 @@ router.get('/', function (req, res) {
 });
 
 router.get("/song/:id",function(req,res){
-    console.log(req.params.id);
-    res.sendFile("D:/Songs/Playlist1/Adele_-_Hello_Olagist.co_.mp3");
+    res.sendFile(req.session.allAudio[req.params.id-1].path);
 });
 
 module.exports = router;
