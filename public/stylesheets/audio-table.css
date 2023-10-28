@@ -1,0 +1,42 @@
+.audio-table{
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 90%;
+}
+
+.audio-table-container{
+    align-items: center;
+    background-color: whitesmoke;
+    width: calc(100% - 5px);
+    height: calc(100% - 5px);
+}
+
+.audio-table th, td{
+    border: thin solid #a2a2a2;
+    padding: 5px;
+    user-select: none;
+}
+
+.audio-table .title, .creator {
+    width: 40%;
+}
+
+.audio-table .row-num, .length {
+    text-align: center;
+}
+
+.audio-table .row-num {
+    width: 3%;
+}
+
+.audio-table .length {
+    width: 8%;
+}
+
+.audio-table .audio-row:hover{
+    background-color: #c0fdc0;
+}
+
+.audio-table .audio-row.selected{
+    background-color: palegreen;
+}

@@ -2,16 +2,18 @@
 <html lang="en">
 <head>
     <title>Tilawah</title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+    <%- include('necessary-imports.ejs') %>
 </head>
 <body>
 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column">
     <%- include('header.ejs') %>
     <div style="display: flex; flex-direction: row; width: 100%; height: 100%;">
         <%- include('sidebar.ejs') %>
+        <div style="width: 100%; height: 100%">
+            <%- include('audio-table.ejs', {tableRows: audioList}) %>
+        </div>
     </div>
 </div>
-<script src="javascripts/index.js" ></script>
+<script src="javascripts/index.js"></script>
 </body>
 </html>
