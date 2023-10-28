@@ -33,6 +33,7 @@ app.use((req, res, next) => {
         req.session.allAudio = []
         result.forEach(function (row) {
             req.session.allAudio.push({
+                id: row.AUDIO_ID,
                 title: (row.AUDIO_NAME ? row.AUDIO_NAME : "unknown"),
                 creator: (row.CREATOR_NAME? row.CREATOR_NAME : "unknown"),
                 length: "00:00"

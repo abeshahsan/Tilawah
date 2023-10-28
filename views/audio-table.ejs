@@ -8,7 +8,7 @@
             <th>Length</th>
         </tr>
         <% for (let i = 0; i < tableRows.length; i++) { %>
-        <tr class="audio-row" onclick="playAudio(this)">
+        <tr class="audio-row" onclick="playAudio(this)" id="<%=tableRows[i].id%>">
             <td class="row-num"> <%= i + 1 %> 
                 <audio id='current_track'><source id="current_src" type='audio/mpeg'></audio>
             </td>
