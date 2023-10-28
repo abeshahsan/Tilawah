@@ -141,13 +141,13 @@
     position: absolute;
     right: var(--profile-button-translate-from-right);
     top: 45px;
-    background-color: white;
+    background-color: whitesmoke;
     width: 300px;
     height: auto;
     margin-top: 10px;
     /*padding: 10px 0 10px 0;*/
     border-radius: 10px;
-    box-shadow: 0 0 10px 1px #c5c5c5;
+    box-shadow: 0 0 5px 2px #d5d5d5;
 }
 
 .profile-panel .profile-menu ul {
@@ -160,7 +160,7 @@
 .profile-panel .profile-menu .name-email {
     border: thin solid #dad7d7;
     border-radius: 8px;
-    box-shadow: 0 0 10px 1px #d2d2d2;
+    box-shadow: 0 0 5px 1px #e3e2e2;
     padding: 8px 8px 8px 8px;
     width: 90%;
     height: 90%;
@@ -170,6 +170,7 @@
     text-align: center;
     margin: 10px auto;
     z-index: 3;
+    background-color: white;
 }
 
 .profile-panel .profile-menu .name-email div {

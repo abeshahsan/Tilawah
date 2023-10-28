@@ -102,8 +102,7 @@ function insertUser(email, password, name, callback = function () {
             pool.query(sqlProfile, results.insertId, (err) => {
                 if (err) {
                     console.log(err.sqlMessage + '\n' + err.sql);
-                }
-                else return callback(results.insertId)
+                } else return callback(results.insertId)
             })
         }
     });
@@ -160,8 +159,20 @@ function updateEmail(userID, email, callback) {
     });
 }
 
-function loadAllAudios(callback = function () {}) {
-    return callback();
+function loadAllAudios(callback = function () {
+}) {
+    const sql = `SELECT AUDIO.*, COLLECTION.COLLECTION_NAME, COLLECTION.CREATOR_ID, CREATOR.CREATOR_NAME
+                 FROM AUDIO,
+                      COLLECTION,
+                      CREATOR
+                 WHERE AUDIO.COLLECTION_ID = COLLECTION.COLLECTION_ID
+                   AND COLLECTION.CREATOR_ID = CREATOR.CREATOR_ID;`;
+    pool.query(sql, (err, result) => {
+        if (err) {
+            console.log(err.sqlMessage + '\n' + err.sql);
+        }
+        return callback(result);
+    });
 }
 
 module.exports = {

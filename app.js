@@ -22,31 +22,24 @@ app.use(expressSession({
  * Store it into session to use it globally
  */
 app.use((req, res, next) => {
-    database.loadAllAudios(function () {
-        req.session.allAudio = [
-            {
-                title: "a",
-                creator: "abc",
+    if (req.session.allAudio) {
+        next()
+        return;
+    }
+
+    console.log('lol')
+    database.loadAllAudios(function (result) {
+        console.log(result)
+        req.session.allAudio = []
+        result.forEach(function (row) {
+            req.session.allAudio.push({
+                title: (row.AUDIO_NAME ? row.AUDIO_NAME : "unknown"),
+                creator: (row.CREATOR_NAME? row.CREATOR_NAME : "unknown"),
                 length: "00:00"
-            },
-            {
-                title: "b",
-                creator: "xyz",
-                length: "00:00"
-            },
-            {
-                title: "c",
-                creator: "wpm",
-                length: "00:00"
-            },
-            {
-                title: "d",
-                creator: "lsd",
-                length: "00:00"
-            },
-        ]
+            })
+        })
+        next()
     })
-    next()
 })
 
 // view engine setup
