@@ -5,17 +5,18 @@ document.addEventListener('DOMContentLoaded', function () {
 let selectedRow;
 var isPlaying = 0;
 var playpause = $("#playpause");
-currentTrack = document.querySelector("#current_track");
-currentSrc = document.querySelector("#current_src");
 
 
 function playAudio(row) {
+    console.log(row);
     if(selectedRow) {
         selectedRow.classList.remove('selected')
     }
     row.classList.add('selected')
     selectedRow = row
     let songId = row.getAttribute("id");
+    currentTrack = document.querySelector("#current_track");
+    currentSrc = document.querySelector("#current_src");
     
     currentSrc.setAttribute("src", "/song/"+ songId); 
     currentTrack.load();
