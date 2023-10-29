@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 let selectedRow;
+var isPlaying = 0;
+var playpause = $("#playpause");
+currentTrack = document.querySelector("#current_track");
+currentSrc = document.querySelector("#current_src");
+
 
 function playAudio(row) {
     if(selectedRow) {
@@ -10,11 +15,31 @@ function playAudio(row) {
     }
     row.classList.add('selected')
     selectedRow = row
-
-    currentTrack = document.querySelector("#current_track");
-    currentSrc = document.querySelector("#current_src");
-    let rowId = row.getAttribute("id");
-    currentSrc.setAttribute("src", "/song/"+ rowId); 
+    let songId = row.getAttribute("id");
+    
+    currentSrc.setAttribute("src", "/song/"+ songId); 
     currentTrack.load();
     currentTrack.play();
+    setIsPlaying(1);
 }
+
+function setIsPlaying(_isPlaying){
+    isPlaying = _isPlaying;
+    $(playpause).removeClass("fa-play fa-pause");
+    if(isPlaying){
+        $(playpause).addClass("fa-pause");
+    } else {
+        $(playpause).addClass("fa-play");
+    }
+}
+
+function togglePlayState(){
+    if(isPlaying){
+        currentTrack.pause();
+    } else {
+        currentTrack.play();
+    }
+    setIsPlaying(!isPlaying);
+}
+
+$(playpause).on("click",function(){ togglePlayState() });
