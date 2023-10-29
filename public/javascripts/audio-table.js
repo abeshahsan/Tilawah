@@ -11,11 +11,11 @@ function playAudio(row) {
     }
     row.classList.add('selected')
     selectedRow = row
+    let songId = row.getAttribute("id");
+    let currentTrack = document.querySelector("#current_track");
+    let currentSrc = document.querySelector("#current_src");
 
-    currentTrack = document.querySelector("#current_track");
-    currentSrc = document.querySelector("#current_src");
-    let rowId = row.getAttribute("id");
-    currentSrc.setAttribute("src", "/song/"+ rowId);
+    currentSrc.setAttribute("src", "/song/"+ songId);
     currentTrack.load();
     currentTrack.play();
 }
