@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
 let selectedRow;
 var isPlaying = 0;
 var playpause = $("#playpause");
+currentTrack = document.querySelector("#current_track");
+currentSrc = document.querySelector("#current_src");
 
 
 function playAudio(row) {
@@ -15,8 +17,6 @@ function playAudio(row) {
     row.classList.add('selected')
     selectedRow = row
     let songId = row.getAttribute("id");
-    let currentTrack = document.querySelector("#current_track");
-    let currentSrc = document.querySelector("#current_src");
 
     currentSrc.setAttribute("src", "/song/"+ songId);
     currentTrack.load();
@@ -34,7 +34,7 @@ function setIsPlaying(_isPlaying){
     }
 }
 
-function togglePlayState(){
+function togglePlayState(){ 
     if(isPlaying){
         currentTrack.pause();
     } else {
