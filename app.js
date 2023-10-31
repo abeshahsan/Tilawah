@@ -33,28 +33,39 @@ app.use((req, res, next) => {
     }
 
     // console.log('lol')
-    database.loadAllAudios(function (result) {
-        // console.log(result)
-        req.session.allAudio = [null]
-        result.forEach(function (row, index) {
-            getAudioDurationInSeconds(`${row.PATH}`, ffProbeStatic.path).then((duration) => {
-                duration = utility.timeFormatFromSeconds(duration)
-                req.session.allAudio.push({
-                    id: row.AUDIO_ID,
-                    title: (row.AUDIO_NAME ? row.AUDIO_NAME : "unknown"),
-                    creator: (row.CREATOR_NAME ? row.CREATOR_NAME : "unknown"),
-                    length: `${duration}`,
-                    path: row.PATH,
-                })
-            }).catch(err => {
-                console.log(err.message)
-            }).finally(function () {
-                if (index + 1 === result.length) {
-                    next()
+    database.loadAllAudios(async function (result) {
+        req.session.allAudio = [null];
+
+        try {
+            const durations = await Promise.all(result.map(async (row) => {
+                try {
+                    const duration = await getAudioDurationInSeconds(`${row.PATH}`, ffProbeStatic.path);
+                    return utility.timeFormatFromSeconds(duration);
+                } catch (err) {
+                    console.log(err.message);
+                    return null; // or some placeholder value
                 }
-            })
-        })
-    })
+            }));
+
+            result.forEach((row, index) => {
+                if (durations[index]) {
+                    req.session.allAudio.push({
+                        id: row.AUDIO_ID,
+                        title: row.AUDIO_NAME || "unknown",
+                        creator: row.CREATOR_NAME || "unknown",
+                        length: durations[index] || "unknown", // Use the corresponding duration
+                        path: row.PATH,
+                    });
+                }
+                if (index + 1 === result.length) {
+                    next();
+                }
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    });
+
 })
 
 // view engine setup

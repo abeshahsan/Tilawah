@@ -21,6 +21,7 @@ function playAudio(row) {
     currentSrc.setAttribute("src", "/song/"+ songId);
     currentTrack.load();
     currentTrack.play();
+    currentTrack.volume = .02
     setIsPlaying(1);
 }
 
