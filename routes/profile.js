@@ -4,21 +4,11 @@ const mailer = require("../email");
 // Include Express.js
 const router = express.Router(); // Create an Express.js app
 
-router.get('/profile', (req, res) => {
-    res.render('profile', {
-        options: {
-            loginRegister: !req.session.user,
-            hamburger: true
-        },
-        user: req.session.user,
-        data: countryOptions
-    })
-});
 
 router.post('/profile-partial', (req, res) => {
     res.render('profile-partial', {
         user: req.session.user,
-        data: countryOptions
+        countryOptions: countryOptions
     })
 });
 

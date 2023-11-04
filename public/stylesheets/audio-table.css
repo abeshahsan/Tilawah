@@ -1,20 +1,24 @@
-.audio-table{
+.audio-table {
     margin: 0 auto;
     border-collapse: collapse;
     width: 90%;
 }
 
-.audio-table-container{
+.audio-table-container {
     align-items: center;
     background-color: whitesmoke;
     width: calc(100% - 5px);
     height: calc(100% - 5px);
 }
 
-.audio-table th, td{
+.audio-table th, td {
     border: thin solid #a2a2a2;
     padding: 5px;
     user-select: none;
+}
+
+.audio-table .audio-row {
+    font-family: "Segoe UI Black", sans-serif;
 }
 
 .audio-table .title, .creator {
@@ -33,10 +37,10 @@
     width: 8%;
 }
 
-.audio-table .audio-row:hover{
+.audio-table .audio-row:hover {
     background-color: #c0fdc0;
 }
 
-.audio-table .audio-row.selected{
+.audio-table .audio-row.selected {
     background-color: palegreen;
 }

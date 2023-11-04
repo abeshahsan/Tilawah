@@ -5,7 +5,7 @@
 
 <select id="country" name="country" disabled>
     <option style="display: none" value=""></option>
-    <% data.forEach((option) => { %>
+    <% countryOptions.forEach((option) => { %>
         <option value="<%= option %>"
         <% if (user.country === option) { %>
                 selected

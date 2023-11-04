@@ -11,10 +11,16 @@
     <div style="display: flex; flex-direction: row; width: 100%; height: 100%;">
         <%- include('sidebar.ejs') %>
         <div style="width: 100%; height: 100%" class="main-container">
-            <%- include('audio-table.ejs', {tableRows: audioList}) %>
+            <% if (route === "/") { %>
+                <%- include('audio-table.ejs', {tableRows: audioList}) %>
+            <% } else if (route === "/login") { %>
+                <%- include('login-partial.ejs') %>
+            <% } else if (route === "/profile") { %>
+                <%- include('profile-partial.ejs') %>
+            <% } %>
         </div>
+        <%- include('control-panel.ejs') %>
     </div>
-    <%- include('bottom-bar.ejs') %>
 </div>
 <script src="javascripts/index.js"></script>
 </body>

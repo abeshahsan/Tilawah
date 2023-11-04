@@ -8,17 +8,19 @@ const mailer = require("../email");
 const controls = require
 
 /* GET home page. */
-router.get('/login', function (req, res) {
-    res.render('login',
-        {
-            options: {
-                loginRegister: false,
-                hamburger: true
-            },
-            user: req.session.user
-        }
-    );
-});
+// router.get('*', function (req, res) {
+//     res.render('index',
+//         {
+//             options: {
+//                 loginRegister: false,
+//                 hamburger: true
+//             },
+//             user: req.session.user,
+//             countryOptions:
+//             route: "/login"
+//         }
+//     );
+// });
 
 router.post('/login-partial', function (req, res) {
     res.render('login-partial', function (err, html) {
