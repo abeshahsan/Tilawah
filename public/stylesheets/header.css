@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
-@import "style.css";
 
 .header {
     width: 100%;
@@ -13,13 +12,13 @@
     gap: 25px;
 }
 
-.header .home-route a {
+.header .tilawah-icon a {
     font-size: 30px;
     text-decoration: none;
     color: #444343;
 }
 
-.header .home-route a .logo {
+.header .tilawah-icon a .logo {
     border: thin solid #cbcaca;
     background-color: #f1f0f0;
     border-radius: 50px;
@@ -31,7 +30,7 @@
     justify-content: center;
 }
 
-.header .home-route a .logo img {
+.header .tilawah-icon a .logo img {
     width: 70%;
     height: 70%;
     user-focus: none;

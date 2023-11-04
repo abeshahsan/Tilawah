@@ -15,15 +15,33 @@ router.get('/logout', function (req, res, next) {
 
 router.get('*', function (req, res) {
     // console.log(req.session.allAudio)
+    let options = {}
+
+    if (req.path === "/login" || req.path === "/register") {
+        options.loginRegister = false;
+        options.hamburger = false;
+    } else {
+        options.loginRegister = !req.session.user;
+        options.hamburger = true;
+    }
+
     res.render('index', {
-        options: {
-            loginRegister: !req.session.user,
-            hamburger: true
-        },
+        options: options,
         user: req.session.user,
         audioList: req.session.allAudio,
         countryOptions: countryOptions,
         route: req.path
+    });
+});
+
+router.post('/home', function (req, res) {
+    res.render('audio-table', {
+        tableRows: req.session.allAudio
+    }, function (err, html) {
+        if (err) {
+            console.warn(err)
+        }
+        res.send({html, loginRegister: !req.session.user})
     });
 });
 

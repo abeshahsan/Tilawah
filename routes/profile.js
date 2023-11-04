@@ -5,8 +5,8 @@ const mailer = require("../email");
 const router = express.Router(); // Create an Express.js app
 
 
-router.post('/profile-partial', (req, res) => {
-    res.render('profile-partial', {
+router.post('/profile-DOM', (req, res) => {
+    res.render('profile-DOM', {
         user: req.session.user,
         countryOptions: countryOptions
     })

@@ -1,4 +1,4 @@
-
+$(document).ready(function () {
     let fullNameText = $("#full-name")
     let editNameButton = $("#edit-name-button")
     let editName = $("#edit-name")
@@ -145,13 +145,13 @@
                 .done(function (response) {
                     if (response.success === true) {    //success
                         disableEmailEdit()
-                    } else if(!response.otpMatched) {
+                    } else if (!response.otpMatched) {
                         alert('Wrong OTP');
-                    }
-                    else  {
+                    } else {
                         alert('Something went wrong');
                     }
                 });
             return false; // required to block normal submit since you used ajax
         },
     })
+})

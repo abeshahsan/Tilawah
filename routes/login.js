@@ -22,8 +22,8 @@ const controls = require
 //     );
 // });
 
-router.post('/login-partial', function (req, res) {
-    res.render('login-partial', function (err, html) {
+router.post('/login-DOM', function (req, res) {
+    res.render('login-DOM', function (err, html) {
         if(err) {
             console.warn(err)
         }

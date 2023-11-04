@@ -18,8 +18,8 @@ router.get('/register', function (req, res) {
     );
 });
 
-router.post('/register-partial', function (req, res) {
-    res.render('register-partial', function (err, html) {
+router.post('/register-DOM', function (req, res) {
+    res.render('register-DOM', function (err, html) {
         if(err) {
             console.warn(err)
         }
