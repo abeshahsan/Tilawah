@@ -1,19 +1,27 @@
-document.addEventListener('DOMContentLoaded', function () {
-    let loginForm = document.querySelector('.login-form')
+function makeFormNOTResponsive(form) {
+    $(form).addClass('no-events')
+}
 
-    let alert = document.querySelector('.alert')
-    let alertText = document.querySelector('.alert p')
-    let alertClose = document.querySelector('.alert .close')
+function makeFormResponsive(form) {
+    $(form).removeClass('no-events')
+}
 
-    let forgotPass = document.querySelector('.forgot-password')
-    let forgotFormMail = document.querySelector('.forgot-password-form.email')
-    let forgotFormOTP = document.querySelector('.forgot-password-form.otp')
-    let recoverPassword = document.querySelector('.forgot-password-form.recover-password')
+$(document).ready(function () {
+    let loginForm = $('.login-form')
 
-    forgotPass.addEventListener('click', bringForgotMailForm)
+    let alert = $('.alert')
+    let alertText = $('.alert p')
+    let alertClose = $('.alert .close')
 
-    alertClose.addEventListener('click', function () {
-        alert.classList.add('hidden')
+    let forgotPass = $('.forgot-password')
+    let forgotFormMail = $('.forgot-password-form.email')
+    let forgotFormOTP = $('.forgot-password-form.otp')
+    let recoverPassword = $('.forgot-password-form.recover-password')
+
+    forgotPass.on('click', bringForgotMailForm)
+
+    alertClose.on('click', function () {
+        alert.addClass('hidden')
     })
 
     $(loginForm).validate({
@@ -31,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         },
         submitHandler: function (form) {
-            form.classList.add('no-events')
+            makeFormNOTResponsive(form);
             $.ajax({
                 type: $(form).attr('method'),
                 url: $(form).attr('action'),
@@ -42,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (response.success === 1) {    //success
                         window.location.href = '/';
                     } else {
-                        form.classList.remove('no-events')
+                        makeFormResponsive(form);
                         showAlert('Wrong email or password. Please try again')
                     }
                 })
@@ -65,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
         },
         submitHandler: function (form) {
-            form.classList.add('no-events')
+            $(form).addClass('no-events')
             $.ajax({
                 type: $(form).attr('method'),
                 url: $(form).attr('action'),
@@ -76,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (response.success === 1) {    //success
                         bringForgotOTPForm()
                     } else {
-                        form.classList.remove('no-events')
+                        $(form).removeClass('no-events')
                         showAlert('No account exists with this email')
                     }
                 });
@@ -91,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
         },
         submitHandler: function (form) {
-            form.classList.add('no-events')
+            $(form).addClass('no-events')
             $.ajax({
                 type: $(form).attr('method'),
                 url: $(form).attr('action'),
@@ -102,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (response.success === 1) {    //success
                         bringRecoverPasswordForm()
                     } else {
-                        form.classList.remove('no-events')
+                        $(form).removeClass('no-events')
                         showAlert('Wrong OTP!')
                     }
                 });
@@ -132,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
         },
         submitHandler: function (form) {
-            form.classList.add('no-events')
+            $(form).addClass('no-events')
             $.ajax({
                 type: $(form).attr('method'),
                 url: $(form).attr('action'),
@@ -143,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (response.success === 1) {    //success
                         window.location.href = '/';
                     } else {
-                        form.classList.remove('no-events')
+                        $(form).removeClass('no-events')
                         showAlert('Some error Occurred. Please try again')
                     }
                 });
@@ -152,22 +160,22 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     function bringForgotMailForm() {
-        loginForm.classList.add('hidden')
-        forgotFormMail.classList.remove('hidden')
+        loginForm.addClass('hidden')
+        forgotFormMail.removeClass('hidden')
     }
 
     function bringForgotOTPForm() {
-        forgotFormMail.classList.add('hidden')
-        forgotFormOTP.classList.remove('hidden')
+        forgotFormMail.addClass('hidden')
+        forgotFormOTP.removeClass('hidden')
     }
 
     function bringRecoverPasswordForm() {
-        forgotFormOTP.classList.add('hidden')
-        recoverPassword.classList.remove('hidden')
+        forgotFormOTP.addClass('hidden')
+        recoverPassword.removeClass('hidden')
     }
 
     function showAlert(text) {
-        alert.classList.remove('hidden')
-        alertText.textContent = text
+        alert.removeClass('hidden')
+        alertText.text(text)
     }
 })

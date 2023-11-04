@@ -1,4 +1,4 @@
-$(() => {
+
     let fullNameText = $("#full-name")
     let editNameButton = $("#edit-name-button")
     let editName = $("#edit-name")
@@ -155,4 +155,3 @@ $(() => {
             return false; // required to block normal submit since you used ajax
         },
     })
-})

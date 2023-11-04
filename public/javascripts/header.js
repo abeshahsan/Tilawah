@@ -1,29 +1,68 @@
-document.addEventListener('DOMContentLoaded', () => {
-    let loginButton = document.querySelector('.login-button')
+$(document).ready(function () {
 
-    loginButton.addEventListener('click', function () {
-        window.location.href = '/login'
+    let mainContainer = $(".main-container");
+
+    function loadLoginDOM() {
+        $.post("/login-partial", function (html) {
+            let sidebar = $(".sidebar");
+            let loginRegisterDiv = $(".login-register");
+            sidebar.addClass("hidden");
+            loginRegisterDiv.addClass("hidden");
+
+            $(mainContainer).html(html);
+            history.pushState(null, null, "/login");
+        });
+    }
+
+    function loadRegisterDOM() {
+        $.post("/register-partial", function (html) {
+            let sidebar = $(".sidebar");
+            let loginRegisterDiv = $(".login-register");
+            sidebar.addClass("hidden");
+            loginRegisterDiv.addClass("hidden");
+
+            $(mainContainer).html(html);
+            history.pushState(null, null, "/register");
+        });
+    }
+
+    function loadProfileDOM() {
+        $.post("/profile-partial", function (html) {
+            $(mainContainer).html(html);
+            history.pushState(null, null, "/profile");
+        });
+    }
+
+    function hideProfileMenu() {
+        $(".profile-menu").addClass("hidden");
+    }
+
+    let loginButton = $('.login-button')
+
+    loginButton.on('click', function () {
+        loadLoginDOM();
     })
 
-    let registerButton = document.querySelector('.register-button')
+    let registerButton = $('.register-button')
 
-    registerButton.addEventListener('click', function () {
-        window.location.href = '/register'
+    registerButton.on('click', function () {
+        loadRegisterDOM();
     })
 
+    let profileButton = $(".profile-button")
+    let profileMenu = $(".profile-menu")
 
-    let profileButton = document.querySelector(".profile-button")
-    let profileMenu = document.querySelector(".profile-menu")
+    let profileHyperLink = $("#profile-hyperlink");
 
-    profileButton.addEventListener('click', function (event) {
-        if(profileMenu.classList.contains('hidden')) profileMenu.classList.remove('hidden')
-        else profileMenu.classList.add('hidden')
+    $(profileHyperLink).on("click", function (event) {
+        event.preventDefault();
+        loadProfileDOM();
+        hideProfileMenu();
     })
 
-    document.addEventListener("click", function (event) {
-        console.log('lol')
-        if(event.target.id !== profileButton.id && event.target.className !== "name-email") {
-            profileMenu.classList.add('hidden')
-        }
+    profileButton.on('click', function () {
+        if (profileMenu.hasClass('hidden')) {
+            profileMenu.removeClass('hidden')
+        } else profileMenu.addClass('hidden')
     })
 })
