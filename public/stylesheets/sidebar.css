@@ -1,5 +1,7 @@
 .sidebar {
-    background-color: whitesmoke;
+    overflow-y: auto;
+    position: relative;
+    background-color: rgb(147, 204, 168);
     width: 240px;
     text-align: left;
 }
@@ -38,4 +40,8 @@
     align-items: center;
     justify-content: center;
     line-height: 30px;
+}
+
+.sidebar.close{
+    width: 50px;
 }

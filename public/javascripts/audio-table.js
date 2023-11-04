@@ -5,25 +5,39 @@ $(document).ready(function () {
     let currentTrack = document.querySelector("#current-track");
     let currentSrc = document.querySelector("#current-src");
 
+    let playingSongId = localStorage.getItem("song-id");
     $(".audio-row").each(function (i, element) {
+        if(playingSongId == $(element).attr("id")){
+            if(localStorage.getItem("page-reloaded") == 1){
+                localStorage.setItem("page-reloaded",0);
+                currentSrc.setAttribute("src", "/song/" + playingSongId);
+                currentTrack.load();
+            }
+            $(element).addClass("selected");
+            selectedRow = element;
+        }
         $(element).on("click", function () {
             playAudio($(element))
         })
     })
 
+    window.onbeforeunload = function reloadHandler(){
+        localStorage.setItem("page-reloaded",1);
+    }
     function playAudio(row) {
         if (selectedRow) {
-            selectedRow.removeClass('selected');
+            $(selectedRow).removeClass('selected');
         }
-        row.addClass('selected');
+        $(row).addClass('selected');
         selectedRow = row
-        let songId = row.attr("id");
+        let songId = $(row).attr("id");
 
         currentSrc.setAttribute("src", "/song/" + songId);
         currentTrack.load();
         currentTrack.play();
-        currentTrack.volume = .02
+        currentTrack.volume = .5;
         setIsPlaying(1);
+        localStorage.setItem("song-id",songId);
     }
     
     function setIsPlaying(_isPlaying) {

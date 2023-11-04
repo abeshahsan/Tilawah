@@ -2,8 +2,11 @@ $(document).ready(function () {
 
     let mainContainer = $(".main-container");
     let sidebar = $(".sidebar");
+    let hamburger = $(".hamburger");
     let loginRegisterDiv = $(".login-register");
     let logo = $(".logo");
+    let home = $(".home");
+
 
     function loadLoginDOM() {
         $.post("/login-DOM", function (html) {
@@ -93,12 +96,19 @@ $(document).ready(function () {
         loadHome()
     })
 
-    $(document).ready(function () {
-        let home = $(".sidebar-home");
 
-        $(home).on("click", function (event) {
-            event.preventDefault();
-            loadHome();
-        })
+    $(home).on("click", function (event) {
+        event.preventDefault();
+        loadHome();
     })
+
+    $(hamburger).on("click", function(event){
+        if(sidebar.hasClass('close')){
+            sidebar.removeClass('close');
+        }
+        else{
+            sidebar.addClass('close');
+        }
+    })
+   
 })
