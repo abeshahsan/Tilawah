@@ -1,5 +1,5 @@
 <div class="audio-table-container">
-    <link rel='stylesheet' href='stylesheets/audio-table.css'/>
+
     <table class="audio-table">
         <tr>
             <th>#</th>
@@ -7,11 +7,8 @@
             <th>Creator</th>
             <th>Length</th>
         </tr>
-        <audio id='current_track'>
-            <source id="current_src" type='audio/mpeg'>
-        </audio>
         <% for (let i = 1; i < tableRows.length; i++) { %>
-        <tr class="audio-row" onclick="playAudio(this)" id="<%= tableRows[i].id %>">
+        <tr class="audio-row" id="<%= tableRows[i].id %>">
             <td class="row-num"> <%= i %>
             </td>
             <td class="title"> <%= tableRows[i].title %> </td>
@@ -21,5 +18,4 @@
         <% } %>
     </table>
 </div>
-<%- include('bottom-bar.ejs') %>
 <script src="javascripts/audio-table.js"></script>

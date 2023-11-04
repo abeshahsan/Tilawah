@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function (event) {
+
 
     let alert = document.querySelector('.alert')
     let alertText = document.querySelector('.alert p')
@@ -126,4 +126,3 @@ document.addEventListener('DOMContentLoaded', function (event) {
         alert.classList.remove('hidden')
         alertText.textContent = text
     }
-})

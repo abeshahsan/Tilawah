@@ -18,6 +18,15 @@ router.get('/register', function (req, res) {
     );
 });
 
+router.post('/register-partial', function (req, res) {
+    res.render('register-partial', function (err, html) {
+        if(err) {
+            console.warn(err)
+        }
+        res.send(html)
+    });
+});
+
 /* Receive the user's email to register. */
 router.post('/register-email', function (req, res) {
     let email = req.body.email.trim()

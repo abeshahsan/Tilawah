@@ -20,6 +20,15 @@ router.get('/login', function (req, res) {
     );
 });
 
+router.post('/login-partial', function (req, res) {
+    res.render('login-partial', function (err, html) {
+        if(err) {
+            console.warn(err)
+        }
+        res.send(html)
+    });
+});
+
 router.post('/login', function (req, res) {
     database.findUser(req.body.email.trim(), req.body.password.trim(), function (user) {
         if (!user) {
@@ -43,9 +52,9 @@ router.post('/forgot-mail', function (req, res) {
                 if (sentOTP) {
                     req.session.forgot.otp = sentOTP;
                     console.log(req.session.forgot.otp);
-                    res.send({ success: 1 });
+                    res.send({success: 1});
                 } else {
-                    res.send({ success: 0 });
+                    res.send({success: 0});
                 }
             });
         }
@@ -65,7 +74,7 @@ router.post('/forgot-otp', function (req, res) {
 router.post('/reset-password', function (req, res) {
     let password = req.body['password'].trim()
     database.updatePassword(req.session.forgot.email, password, function (updated) {
-        if(updated) {
+        if (updated) {
             database.findUser(req.session.forgot.email, password, function (user) {
                 req.session.user = user;
                 req.session.user.email = user.email

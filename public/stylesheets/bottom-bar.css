@@ -10,7 +10,7 @@ body{
 }
 
 
-#bottom_bar{   
+#control-panel{
   position: fixed;
   bottom: 0;
   height: 61px;

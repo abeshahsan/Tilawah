@@ -13,7 +13,13 @@ router.get('/profile', (req, res) => {
         user: req.session.user,
         data: countryOptions
     })
-    console.log(req.session.user)
+});
+
+router.post('/profile-partial', (req, res) => {
+    res.render('profile-partial', {
+        user: req.session.user,
+        data: countryOptions
+    })
 });
 
 router.post('/edit-personal-info', (req, res) => {
@@ -32,8 +38,6 @@ router.post('/edit-personal-info', (req, res) => {
             success: isUpdated
         })
     })
-
-    console.log(req.session.user)
 });
 
 router.post('/edit-email', (req, res) => {

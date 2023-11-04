@@ -3,10 +3,10 @@
 .user-profile-container {
     border-radius: 5px;
     width: 100%;
-    height: auto;
+    height: 100%;
     padding-top: 25px;
     padding-bottom: 25px;
-    background-color: rgb(231, 221, 252, .5)
+    background-color: rgb(231, 221, 252, .5);
 }
 
 .error {
