@@ -10,6 +10,8 @@
 
 
 #control-panel {
+    display: flex;
+    flex-direction: column;
     position:fixed;
     bottom: 0;
     height: 80px;
@@ -52,16 +54,37 @@
 }
 
 
-.volume_icon{
-    vertical-align: middle;
-    margin-right: 5px;
- }
+#volume-controller {
+	width: 250px;
+	height: 50px;
+	position: absolute;
+    top: 25px;
+    right: 10%;
+    margin: 0 auto;
+	/* align-items: center; */
+	
+}
+#volume-controller i {
+    position: absolute;
+    color: #666;
+    margin-top: -10px;
+}
+
+i.fa-volume-down {
+    right: -10px;
+}
+
+i.fa-volume-up {
+    left: -10px;
+}
 
 #volume-slider {
     position: absolute;
-    top: 25px;
-    right: 200px;
-    margin: 0 auto;
+    left: 25px;
+    right: 25px;
+    /* top: 10px; */
+    /* right: 200px; */
+    /* margin: 0 auto; */
     height: 5px;
     width: 200px;
     background: #938e8e;
@@ -70,7 +93,7 @@
 	
 .ui-slider-range-min {
     height: 5px;
-    width: 200px;
+    width: 100px;
     position: absolute;
     background: rgb(91, 93, 91);
     border: none;
