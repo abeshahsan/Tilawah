@@ -7,14 +7,15 @@
             <th>Creator</th>
             <th>Length</th>
         </tr>
-        <% for (let i = 1; i < tableRows.length; i++) { %>
-        <tr class="audio-row" id="<%= tableRows[i].id %>">
-            <td class="row-num"> <%= i %>
-            </td>
-            <td class="title"> <%= tableRows[i].title %> </td>
-            <td class="creator"> <%= tableRows[i].creator %> </td>
-            <td class="length"> <%= tableRows[i].length %> </td>
-        </tr>
+        <% let i = 1; %>
+        <% for (let id in tableRows) { %>
+            <tr class="audio-row" id="<%= id %>">
+                <td class="row-num"> <%= i++ %>
+                </td>
+                <td class="title"> <%= tableRows[id].title %> </td>
+                <td class="creator"> <%= tableRows[id].creator %> </td>
+                <td class="length"> <%= tableRows[id].length %> </td>
+            </tr>
         <% } %>
     </table>
 </div>

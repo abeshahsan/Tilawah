@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 
     // console.log('lol')
     database.loadAllAudios(async function (result) {
-        req.session.allAudio = [null];
+        req.session.allAudio = {};
 
         try {
             const durations = await Promise.all(result.map(async (row) => {
@@ -49,13 +49,13 @@ app.use((req, res, next) => {
 
             result.forEach((row, index) => {
                 if (durations[index]) {
-                    req.session.allAudio.push({
+                    req.session.allAudio[row.AUDIO_ID] = {
                         id: row.AUDIO_ID,
                         title: row.AUDIO_NAME || "unknown",
                         creator: row.CREATOR_NAME || "unknown",
                         length: durations[index] || "unknown", // Use the corresponding duration
                         path: row.PATH,
-                    });
+                    };
                 }
                 if (index + 1 === result.length) {
                     next();

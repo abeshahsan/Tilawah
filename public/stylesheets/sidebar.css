@@ -1,6 +1,6 @@
 .sidebar {
     overflow-y: auto;
-    position: relative;
+    overflow-x: hidden;
     background-color: rgb(147, 204, 168);
     width: 240px;
     text-align: left;

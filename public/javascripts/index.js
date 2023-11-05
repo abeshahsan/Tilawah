@@ -5,8 +5,7 @@ $(document).ready(function () {
     let hamburger = $(".hamburger");
     let loginRegisterDiv = $(".login-register");
     let logo = $(".logo");
-    let home = $(".home");
-
+    let home = $(".sidebar-home");
 
     function loadLoginDOM() {
         $.post("/login-DOM", function (html) {
@@ -14,7 +13,7 @@ $(document).ready(function () {
             loginRegisterDiv.addClass("hidden");
 
             $(mainContainer).html(html);
-            history.pushState(null, null, "/login");
+            history.pushState("login", "", "/login");
         });
     }
 
@@ -24,7 +23,7 @@ $(document).ready(function () {
             if (res.loginRegister) loginRegisterDiv.removeClass("hidden");
             else loginRegisterDiv.addClass("hidden");
             sidebar.removeClass("hidden");
-            history.pushState(null, null, "/");
+            history.pushState("home", "", "/");
         });
     }
 
@@ -36,14 +35,14 @@ $(document).ready(function () {
             loginRegisterDiv.addClass("hidden");
 
             $(mainContainer).html(html);
-            history.pushState(null, null, "/register");
+            history.pushState("register", "", "/register");
         });
     }
 
     function loadProfileDOM() {
         $.post("/profile-DOM", function (html) {
             $(mainContainer).html(html);
-            history.pushState(null, null, "/profile");
+            history.pushState("profile", "", "/profile");
         });
     }
 
