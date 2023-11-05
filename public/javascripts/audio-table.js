@@ -67,14 +67,14 @@ $(document).ready(function () {
     
     $("#volume-slider").slider({
         value  : volumeValue,
-        step   : 1,
+        step   : 0.01,
         range  : 'min',
         min    : 0,
         max    : 100,
         slide : function(){
             let value = $("#volume-slider").slider("value");
-            currentTrack.volume = (value / 100);
             volumeValue = value;
+            currentTrack.volume = (value / 100);
         }
     });
 })
