@@ -9,7 +9,6 @@
     height: 100vh;
     padding: 0 1.7rem;
     background-color:  rgb(147, 204, 168);
-    overflow: hidden;
 }
 /* 
 .sidebar.hidden {
