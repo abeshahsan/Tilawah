@@ -6,6 +6,7 @@ $(document).ready(function () {
     let currentSrc = document.querySelector("#current-src");
 
     let playingSongId = localStorage.getItem("song-id");
+    let volumeValue = localStorage.getItem("volume-value");
     $(".audio-row").each(function (i, element) {
         if(playingSongId == $(element).attr("id")){
             if(localStorage.getItem("page-reloaded") == 1){
@@ -23,6 +24,7 @@ $(document).ready(function () {
 
     window.onbeforeunload = function reloadHandler(){
         localStorage.setItem("page-reloaded",1);
+        localStorage.setItem("volume-value",volumeValue);
     }
     function playAudio(row) {
         if (selectedRow) {
@@ -34,8 +36,8 @@ $(document).ready(function () {
 
         currentSrc.setAttribute("src", "/song/" + songId);
         currentTrack.load();
+        currentTrack.volume = (volumeValue / 100);
         currentTrack.play();
-        currentTrack.volume = .5;
         setIsPlaying(1);
         localStorage.setItem("song-id",songId);
     }
@@ -49,7 +51,7 @@ $(document).ready(function () {
             $(playPause).addClass("fa-play");
         }
     }
-
+    
     function togglePlayPause() {
         if (isPlaying) {
             currentTrack.pause();
@@ -58,9 +60,22 @@ $(document).ready(function () {
         }
         setIsPlaying(!isPlaying);
     }
-
+    
     $(playPause).on("click", function () {
         togglePlayPause()
+    });
+    
+    $("#volume-slider").slider({
+        value  : volumeValue,
+        step   : 1,
+        range  : 'min',
+        min    : 0,
+        max    : 100,
+        slide : function(){
+            let value = $("#volume-slider").slider("value");
+            currentTrack.volume = (value / 100);
+            volumeValue = value;
+        }
     });
 })
 
