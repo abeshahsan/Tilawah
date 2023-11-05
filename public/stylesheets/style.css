@@ -4,7 +4,7 @@
     border: none;
     outline: none;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    font-family: "segoe ui", sans-serif;
 }
 
 body {
@@ -15,6 +15,6 @@ body {
     overflow: hidden;
 }
 
-.main-container {
-
+.main-container::-webkit-scrollbar {
+    visibility: hidden;
 }

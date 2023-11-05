@@ -1,7 +1,8 @@
 $(document).ready(function () {
     let selectedRow;
     let isPlaying = 0;
-    let playPause = $("#play-pause");
+    let I_PlayPause = $("#play-pause");
+    let playPause = $(".icons.play-pause");
     let currentTrack = document.querySelector("#current-track");
     let currentSrc = document.querySelector("#current-src");
 
@@ -44,11 +45,11 @@ $(document).ready(function () {
     
     function setIsPlaying(_isPlaying) {
         isPlaying = _isPlaying;
-        $(playPause).removeClass("fa-play fa-pause");
+        $(I_PlayPause).removeClass("fa-play fa-pause");
         if (isPlaying) {
-            $(playPause).addClass("fa-pause");
+            $(I_PlayPause).addClass("fa-pause");
         } else {
-            $(playPause).addClass("fa-play");
+            $(I_PlayPause).addClass("fa-play");
         }
     }
     
