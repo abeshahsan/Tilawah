@@ -10,8 +10,8 @@
 
 
 #control-panel {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     position:fixed;
     bottom: 0;
     height: 80px;
@@ -19,6 +19,7 @@
     background-color: white;
     box-shadow: 0 0 30px #ccc;
     padding-top: 2px;
+    margin: 0 auto;
 }
 
 
@@ -33,17 +34,17 @@
 
 /*** control-panel items ***/
 .controls {
-    width: 323px;
+    width: 310px;
     height: 100%;
     margin: 0 auto;
-    padding: 0;
 }
 
 .controls .fa {
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    height: 100%;
+    margin: 10px 10px;
+}
+
+.controls .fa-play{
+    width: 20px;
 }
 
 #repeat_badge {
@@ -62,7 +63,7 @@
     right: 10%;
     margin: 0 auto;
 	/* align-items: center; */
-	
+
 }
 #volume-controller i {
     position: absolute;
@@ -70,12 +71,14 @@
     margin-top: -10px;
 }
 
-i.fa-volume-down {
+#volume-controller i.fa-volume-down {
     right: -15px;
+    padding: 5px 10px;
 }
 
-i.fa-volume-up {
+#volume-controller i.fa-volume-up {
     left: -15px;
+    padding: 5px 10px;
 }
 
 #volume-slider {
