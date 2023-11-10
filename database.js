@@ -161,12 +161,14 @@ function updateEmail(userID, email, callback) {
 
 function loadAllAudios(callback = function () {
 }) {
-    const sql = `SELECT AUDIO.*, COLLECTION.COLLECTION_NAME, COLLECTION.CREATOR_ID, CREATOR.CREATOR_NAME
-                 FROM AUDIO,
-                      COLLECTION,
-                      CREATOR
-                 WHERE AUDIO.COLLECTION_ID = COLLECTION.COLLECTION_ID
-                   AND COLLECTION.CREATOR_ID = CREATOR.CREATOR_ID;`;
+    const sql = `SELECT *
+                 FROM (SELECT T.*, CREATOR.CREATOR_NAME
+                       FROM (SELECT AUDIO.*, AUDIO_CREATOR.CREATOR_ID
+                             FROM AUDIO
+                                      LEFT JOIN AUDIO_CREATOR ON AUDIO.AUDIO_ID = AUDIO_CREATOR.AUDIO_ID) T
+                                LEFT JOIN CREATOR ON T.CREATOR_ID = CREATOR.CREATOR_ID) T2
+                          LEFT JOIN COLLECTION ON T2.COLLECTION_ID = COLLECTION.COLLECTION_ID
+                 ORDER BY AUDIO_ID`;
     pool.query(sql, (err, result) => {
         if (err) {
             console.log(err.sqlMessage + '\n' + err.sql);

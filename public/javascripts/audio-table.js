@@ -39,6 +39,9 @@ $(document).ready(function () {
         currentTrack.load();
         currentTrack.volume = (volumeValue / 100);
         currentTrack.play();
+        currentTrack.addEventListener("ended", function () {
+            togglePlayPause()
+        })
         setIsPlaying(1);
         localStorage.setItem("song-id",songId);
     }
