@@ -76,6 +76,11 @@ $(document).ready(function () {
             let value = $("#volume-slider").slider("value");
             volumeValue = value;
             currentTrack.volume = (value / 100);
+        },
+        slide : function(){
+            let value = $("#volume-slider").slider("value");
+            volumeValue = value;
+            currentTrack.volume = (value / 100);
         }
     });
 })
