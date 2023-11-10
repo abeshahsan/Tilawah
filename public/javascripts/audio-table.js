@@ -72,7 +72,7 @@ $(document).ready(function () {
         range  : 'min',
         min    : 0,
         max    : 100,
-        slide : function(){
+        change : function(){
             let value = $("#volume-slider").slider("value");
             volumeValue = value;
             currentTrack.volume = (value / 100);
