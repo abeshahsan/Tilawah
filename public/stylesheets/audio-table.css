@@ -19,13 +19,21 @@
 
 ::-webkit-scrollbar  {
     width: 6px;
-    background-color: whitesmoke;
+    background-color: transparent;
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb  {
     background-color: #d0cfcf;
     border-radius: 10px;
+}
+
+::-webkit-scrollbar-track-piece:start {
+    margin-top: 5px;
+}
+
+::-webkit-scrollbar-track-piece:end {
+    margin-bottom: 5px;
 }
 
 .audio-table th, td {

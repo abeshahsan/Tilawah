@@ -1,7 +1,7 @@
 @import "style.css";
 
 .login-container {
-    margin: 0 auto;
+    margin: 60px auto 0;
     width: 420px;
     height: 70%;
     min-width: 420px;
@@ -10,9 +10,10 @@
     border-radius: 20px;
     box-shadow: 0 0 15px 1px rgba(229, 227, 227, 0.75);
 
-    display: block;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
+     justify-content: center;
 }
 
 .login-container form {
