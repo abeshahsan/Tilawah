@@ -1,3 +1,4 @@
+
 .audio-table {
     margin: 10px auto;
     border-collapse: collapse;
@@ -6,25 +7,54 @@
 
 .audio-table-container {
     align-items: center;
-    background-color: whitesmoke;
-    width: calc(100% - 5px);
+    background-color: #e2f9fa;
+    width: calc(100% - 50px);
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
+    border-radius: 10px;
+    margin: 0 auto;
+    box-shadow: 0 1px 6px -1px #9b9a9a;
+}
+
+::-webkit-scrollbar  {
+    width: 6px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb  {
+    background-color: #d0cfcf;
+    border-radius: 10px;
 }
 
 .audio-table th, td {
-    border: thin solid #a2a2a2;
     padding: 5px;
     user-select: none;
+}
+
+.audio-table .th-creator, .th-title {
+    text-align: left;
 }
 
 .audio-table .audio-row {
     font-family: "Segoe UI Black", sans-serif;
 }
 
+.audio-table tr {
+    line-height: 50px;
+    border-style: solid;
+    border-color: transparent;
+}
+
 .audio-table .title, .creator {
-    width: 40%;
+    width: 20%;
+}
+
+.audio-table .title {
+    font-size: 17px;
+    font-weight: bold;
+    color: #3e3d3d;
 }
 
 .audio-table .row-num, .length {
@@ -40,9 +70,9 @@
 }
 
 .audio-table .audio-row:hover {
-    background-color: #c0fdc0;
+    background-color: #cae0fa;
 }
 
 .audio-table .audio-row.selected {
-    background-color: palegreen;
+    background-color: #c3cdda;
 }

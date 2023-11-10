@@ -3,8 +3,8 @@
     bottom: 0;
     height: 80px;
     width: 100%;
-    background-color: white;
-    box-shadow: 0 0 30px #ccc;
+    background-color: #ceddffe8;
+    box-shadow: 0 1px 6px -1px #9b9a9a;
     padding-top: 2px;
     margin: 0 auto;
 }
@@ -26,7 +26,7 @@
 }
 
 .controls .icons:hover {
-    background-color: #e1dfdf;
+    background-color: #bebcbc;
 }
 
 .controls .icons {

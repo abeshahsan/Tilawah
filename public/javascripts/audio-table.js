@@ -11,7 +11,7 @@ $(document).ready(function () {
     $(".audio-row").each(function (i, element) {
         if(playingSongId == $(element).attr("id")){
             if(localStorage.getItem("page-reloaded") == 1){
-                localStorage.setItem("page-reloaded",0);
+                localStorage.setItem("page-reloaded", 0);
                 currentSrc.setAttribute("src", "/song/" + playingSongId);
                 currentTrack.load();
             }
