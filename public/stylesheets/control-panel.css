@@ -6,7 +6,7 @@
     background-color: #ceddffe8;
     box-shadow: 0 1px 6px -1px #9b9a9a;
     padding-top: 2px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
 }
 
 
@@ -89,7 +89,7 @@
     cursor: pointer;
 }
 	
-.ui-slider-range-min {
+#volume-slider .ui-slider-range-min {
     height: 5px;
     width: 200px;
     position: absolute;
@@ -110,4 +110,20 @@
     cursor: pointer;
     outline: none;
 }
-
+.seekbar-controller{
+    width: 100%;
+}
+#seek-slider{
+    background: #938e8e;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 100%;
+}
+#seek-slider .ui-slider-range-min {
+    height: 5px;
+    position: absolute;
+    background: rgb(91, 93, 91);
+    border: none;
+    border-radius: 10px;
+    outline: none;
+}

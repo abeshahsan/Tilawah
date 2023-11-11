@@ -109,7 +109,7 @@ $(document).ready(function () {
             value: currentTrack.currentTime,
             range: "min",
             min: 0,
-            // max: 255,
+            // max: 100,
             step: 0.1,
             // animate: true,
             slide:  function(event, ui) {
@@ -117,8 +117,8 @@ $(document).ready(function () {
                 manualSeek = true;
             },
             stop: function() {
-                manualSeek = false; 
                 currentTrack.currentTime = $(seekSlider).slider("value");
+                manualSeek = false; 
             }
         }); 
 
