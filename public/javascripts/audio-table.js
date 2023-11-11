@@ -8,6 +8,8 @@ $(document).ready(function () {
 
     let playingSongId = localStorage.getItem("song-id");
     let volumeValue = localStorage.getItem("volume-value");
+    let audioLength = 0;
+
     $(".audio-row").each(function (i, element) {
         if(playingSongId == $(element).attr("id")){
             if(localStorage.getItem("page-reloaded") == 1){
@@ -17,6 +19,9 @@ $(document).ready(function () {
             }
             $(element).addClass("selected");
             selectedRow = element;
+            currentTrack.onloadedmetadata = function() {
+                audioLength = currentTrack.duration
+            };
         }
         $(element).on("click", function () {
             playAudio($(element))
@@ -38,9 +43,14 @@ $(document).ready(function () {
         currentSrc.setAttribute("src", "/song/" + songId);
         currentTrack.load();
         currentTrack.volume = (volumeValue / 100);
+        currentTrack.duration = 
         currentTrack.play();
         setIsPlaying(1);
         localStorage.setItem("song-id",songId);
+
+        currentTrack.onloadedmetadata = function() {
+            audioLength = currentTrack.duration
+        };
     }
     
     function setIsPlaying(_isPlaying) {
@@ -65,6 +75,10 @@ $(document).ready(function () {
     $(playPause).on("click", function () {
         togglePlayPause()
     });
+
+    // $(playPause).on("keypress", function () {
+    //     if( e.key == " ") togglePlayPause()
+    // });
     
     $("#volume-slider").slider({
         value  : volumeValue,
@@ -83,5 +97,16 @@ $(document).ready(function () {
             currentTrack.volume = (value / 100);
         }
     });
+
+    $( "#seek-slider" ).slider({
+        range: "min",
+        min: 0,
+        max: audioLength,
+        step:1,
+        animate: true,
+    //     slide:  function(event, ui) {
+             
+    // },
+}); 
 })
 
