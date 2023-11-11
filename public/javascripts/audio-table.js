@@ -13,7 +13,7 @@ $(document).ready(function () {
     $(".audio-row").each(function (i, element) {
         if(playingSongId == $(element).attr("id")){
             if(localStorage.getItem("page-reloaded") == 1){
-                localStorage.setItem("page-reloaded",0);
+                localStorage.setItem("page-reloaded", 0);
                 currentSrc.setAttribute("src", "/song/" + playingSongId);
                 currentTrack.load();
             }
@@ -45,6 +45,9 @@ $(document).ready(function () {
         currentTrack.volume = (volumeValue / 100);
         currentTrack.duration = 
         currentTrack.play();
+        currentTrack.addEventListener("ended", function () {
+            togglePlayPause()
+        })
         setIsPlaying(1);
         localStorage.setItem("song-id",songId);
 

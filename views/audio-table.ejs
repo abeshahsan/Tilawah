@@ -2,16 +2,15 @@
 
     <table class="audio-table">
         <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Creator</th>
-            <th>Length</th>
+            <th class="th-row-num">#</th>
+            <th class="th-title">Title</th>
+            <th class="th-creator">Creator</th>
+            <th class="th-duration">Duration</th>
         </tr>
         <% let i = 1; %>
         <% for (let id in tableRows) { %>
             <tr class="audio-row" id="<%= id %>">
-                <td class="row-num"> <%= i++ %>
-                </td>
+                <td class="row-num"> <%= i++ %></td>
                 <td class="title"> <%= tableRows[id].title %> </td>
                 <td class="creator"> <%= tableRows[id].creator %> </td>
                 <td class="length"> <%= tableRows[id].length %> </td>
