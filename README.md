@@ -29,5 +29,5 @@ It was made as the Lab project for <br> CSE 4508: RDBMS Programming Lab.
 To install the necessary packages, run this commands:
 ```
 npm init -y
-npm run package-installer
+npm install
 ```

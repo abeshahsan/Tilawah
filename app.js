@@ -48,6 +48,7 @@ app.use((req, res, next) => {
             }));
 
             result.forEach((row, index) => {
+                // console.log("lol")
                 if (durations[index]) {
                     req.session.allAudio[row.AUDIO_ID] = {
                         id: row.AUDIO_ID,
