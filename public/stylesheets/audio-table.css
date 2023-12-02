@@ -84,3 +84,12 @@
 .audio-table .audio-row.selected {
     background-color: #c3cdda;
 }
+
+.-audio-context-menu li {
+    padding: 5px 20px;
+    cursor: pointer;
+}
+
+.audio-context-menu li:hover {
+    background-color: red;
+}
