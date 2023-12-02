@@ -1,4 +1,4 @@
-# Tilawah
+<h1 align="center">Tilawah</h1>
 
 <p align = "center"> 
 Tilawah is a web application to listen to Quran recitation, islamic podcast, nasheed.
@@ -25,9 +25,14 @@ It was made as the Lab project for <br> CSE 4508: RDBMS Programming Lab.
 - MySQL
 
 
-### Install packages
+### Setup and run
 To install the necessary packages, run this commands:
 ```
 npm init -y
 npm install
+```
+
+Then use the following command to run start the app:
+```
+npm start
 ```
