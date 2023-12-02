@@ -1,12 +1,15 @@
 #control-panel {
     position:fixed;
     bottom: 0;
-    height: 80px;
+    height: 90px;
     width: 100%;
     background-color: #ceddffe8;
     box-shadow: 0 1px 6px -1px #9b9a9a;
     padding-top: 2px;
     /* margin: 0 auto; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
@@ -16,13 +19,14 @@
 
 /*** control-panel items ***/
 .controls {
-    width: 310px;
+    width: 100%;
     height: 100%;
-    margin: 0 auto;
+    gap: 10px;
 
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
 }
 
 .controls .icons:hover {
@@ -38,6 +42,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    position: relative;
 }
 
 .controls .fa-play{
@@ -99,7 +105,7 @@
     outline: none;
 }
 
-.ui-slider-handle {
+#volume-slider .ui-slider-handle {
     width: 20px;
     height: 20px;
     border-radius: 20px;
@@ -110,20 +116,50 @@
     cursor: pointer;
     outline: none;
 }
+
 .seekbar-controller{
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+
 #seek-slider{
     background: #938e8e;
     border-radius: 15px;
     cursor: pointer;
-    width: 100%;
+    width: 35%;
+    position: relative;
+
+    margin: 8px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 #seek-slider .ui-slider-range-min {
     height: 5px;
-    position: absolute;
     background: rgb(91, 93, 91);
     border: none;
     border-radius: 10px;
     outline: none;
 }
+
+#seek-slider .ui-slider-handle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background: rgb(44, 212, 100);
+    cursor: pointer;
+    outline: none;
+}
+
+
+/********************************************************/
+
+.controls .icons[title]:hover::after {
+    background-color: red;
+}
+

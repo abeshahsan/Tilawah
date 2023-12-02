@@ -2,13 +2,14 @@
 .audio-table {
     margin: 10px auto;
     border-collapse: collapse;
-    width: 90%;
+    width: 95%;
 }
 
 .audio-table-container {
     align-items: center;
     background-color: #e2f9fa;
-    width: calc(100% - 50px);
+    /*width: calc(100% - 50px);*/
+    width: 95%;
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
@@ -92,3 +93,4 @@
 .audio-context-menu li:hover {
     background-color: red;
 }
+

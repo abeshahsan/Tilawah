@@ -143,6 +143,6 @@ $(document).ready(function () {
             $(seekSlider).slider('value', currentTrack.currentTime);
         }
     });
-})
+});
     
     
