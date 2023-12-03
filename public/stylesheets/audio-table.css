@@ -2,13 +2,14 @@
 .audio-table {
     margin: 10px auto;
     border-collapse: collapse;
-    width: 90%;
+    width: 95%;
 }
 
 .audio-table-container {
     align-items: center;
     background-color: #e2f9fa;
-    width: calc(100% - 50px);
+    /*width: calc(100% - 50px);*/
+    width: 95%;
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
@@ -55,7 +56,7 @@
     border-color: transparent;
 }
 
-.audio-table .title, .creator {
+.audio-table .title, .creator, .collection {
     width: 20%;
 }
 
@@ -84,3 +85,12 @@
 .audio-table .audio-row.selected {
     background-color: #c3cdda;
 }
+
+.audio-context-menu li {
+    cursor: pointer;
+}
+
+.audio-context-menu li:hover {
+    background-color: red;
+}
+

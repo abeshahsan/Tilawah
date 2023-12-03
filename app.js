@@ -54,6 +54,7 @@ app.use((req, res, next) => {
                         id: row.AUDIO_ID,
                         title: row.AUDIO_NAME || "unknown",
                         creator: row.CREATOR_NAME || "unknown",
+                        collection: row.COLLECTION_NAME || "unknown",
                         length: durations[index] || "unknown", // Use the corresponding duration
                         path: row.PATH,
                     };
