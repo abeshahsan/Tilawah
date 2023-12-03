@@ -22,9 +22,10 @@
     position: relative;
     list-style: none;
     padding: 0;
+    user-select: none;
 }
 
-.sidebar ul li {
+.sidebar ul li{
     padding: 1rem;
     margin: 8px 0;
     border-radius: 8px;
@@ -32,7 +33,7 @@
     cursor: pointer;
 }
 
-.sidebar ul li:hover {
+.sidebar ul li:hover{
     background-color: #d3d3d3;
 }
 
@@ -56,4 +57,8 @@
 
 .sidebar ul li a span{
     overflow: hidden;
+}
+
+nav{
+    margin-left: 3.9rem;
 }
