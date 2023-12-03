@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const dbTables = require('./database-tables');
+const {SERVER_STATUS_CURSOR_EXISTS} = require("mysql/lib/protocol/constants/server_status");
 const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
@@ -177,6 +178,99 @@ function loadAllAudios(callback = function () {
     });
 }
 
+function createPlaylist(playlistName, userID, callback = function () {
+}) {
+    const sql = `INSERT INTO PLAYLIST (PLAYLIST_NAME, USER_ID)
+                 VALUES (${pool.escape(playlistName)}, ${pool.escape(userID)})`;
+
+    let SUCCESSFULLY_CREATED = true;
+
+    pool.query(sql, (err) => {
+        if (err) {
+            SUCCESSFULLY_CREATED = false;
+            console.log(err.sqlMessage + '\n' + err.sql);
+        }
+        return callback(SUCCESSFULLY_CREATED);
+    });
+}
+
+function deletePlaylist(playlistID, callback = function () {
+}) {
+    const sql = `DELETE
+                 FROM PLAYLIST
+                 WHERE PLAYLIST_ID = ${pool.escape(playlistID)}`;
+
+    let SUCCESSFULLY_DELETED = true;
+
+    pool.query(sql, (err) => {
+        if (err) {
+            SUCCESSFULLY_DELETED = false;
+            console.log(err.sqlMessage + '\n' + err.sql);
+        }
+        return callback(SUCCESSFULLY_DELETED);
+    });
+}
+
+function addAudioToPlaylist(audioID, playlistID, callback = function () {
+}) {
+    const sql = `INSERT INTO AUDIO_PLAYLIST (AUDIO_ID, PLAYLIST_ID)
+                 VALUES (${pool.escape(audioID)}, ${pool.escape(playlistID)})`;
+
+    let SUCCESSFULLY_ADDED = true;
+
+    pool.query(sql, (err) => {
+        if (err) {
+            SUCCESSFULLY_ADDED = false;
+            console.log(err.sqlMessage + '\n' + err.sql);
+        }
+        return callback(SUCCESSFULLY_ADDED);
+    });
+}
+
+function deleteAudioFromPlaylist(audioID, playlistID, callback = function () {
+}) {
+    const sql = `DELETE
+                 FROM AUDIO_PLAYLIST
+                 WHERE PLAYLIST_ID = ${pool.escape(playlistID)}
+                   AND AUDIO_ID = ${pool.escape(audioID)}`;
+
+    let SUCCESSFULLY_DELETED = true;
+
+    pool.query(sql, (err) => {
+        if (err) {
+            SUCCESSFULLY_DELETED = false;
+            console.log(err.sqlMessage + '\n' + err.sql);
+        }
+        return callback(SUCCESSFULLY_DELETED);
+    });
+}
+
+function loadPlaylistsOfCurrentUser(userID, callback = function () {
+}) {
+    const sql = `SELECT *
+                 FROM PLAYLIST
+                 WHERE USER_ID = ${pool.escape(userID)}`;
+    pool.query(sql, (err, result) => {
+        if (err) {
+            console.log(err.sqlMessage + '\n' + err.sql);
+        }
+        return callback(result);
+    });
+}
+
+function loadAudioOfPlaylist(playlistID, callback = function () {
+}) {
+    const sql = `SELECT AUDIO_ID
+                 FROM AUDIO_PLAYLIST
+                 WHERE PLAYLIST_ID = ${pool.escape(playlistID)}`;
+    pool.query(sql, (err, result) => {
+        if (err) {
+            console.log(err.sqlMessage + '\n' + err.sql);
+        }
+        return callback(result);
+    });
+}
+
 module.exports = {
     findUser,
     insertUser,
@@ -184,5 +278,11 @@ module.exports = {
     updatePassword,
     updatePersonalInfo,
     updateEmail,
-    loadAllAudios
+    loadAllAudios,
+    createPlaylist,
+    deletePlaylist,
+    addAudioToPlaylist,
+    deleteAudioFromPlaylist,
+    loadPlaylistsOfCurrentUser,
+    loadAudioOfPlaylist
 }
