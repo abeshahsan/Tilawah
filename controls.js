@@ -1,8 +1,8 @@
-const database = require('../database');
+const database = require('./database');
 
 const {getAudioDurationInSeconds} = require('get-audio-duration');
 const ffProbeStatic = require('ffprobe-static');
-const utility = require('../sever-utility');
+const utility = require('./sever-utility');
 
 async function preLoadAllAudio() {
     return new Promise((resolve, reject) => {
@@ -38,6 +38,21 @@ async function preLoadAllAudio() {
             } catch (error) {
                 reject(error); // Reject with the error if any occurs
             }
+        });
+    });
+}
+
+async function loadPlaylistAudio(playlistID, allAudio) {
+    return new Promise((resolve, reject) => {
+        database.loadAudioOfPlaylist(playlistID, function (result, error) {
+            if(error) {
+                return reject(error);
+            }
+            let playlistAudio = {};
+            result.forEach(function (entry) {
+                playlistAudio[entry.AUDIO_ID] = allAudio[entry.AUDIO_ID];
+            });
+            resolve(playlistAudio);
         });
     });
 }
@@ -294,4 +309,4 @@ let countryOptions = [
     "Zimbabwe",
 ]
 
-module.exports = {options, countryOptions, preLoadAllAudio}
+module.exports = {options, countryOptions, preLoadAllAudio, loadPlaylistAudio}

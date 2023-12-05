@@ -1,22 +1,9 @@
 const express = require('express');
-const controls = require("./controls");
+const controls = require("../controls");
 const router = express.Router();
 
 const database = require('../database')
 const mailer = require('../email')
-
-/* GET the register page. */
-router.get('/register', function (req, res) {
-    res.render('register',
-        {
-            options: {
-                loginRegister: false,
-                hamburger: true
-            },
-            user: req.session.user
-        }
-    );
-});
 
 router.post('/register-DOM', function (req, res) {
     res.render('register-DOM', function (err, html) {
