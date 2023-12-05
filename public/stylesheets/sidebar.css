@@ -30,7 +30,11 @@
     cursor: pointer;
 }
 
-.sidebar ul li:hover{
+.sidebar ul li.sidebar-home:hover{
+    background-color: #d3d3d3;
+}
+
+.sidebar ul li.item:hover{
     background-color: #d3d3d3;
 }
 
@@ -60,6 +64,8 @@
     overflow: hidden;
 }
 
-nav{
-    margin-left: 3.9rem;
+.playlist-menu{
+    display: flex;
+    flex-flow: column wrap;
+    overflow: hidden;
 }
