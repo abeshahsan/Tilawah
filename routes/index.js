@@ -8,30 +8,6 @@ router.get("/song/:id", function (req, res) {
     res.sendFile(req.session.allAudio[req.params.id].path);
 });
 
-router.get('/playlist/:id', async function (req, res) {
-    if (!req.session.user) {
-        return res.redirect("/login");
-    }
-
-    console.log("lol");
-    try {
-        let playListAudio = await controls.loadPlaylistAudio(2, req.session.allAudio);
-
-        return res.render('index', {
-            options: {
-                hamburger: true,
-                loginRegister: false
-            },
-            user: req.session.user,
-            audioList: playListAudio,
-            countryOptions: controls.countryOptions,
-            route: "/playlist"
-        });
-    } catch (error) {
-        console.log(error);
-    }
-});
-
 router.get('/logout', function (req, res, next) {
     delete req.session.user
     res.redirect("/")
