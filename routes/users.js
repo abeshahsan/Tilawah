@@ -7,13 +7,15 @@ const controls = require('../controls')
 /**
  * Default Get Request
  */
-router.get(['/', '/home'], function (req, res) {
+router.get(['/', '/home/2'], function (req, res) {
     // console.log(req.session.allAudio)
     let options = {}
     let _audioList = req.session.allAudio;
 
     options.loginRegister = !req.session.user;
     options.hamburger = true;
+
+    console.log(req.path, req.params[0]);
 
     res.render('index', {
         options: options,

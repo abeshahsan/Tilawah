@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 const controls = require('../controls')
 
-router.get('/2', async function (req, res, next) {
+router.get('/:2', async function (req, res, next) {
     // console.log(req.session.allAudio)
     let options = {}
     let _audioList = req.session.allAudio;
