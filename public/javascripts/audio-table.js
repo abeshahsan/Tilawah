@@ -144,7 +144,9 @@ $(document).ready(function () {
         }
     });
 
-    $(".controls .icons").tooltip();
+    $(".controls .icons").tooltip({
+        tooltipClass: "control-panel-tooltip"
+    });
 });
     
     
