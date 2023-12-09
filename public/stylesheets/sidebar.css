@@ -13,10 +13,6 @@
     box-shadow: 0 1px 6px -1px #9b9a9a;
     margin-left: 10px;
 }
-/* 
-.sidebar.hidden {
-    display: none;
-} */
 
 .sidebar ul {
     height: 88%;
@@ -53,6 +49,10 @@
 
 .sidebar.close{
     width: 7%;
+}
+
+.sidebar.hidden{
+    display: none;
 }
 
 

@@ -5,20 +5,15 @@ const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const logger = require('morgan');
 const database = require('./database');
-const controls = require('./routes/controls');
+const controls = require('./controls');
 
-const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
 const profileRouter = require('./routes/profile');
 const playlistRouter = require('./routes/playlist');
 const app = express();
-
-const {getAudioDurationInSeconds} = require('get-audio-duration');
-const ffProbeStatic = require('ffprobe-static');
-const utility = require('./sever-utility');
-const util = require("util");
 
 app.use(expressSession({
     secret: "kaane-kaane-boli-shuno", resave: true, saveUninitialized: true,
@@ -45,7 +40,7 @@ app.use(expressSession({
 
 // app.use(logger('dev'));
         app.use(express.json());
-        app.use(express.urlencoded({extended: false}));
+        app.use(express.urlencoded({extended: true}));
         app.use(cookieParser());
         app.use(express.static(path.join(__dirname, 'public')));
 
@@ -55,7 +50,11 @@ app.use(expressSession({
         app.use('/', registerRouter);
         app.use('/', profileRouter);
         app.use('/', usersRouter);
+<<<<<<< HEAD
         app.use('/', playlistRouter);
+=======
+        app.use('/playlist', playlistRouter);
+>>>>>>> 6a65402b727fd209a76723dc4a5728b1875cfde4
 
 
         app.use(function (req, res, next) {

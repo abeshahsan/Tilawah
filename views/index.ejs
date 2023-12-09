@@ -14,7 +14,7 @@
                 <%- include('sidebar.ejs') %>
             <% } %>
             <div style="width: 100%; height: 100%" class="main-container">
-                <% if (route === "/") { %>
+                <% if (route === "/" || route === "/home" || route === "/playlist") { %>
                     <%- include('audio-table.ejs', {tableRows: audioList}) %>
                 <% } else if (route === "/login") { %>
                     <%- include('login-DOM.ejs') %>
@@ -28,6 +28,6 @@
     </div>
     <%- include('control-panel.ejs') %>
 </div>
-<script src="javascripts/index.js"></script>
+<script src="/javascripts/index.js"></script>
 </body>
 </html>

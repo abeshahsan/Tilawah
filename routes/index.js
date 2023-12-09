@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const controls = require('./controls')
+const controls = require('../controls')
 
 /* GET home page. */
 router.get("/song/:id", function (req, res) {
@@ -14,6 +14,17 @@ router.get('/logout', function (req, res, next) {
 });
 
 router.post('/home', function (req, res) {
+    res.render('audio-table', {
+        tableRows: req.session.allAudio
+    }, function (err, html) {
+        if (err) {
+            console.warn(err)
+        }
+        res.send({html, loginRegister: !req.session.user})
+    });
+});
+
+router.post('/playlist/:id', function (req, res) {
     res.render('audio-table', {
         tableRows: req.session.allAudio
     }, function (err, html) {
