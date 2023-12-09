@@ -16,7 +16,10 @@
                 <li class="sidebar-playlist">
                     <a>
                         <i class="fas fa-list"></i>
-                        <span id="my-playlists">My Playlists</span>                 
+                        <span id="my-playlists">My Playlists</span>
+                        <div class="new-playlist">
+                            <i class="fa-thin fa-plus"></i>                 
+                        </div>
                     </a>
                     
                     <div class="playlist-menu">
@@ -30,4 +33,6 @@
         </div>
     </div>
 </div>
+<%- include("new-playlist-modal.ejs") %>
 <script src="javascripts/sidebar.js"></script>
+<script src="javascripts/playlist.js"></script>

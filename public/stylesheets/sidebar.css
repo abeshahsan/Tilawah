@@ -5,7 +5,7 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 18%;
+    width: 22%;
     height: 100%;
     padding: 0 1.7rem;
     background-color: #e2f9fa;
@@ -68,4 +68,13 @@
     display: flex;
     flex-flow: column wrap;
     overflow: hidden;
+}
+
+.fa-thin.fa-plus{
+    scale: 1.5;
+    position: absolute;
+    right: 5px;
+}
+.fa-thin.fa-plus:hover{
+    background-color:#e3e3e3;
 }

@@ -12,6 +12,7 @@ const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
 const profileRouter = require('./routes/profile');
+const playlistRouter = require('./routes/playlist');
 const app = express();
 
 const {getAudioDurationInSeconds} = require('get-audio-duration');
@@ -54,6 +55,7 @@ app.use(expressSession({
         app.use('/', registerRouter);
         app.use('/', profileRouter);
         app.use('/', usersRouter);
+        app.use('/', playlistRouter);
 
 
         app.use(function (req, res, next) {
