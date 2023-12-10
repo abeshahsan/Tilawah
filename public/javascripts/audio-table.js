@@ -104,10 +104,17 @@ $(document).ready(function () {
     }
 
     function togglePlayPause() {
+        let divPlayPauseIcon = $(".icons.play-pause");
         if (isPlaying) {
             currentTrack.pause();
+            divPlayPauseIcon.tooltip({
+                content: "Play"
+            });
         } else {
             currentTrack.play();
+            divPlayPauseIcon.tooltip({
+                content: "Pause"
+            });
         }
         setIsPlaying(!isPlaying);
     }
