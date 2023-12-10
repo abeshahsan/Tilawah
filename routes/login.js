@@ -31,7 +31,7 @@ router.post('/login-DOM', function (req, res) {
     });
 });
 
-router.post('/login', async function (req, res) {
+router.post('/login', function (req, res) {
     database.findUser(req.body.email.trim(), req.body.password.trim(), function (user) {
         if (!user) {
             return res.send({success: 0})
