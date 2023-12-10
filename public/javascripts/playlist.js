@@ -54,8 +54,8 @@ $(document).ready(function(){
                 data: $(form).serialize(),
                 dataType : 'json'
             })
-                .done(function (success) {
-                    if (success == true) { 
+                .done(function (response) {
+                    if (response.success == true) { 
                         clearModal();
                         closeModal();
                     } else {
@@ -64,6 +64,5 @@ $(document).ready(function(){
                 });
         },
     });
-
 
 });

@@ -185,12 +185,12 @@ function createPlaylist(playlistName, userID, callback = function () {
 
     let SUCCESSFULLY_CREATED = true;
 
-    pool.query(sql, (err) => {
+    pool.query(sql, (err, result) => {
         if (err) {
             SUCCESSFULLY_CREATED = false;
             console.log(err.sqlMessage + '\n' + err.sql);
         }
-        return callback(SUCCESSFULLY_CREATED);
+        return callback(result);
     });
 }
 

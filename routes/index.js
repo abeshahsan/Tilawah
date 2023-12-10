@@ -38,8 +38,12 @@ router.post('/playlist/:id', function (req, res) {
 router.post('/new-playlist', async function(req, res, next){
     let playlistName = req.body.playlistName;
     try {
-        let success = await controls.createNewPlaylist(req.session.user.userID, playlistName);
-        res.send(success);
+        let result = await controls.createNewPlaylist(req.session.user.userID, playlistName);
+        req.session.user.playlists.push({
+            id: result.insertId,
+            name: playlistName
+        });
+        res.send({success: 1});
     } catch (error) {
         next();
     }
