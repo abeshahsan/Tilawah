@@ -111,6 +111,7 @@ input:-webkit-autofill:active{
 .submit{
     display: grid;
 }
+
 #new-playlist-submit-button{
     width: 25%;
     height: 40px;
