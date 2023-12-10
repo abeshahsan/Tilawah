@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
     let plusIcon = $(".new-playlist");
     let overlayInNewPlaylist = $("#overlay-in-new-playlist");
     let newPlaylist = $("#new-playlist");
@@ -8,18 +8,19 @@ $(document).ready(function(){
     $(plusIcon).on("click", function (event) {
         openModal();
     });
-    
-       // Function to open the modal
+
+    // Function to open the modal
     function openModal() {
         $(newPlaylist).css("display", "block");
         $(overlayInNewPlaylist).css("display", "block");
     }
+
     function closeModal() {
         $(newPlaylist).css("display", "none");
         $(overlayInNewPlaylist).css("display", "none");
     }
-    
-    function clearModal(){
+
+    function clearModal() {
         $(modalInput).val('');
     }
 
@@ -27,35 +28,33 @@ $(document).ready(function(){
     $(overlayInNewPlaylist).click(function () {
         closeModal();
     });
-    
+
     $(newPlaylist).click(function (event) {
         // Prevent clicks within the modal from closing it
         event.stopPropagation();
     });
     $(document).keydown(function (event) {
-        if(event.key === "Escape") {
+        if (event.key === "Escape") {
             closeModal()
         }
     });
-    
+
     $("#new-playlist-form").validate({
-        rules:{
-            
-        },
+        rules: {},
         messages: {
             playlistName: {
                 required: "Please enter a valid name"
             }
         },
-        submitHandler: function(form){
+        submitHandler: function (form) {
             $.ajax({
                 type: $(form).attr('method'),
-                url: $(form).attr('action'),
+                url: "/new-playlist",
                 data: $(form).serialize(),
-                dataType : 'json'
+                dataType: 'json'
             })
                 .done(function (response) {
-                    if (response.success == true) { 
+                    if (response.success == true) {
                         clearModal();
                         closeModal();
                         updatePlaylistItems(response.playlist);
@@ -66,27 +65,40 @@ $(document).ready(function(){
         },
     });
 
-    function updatePlaylistItems(playlist){
+    function updatePlaylistItems(playlist) {
         let li = $('<li/>');
         $(li).append(document.createTextNode(playlist.name));
-        $(li).att("id",playlist.id);
+        $(li).attr("id", playlist.id);
         $(li).attr("class", "item");
         $(playlistItems).append(li);
+        $(li).on("mouseup", function (event) {
+            // console.log(event.which)
+            switch (event.which) {
+                case 1:
+                    getPlaylistAudio(playlist.id);
+                    break;
+            }
+        })
     }
 
-    $(".item").click(function(event){
+
+    $(".item").click(function (event) {
         let playlistId = $(this).attr("id");
+        getPlaylistAudio(playlistId);
+    });
+
+    function getPlaylistAudio(playlistId) {
         $.ajax({
             type: 'POST',
             url: '/playlist/' + playlistId,
             data: {
                 name: $(this).text()
             },
-            dataType : 'json'
+            dataType: 'json'
         })
             .done(function (response) {
                 history.pushState("playlist", "", "/playlist/" + playlistId);
                 $(".main-container").html(response.html);
             });
-    });
+    }
 });

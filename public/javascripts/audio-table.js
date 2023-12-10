@@ -26,7 +26,6 @@ $(document).ready(function () {
             updateSeekSlider();
         }
         $(element).on("mouseup", function (event) {
-            console.log(event.which)
             switch (event.which) {
                 case 1:
                     playAudio($(element))
