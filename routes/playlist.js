@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const controls = require('../controls')
+const controls = require('../controls');
 
 router.get('/:id', async function (req, res, next) {
     try {
