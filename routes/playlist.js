@@ -4,7 +4,6 @@ const path = require('path');
 const controls = require('../controls')
 
 router.get('/:id', async function (req, res, next) {
-
     try {
         let playListAudio = await controls.loadPlaylistAudio(req.params.id, req.session.allAudio);
         

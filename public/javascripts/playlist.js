@@ -1,9 +1,9 @@
 $(document).ready(function(){
     let plusIcon = $(".new-playlist");
-    let overlayInNewPlaylist = document.querySelector("#overlay-in-new-playlist");
-    let newPlaylist = document.querySelector("#new-playlist");
-    let modalInput = document.querySelector("#playlist-name");
-
+    let overlayInNewPlaylist = $("#overlay-in-new-playlist");
+    let newPlaylist = $("#new-playlist");
+    let modalInput = $("#playlist-name");
+    let playlistItems = $(".playlist-menu-items");
 
     $(plusIcon).on("click", function (event) {
         openModal();
@@ -58,6 +58,7 @@ $(document).ready(function(){
                     if (response.success == true) { 
                         clearModal();
                         closeModal();
+                        updatePlaylistItems(response.playlist);
                     } else {
                         alert('Something went wrong');
                     }
@@ -65,4 +66,25 @@ $(document).ready(function(){
         },
     });
 
+    function updatePlaylistItems(playlist){
+        let li = $('<li/>');
+        $(li).append(document.createTextNode(playlist.name));
+        $(li).att("id",playlist.id);
+        $(li).attr("class", "item");
+        $(playlistItems).append(li);
+    }
+
+    $(".item").click(function(event){
+        $.ajax({
+            type: 'POST',
+            url: '/playlist/' + $(this).attr("id"),
+            data: {
+                name: $(this).text()
+            },
+            dataType : 'json'
+        })
+            .done(function (response) {
+                $(".main-container").html(response.html);
+            });
+    })
 });

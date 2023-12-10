@@ -17,6 +17,7 @@ $(document).ready(function () {
                 localStorage.setItem("page-reloaded", "0");
                 currentSrc.setAttribute("src", "/song/" + playingSongId);
                 currentTrack.load();
+                currentTrack.volume = volumeValue/100;
             }
             $(element).addClass("selected");
             selectedRow = element;
@@ -37,7 +38,7 @@ $(document).ready(function () {
 
             },
             items: {
-                "edit": {name: "Edit", icon: "edit"},
+                "Add to playlist": {name: "Add to playlist", icon: "plus"},
                 "cut": {name: "Cut", icon: "cut"},
                 copy: {name: "Copy", icon: "copy"},
                 "paste": {name: "Paste", icon: "paste"},

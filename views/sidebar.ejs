@@ -23,10 +23,10 @@
                     </a>
                     
                     <div class="playlist-menu">
-                        <ul>
+                        <ul class="playlist-menu-items">
                             <% if(user != null){ %>
                                 <% playlists.forEach(element=> { %>
-                                    <li class="item"><span><%=element.name %></span></li>
+                                    <li class="item" id=<%=element.id%>><%=element.name %></li>
                                 <% }) %>
                             <%} %>
                         </ul>
