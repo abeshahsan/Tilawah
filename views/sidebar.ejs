@@ -24,8 +24,11 @@
                     
                     <div class="playlist-menu">
                         <ul>
-                            <li class="item"><span> Item 1</span></li>
-                            <li class="item"><span>Item 2</span></li> 
+                            <% if(user != null){ %>
+                                <% playlists.forEach(element=> { %>
+                                    <li class="item"><span><%=element.name %></span></li>
+                                <% }) %>
+                            <%} %>
                         </ul>
                     </div>                    
                 </li>

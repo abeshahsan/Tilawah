@@ -57,23 +57,23 @@ async function loadPlaylistAudio(playlistID, allAudio) {
     });
 }
 
-async function loadPlaylists(userID) {
-    return new Promise((resolve, reject) => {
-        database.loadPlaylistsOfCurrentUser(userID, function (result, error) {
-            if(error) {
-                return reject(error);
-            }
-            let playlists = {};
-            result.forEach(function (entry) {
-                playlists={
-                    id: entry.PLAYLIST_ID,
-                    name: entry.PLAYLIST_NAME
-                }
-            });
-            resolve(playlists);
-        });
-    });
-}
+// async function loadPlaylists(userID) {
+//     return new Promise((resolve, reject) => {
+//         database.loadPlaylistsOfCurrentUser(userID, function (result, error) {
+//             if(error) {
+//                 return reject(error);
+//             }
+//             let playlists = {};
+//             result.forEach(function (entry) {
+//                 playlists={
+//                     id: entry.PLAYLIST_ID,
+//                     name: entry.PLAYLIST_NAME
+//                 }
+//             });
+//             resolve(playlists);
+//         });
+//     });
+// }
 
 async function createNewPlaylist(userID, playlistName) {
     return new Promise((resolve, reject) => {
@@ -337,4 +337,4 @@ let countryOptions = [
     "Zimbabwe",
 ]
 
-module.exports = {options, countryOptions, preLoadAllAudio, loadPlaylistAudio, loadPlaylists, createNewPlaylist}
+module.exports = {options, countryOptions, preLoadAllAudio, loadPlaylistAudio, createNewPlaylist}

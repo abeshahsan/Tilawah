@@ -43,7 +43,13 @@ router.post('/new-playlist', async function(req, res, next){
             id: result.insertId,
             name: playlistName
         });
-        res.send({success: 1});
+        res.send({
+            success: 1,
+            playlist:{
+                id: result.insertId,
+                 name: playlistName
+            }
+        });
     } catch (error) {
         next();
     }
