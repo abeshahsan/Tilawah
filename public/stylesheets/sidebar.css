@@ -78,3 +78,12 @@
 .fa-thin.fa-plus:hover{
     background-color:#e3e3e3;
 }
+
+.sidebar-tooltip {
+    background-color: #4c4c4c;
+    position: absolute;
+    padding: 5px 7px;
+    border-radius: 5px;
+    color: whitesmoke;
+    transition: none;
+}
