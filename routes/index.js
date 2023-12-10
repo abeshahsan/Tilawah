@@ -35,5 +35,15 @@ router.post('/playlist/:id', function (req, res) {
     });
 });
 
+router.post('/new-playlist', async function(req, res, next){
+    let playlistName = req.body.playlistName;
+    try {
+        let success = await controls.createNewPlaylist(req.session.user.userID, playlistName);
+        res.send(success);
+    } catch (error) {
+        next();
+    }
+});
+
 module.exports = router;
 

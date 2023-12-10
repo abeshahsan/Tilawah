@@ -23,4 +23,14 @@ router.get('/:id', async function (req, res, next) {
     }
 });
 
+// router.get('/get-playlists', async function(req,res,next){
+//     try {
+//         let playLists = await controls.loadPlaylists(req.params.id);
+//         return playLists;
+//     } catch (error) {
+//         next();
+//     }
+// });
+
+
 module.exports = router;
