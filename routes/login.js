@@ -50,7 +50,6 @@ router.post('/login', function (req, res) {
                     });
                 });
                 req.session.user.playlists = playlists;
-                console.log(req.session.user.playlists);
                 res.send({success: 1});
             });
         }

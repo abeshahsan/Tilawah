@@ -24,15 +24,20 @@ router.post('/home', function (req, res) {
     });
 });
 
-router.post('/playlist/:id', function (req, res) {
-    res.render('audio-table', {
-        tableRows: req.session.allAudio
-    }, function (err, html) {
-        if (err) {
-            console.warn(err)
-        }
-        res.send({html, loginRegister: !req.session.user})
-    });
+router.post('/playlist/:id', async function (req, res, next) {
+    try {
+        let playListAudio = await controls.loadPlaylistAudio(req.params.id, req.session.allAudio);
+        res.render('audio-table', {
+            tableRows: playListAudio
+        }, function (err, html) {
+            if (err) {
+                console.warn(err)
+            }
+            res.send({html, loginRegister: !req.session.user})
+        });
+    } catch (error) {
+        next();
+    }
 });
 
 router.post('/new-playlist', async function(req, res, next){
@@ -53,6 +58,10 @@ router.post('/new-playlist', async function(req, res, next){
     } catch (error) {
         next();
     }
+});
+
+router.get('/get-playlists', function(req, res){
+    res.send({playlists: req.session.user.playlists});
 });
 
 module.exports = router;
