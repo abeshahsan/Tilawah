@@ -50,7 +50,7 @@ app.use(expressSession({
         app.use('/', registerRouter);
         app.use('/', profileRouter);
         app.use('/', usersRouter);
-        app.use('/playlist', playlistRouter);
+        app.use('/', playlistRouter);
 
 
         app.use(function (req, res, next) {
