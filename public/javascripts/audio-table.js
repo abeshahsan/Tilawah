@@ -2,7 +2,7 @@ $(document).ready(function () {
     let selectedRow;
     let isPlaying = 0;
     let I_PlayPause = $("#play-pause");
-    let playPause = $(".icons.play-pause");
+    let divPlayPauseIcon = $(".icons.play-pause");
     let currentTrack = document.querySelector("#current-track");
     let currentSrc = document.querySelector("#current-src");
 
@@ -11,8 +11,7 @@ $(document).ready(function () {
     let manualSeek = false;
     let seekSlider = $("#seek-slider");
 
-    let playlists=[];
-    playlists = getPlaylists();
+    let playlists = getPlaylists();
 
     $(".audio-row").each(function (i, element) {
         if (playingSongId == $(element).attr("id")) {
@@ -20,7 +19,7 @@ $(document).ready(function () {
                 localStorage.setItem("page-reloaded", "0");
                 currentSrc.setAttribute("src", "/song/" + playingSongId);
                 currentTrack.load();
-                currentTrack.volume = volumeValue/100;
+                currentTrack.volume = volumeValue / 100;
             }
             $(element).addClass("selected");
             selectedRow = element;
@@ -37,7 +36,7 @@ $(document).ready(function () {
         $.contextMenu({
             selector: '.audio-row',
             className: 'audio-context-menu',
-            audtoHide: true,
+            autoHide: true,
             callback: function (key, options) {
 
             },
@@ -89,6 +88,9 @@ $(document).ready(function () {
             togglePlayPause()
         })
         setIsPlaying(1);
+        divPlayPauseIcon.tooltip({
+            content: "Pause"
+        });
         localStorage.setItem("song-id", songId);
         updateSeekSlider();
     }
@@ -104,7 +106,6 @@ $(document).ready(function () {
     }
 
     function togglePlayPause() {
-        let divPlayPauseIcon = $(".icons.play-pause");
         if (isPlaying) {
             currentTrack.pause();
             divPlayPauseIcon.tooltip({
@@ -119,7 +120,7 @@ $(document).ready(function () {
         setIsPlaying(!isPlaying);
     }
 
-    $(playPause).on("click", function () {
+    $(divPlayPauseIcon).on("click", function () {
         togglePlayPause()
     });
 
@@ -167,9 +168,11 @@ $(document).ready(function () {
         tooltipClass: "control-panel-tooltip"
     });
 
-    function getPlaylists(){
-        $.get('/get-playlists',function(res){
-            playlists = res.playlists;
+    async function getPlaylists() {
+        return new Promise(resolve => {
+            $.get('/get-playlists', function (res) {
+                resolve(res.playlists);
+            });
         })
     }
 });
