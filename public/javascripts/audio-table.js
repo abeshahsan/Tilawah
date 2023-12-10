@@ -11,8 +11,8 @@ $(document).ready(function () {
     let manualSeek = false;
     let seekSlider = $("#seek-slider");
 
-    let playlists=[];
-    playlists = getPlaylists();
+    let playlists={};
+    getPlaylists();
 
     $(".audio-row").each(function (i, element) {
         if (playingSongId == $(element).attr("id")) {
@@ -39,7 +39,7 @@ $(document).ready(function () {
             className: 'audio-context-menu',
             audtoHide: true,
             callback: function (key, options) {
-
+                
             },
             items: {
                 "addToPlaylist": {
@@ -47,12 +47,7 @@ $(document).ready(function () {
                     className: "add-to-playlist",
                     icon: "add",
                     autoHide: true,
-                    items: {
-                        "OK": {
-                            name: "Add to playlist",
-                            icon: "add"
-                        }
-                    }
+                    items: playlists,
                 }
             }
         });
@@ -65,7 +60,6 @@ $(document).ready(function () {
             currentTrack.currentTime = localStorage.getItem("audio-current-time");
         };
     }
-
     window.onbeforeunload = function reloadHandler() {
         localStorage.setItem("page-reloaded", "1");
         localStorage.setItem("volume-value", volumeValue);
@@ -161,8 +155,24 @@ $(document).ready(function () {
     });
 
     function getPlaylists(){
-        $.get('/get-playlists',function(res){
-            playlists = res.playlists;
+        
+        $.ajax({
+            type: 'GET',
+            url: '/get-playlists',
+            dataType : 'json',
+            async: false
+        })
+            .done(function (res) {
+            res.playlists.forEach(elem=>{
+                playlists[(elem.id).toString()]={
+                    name: elem.name,
+                    callback:function(key, options){
+                        alert(key + " " + options.$trigger.attr("id"));
+                    }
+                }
+                            
+            });
+            console.log(playlists)
         })
     }
 });
