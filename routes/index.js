@@ -60,5 +60,9 @@ router.post('/new-playlist', async function(req, res, next){
     }
 });
 
+router.get('/get-playlists', function(req, res){
+    res.send({playlists: req.session.user.playlists});
+});
+
 module.exports = router;
 

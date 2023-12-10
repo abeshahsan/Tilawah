@@ -11,6 +11,9 @@ $(document).ready(function () {
     let manualSeek = false;
     let seekSlider = $("#seek-slider");
 
+    let playlists=[];
+    playlists = getPlaylists();
+
     $(".audio-row").each(function (i, element) {
         if (playingSongId == $(element).attr("id")) {
             if (localStorage.getItem("page-reloaded") == "1") {
@@ -34,15 +37,23 @@ $(document).ready(function () {
         $.contextMenu({
             selector: '.audio-row',
             className: 'audio-context-menu',
+            audtoHide: true,
             callback: function (key, options) {
 
             },
             items: {
-                "Add to playlist": {name: "Add to playlist", icon: "plus"},
-                "cut": {name: "Cut", icon: "cut"},
-                copy: {name: "Copy", icon: "copy"},
-                "paste": {name: "Paste", icon: "paste"},
-                "delete": {name: "Delete", icon: "delete"},
+                "addToPlaylist": {
+                    name: "Add to playlist",
+                    className: "add-to-playlist",
+                    icon: "add",
+                    autoHide: true,
+                    items: {
+                        "OK": {
+                            name: "Add to playlist",
+                            icon: "add"
+                        }
+                    }
+                }
             }
         });
     });
@@ -148,6 +159,12 @@ $(document).ready(function () {
     $(".controls .icons").tooltip({
         tooltipClass: "control-panel-tooltip"
     });
+
+    function getPlaylists(){
+        $.get('/get-playlists',function(res){
+            playlists = res.playlists;
+        })
+    }
 });
     
     

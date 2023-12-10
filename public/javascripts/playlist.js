@@ -75,16 +75,18 @@ $(document).ready(function(){
     }
 
     $(".item").click(function(event){
+        let playlistId = $(this).attr("id");
         $.ajax({
             type: 'POST',
-            url: '/playlist/' + $(this).attr("id"),
+            url: '/playlist/' + playlistId,
             data: {
                 name: $(this).text()
             },
             dataType : 'json'
         })
             .done(function (response) {
+                history.pushState("playlist", "", "/playlist/" + playlistId);
                 $(".main-container").html(response.html);
             });
-    })
+    });
 });
