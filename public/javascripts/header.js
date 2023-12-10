@@ -1,3 +1,5 @@
 $(document).ready(function (){
-    $(".header").tooltip();
+    $(".header").tooltip({
+        tooltipClass: "header-tooltip"
+    });
 });
