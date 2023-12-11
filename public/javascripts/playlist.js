@@ -78,13 +78,7 @@ $(document).ready(function () {
                     getPlaylistAudio(playlist.id);
                     break;
             }
-        })
-
-        //update context menu
-        console.log($(".add-to-playlist"));
-        // $(".audio-context-menu").items.append([playlist.id]={
-        //     name: playlist.name
-        // });
+        });
     }
 
 
