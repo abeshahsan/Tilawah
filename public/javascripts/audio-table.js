@@ -36,13 +36,7 @@ $(document).ready(function () {
         $.contextMenu({
             selector: '.audio-row',
             className: 'audio-context-menu',
-            autoHide: true,
-            events: {
-                show: function(options){
-                    if(window.location.pathname != '/')return false;
-                }
-            },
-            
+            autoHide: true,            
             callback:function(key, options){
                 // alert(key + " " + options.$trigger.attr("id"));
                 let audioId = options.$trigger.attr("id");
@@ -56,8 +50,24 @@ $(document).ready(function () {
                     icon: "add",
                     autoHide: true,
                     items: playlists,
-                }
-            }
+                    visible: function(key, opt){
+                        if(window.location.pathname != '/' )
+                            return false;
+                        else return true;
+                    },
+                },
+                "deleteFromPlaylist":{
+                    name: "Delete from playlist",
+                    className: "delete-from-playlist",
+                    icon: "delete",
+                    autoHide: true,
+                    visible: function(key, opt){
+                        if(window.location.pathname == '/') 
+                            return false;
+                        else return true;
+                    }
+                },
+            },
         });
     });
 
