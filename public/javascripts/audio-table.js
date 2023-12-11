@@ -38,8 +38,11 @@ $(document).ready(function () {
             selector: '.audio-row',
             className: 'audio-context-menu',
             autoHide: true,
-            callback: function (key, options) {
-                
+            callback:function(key, options){
+                // alert(key + " " + options.$trigger.attr("id"));
+                let audioId = options.$trigger.attr("id");
+                let playlistId = key;
+                addAudioToPlaylist(audioId, playlistId);
             },
             items: {
                 "addToPlaylist": {
@@ -52,6 +55,15 @@ $(document).ready(function () {
             }
         });
     });
+
+    function addAudioToPlaylist(audioId, playlistId){
+        $.ajax({
+            type: 'POST',
+            url: '/add-audio-to-playlist',
+            data: {audioId, playlistId},
+            dataType : 'json',
+        });
+    }
 
 
     function updateSeekSlider() {
@@ -175,9 +187,7 @@ $(document).ready(function () {
             res.playlists.forEach(elem=>{
                 playlists[(elem.id).toString()]={
                     name: elem.name,
-                    callback:function(key, options){
-                        alert(key + " " + options.$trigger.attr("id"));
-                    }
+                    
                 }
                             
             });

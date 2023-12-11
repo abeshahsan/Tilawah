@@ -64,5 +64,15 @@ router.get('/get-playlists', function(req, res){
     res.send({playlists: req.session.user.playlists});
 });
 
+router.post('/add-audio-to-playlist',async function(req, res, next){
+    try {
+        let success = await controls.addAudioToPlaylist(req.body.audioId, req.body.playlistId);
+       
+        res.send({success: success});
+    } catch (error) {
+        next();
+    }
+});
+
 module.exports = router;
 

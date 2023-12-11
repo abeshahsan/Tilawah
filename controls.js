@@ -86,6 +86,17 @@ async function createNewPlaylist(userID, playlistName) {
     });
 }
 
+async function addAudioToPlaylist(audioId, playlistId) {
+    return new Promise((resolve, reject) => {
+        database.addAudioToPlaylist(audioId, playlistId, function (error) {
+            if(error) {
+                reject(error);
+            }
+            resolve({success: true});
+        });
+    });
+}
+
 let options = {
     loginRegister: true,
     hamburger: true
@@ -337,4 +348,4 @@ let countryOptions = [
     "Zimbabwe",
 ]
 
-module.exports = {options, countryOptions, preLoadAllAudio, loadPlaylistAudio, createNewPlaylist}
+module.exports = {options, countryOptions, preLoadAllAudio, loadPlaylistAudio, createNewPlaylist, addAudioToPlaylist}
