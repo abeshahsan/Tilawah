@@ -31,13 +31,23 @@ router.get('/get-playlists', function(req, res){
 
 router.post('/add-audio-to-playlist',async function(req, res, next){
     try {
-        let success = await controls.addAudioToPlaylist(req.body.audioId, req.body.playlistId);
+        let status = await controls.addAudioToPlaylist(req.body.audioId, req.body.playlistId);
        
-        res.send({success: success});
+        res.send({success: status});
     } catch (error) {
         next();
     }
 });
+router.post('/delete-audio',async function(req, res, next){
+    try {
+        let status = await controls.deleteAudioFromPlaylist(req.body.audioId, req.body.playlistId);
+        res.send({success: status});
+    } catch (error) {
+        next();
+    }
+}); 
+
+
 
 module.exports = router;
 

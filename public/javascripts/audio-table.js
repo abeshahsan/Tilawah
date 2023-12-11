@@ -12,7 +12,7 @@ $(document).ready(function () {
     let seekSlider = $("#seek-slider");
 
     let playlists={};
-    getPlaylists();
+    let audioRow = $(".audio-row");
 
     $(".audio-row").each(function (i, element) {
         if (playingSongId == $(element).attr("id")) {
@@ -35,40 +35,52 @@ $(document).ready(function () {
         })
         $.contextMenu({
             selector: '.audio-row',
-            className: 'audio-context-menu',
-            autoHide: true,            
-            callback:function(key, options){
-                // alert(key + " " + options.$trigger.attr("id"));
-                let audioId = options.$trigger.attr("id");
-                let playlistId = key;
-                addAudioToPlaylist(audioId, playlistId);
-            },
-            items: {
-                "addToPlaylist": {
-                    name: "Add to playlist",
-                    className: "add-to-playlist",
-                    icon: "add",
-                    autoHide: true,
-                    items: playlists,
-                    visible: function(key, opt){
-                        if(window.location.pathname != '/' )
-                            return false;
-                        else return true;
+            build: function($triggerElement, e){
+                return {
+                    className: 'audio-context-menu',
+                    autoHide: true,            
+                    callback:function(key, options){
+                        let audioId = options.$trigger.attr("id");
+                        let playlistId;
+                        if(key == "deleteFromPlaylist") {
+                            let path = window.location.href;
+                            playlistId = path.substring(path.lastIndexOf('/') + 1);
+                            deleteAudioFromPlaylist(audioId, playlistId);
+                        }
+                        else {
+                            playlistId = key;
+                            addAudioToPlaylist(audioId, playlistId);
+                        }
                     },
-                },
-                "deleteFromPlaylist":{
-                    name: "Delete from playlist",
-                    className: "delete-from-playlist",
-                    icon: "delete",
-                    autoHide: true,
-                    visible: function(key, opt){
-                        if(window.location.pathname == '/') 
-                            return false;
-                        else return true;
-                    }
-                },
-            },
+                    items: {
+                        "addToPlaylist": {
+                            name: "Add to playlist",
+                            className: "add-to-playlist",
+                            icon: "add",
+                            autoHide: true,
+                            items: loadPlaylists(),
+                            visible: function(key, opt){
+                                if(window.location.pathname != '/' )
+                                    return false;
+                                else return true;
+                            },
+                        },
+                        "deleteFromPlaylist":{
+                            name: "Delete from playlist",
+                            className: "delete-from-playlist",
+                            icon: "delete",
+                            autoHide: true,
+                            visible: function(key, opt){
+                                if(window.location.pathname == '/') 
+                                    return false;
+                                else return true;
+                            }
+                        },
+                    },
+                }
+            }
         });
+    
     });
 
     function addAudioToPlaylist(audioId, playlistId){
@@ -77,6 +89,20 @@ $(document).ready(function () {
             url: '/add-audio-to-playlist',
             data: {audioId, playlistId},
             dataType : 'json',
+        })
+         .done(function(res){
+        });
+    }
+    function deleteAudioFromPlaylist(audioId, playlistId){
+        $.ajax({
+            type: 'POST',
+            url: '/delete-audio',
+            data: {audioId, playlistId},
+            dataType : 'json',
+        })
+           .done(function(res){
+                console.log($(audioRow).attr("id", audioId));
+                $("#" + audioId).remove();
         });
     }
 
@@ -199,15 +225,18 @@ $(document).ready(function () {
             async: false
         })
             .done(function (res) {
-            res.playlists.forEach(elem=>{
+                res.playlists.forEach(elem=>{
                 playlists[(elem.id).toString()]={
                     name: elem.name,
-                    
                 }
                             
             });
             console.log(playlists)
         })
+    }
+    function loadPlaylists(){
+        getPlaylists();
+        return playlists;
     }
 });
     

@@ -217,7 +217,7 @@ function addAudioToPlaylist(audioID, playlistID, callback = function () {
                  VALUES (${pool.escape(audioID)}, ${pool.escape(playlistID)})`;
 
     let SUCCESSFULLY_ADDED = true;
-
+    
     pool.query(sql, (err) => {
         if (err) {
             SUCCESSFULLY_ADDED = false;

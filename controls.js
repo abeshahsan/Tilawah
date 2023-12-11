@@ -88,11 +88,22 @@ async function createNewPlaylist(userID, playlistName) {
 
 async function addAudioToPlaylist(audioId, playlistId) {
     return new Promise((resolve, reject) => {
-        database.addAudioToPlaylist(audioId, playlistId, function (error) {
-            if(error) {
-                reject(error);
+        database.addAudioToPlaylist(audioId, playlistId, function (success) {
+            if(!success) {
+                reject(0);
             }
-            resolve({success: true});
+            resolve(1);
+        });
+    });
+}
+
+async function deleteAudioFromPlaylist(audioId, playlistId) {
+    return new Promise((resolve, reject) => {
+        database.deleteAudioFromPlaylist(audioId, playlistId, function (success) {
+            if(!success) {
+                reject(0);
+            }
+            resolve(1);
         });
     });
 }
@@ -348,4 +359,4 @@ let countryOptions = [
     "Zimbabwe",
 ]
 
-module.exports = {options, countryOptions, preLoadAllAudio, loadPlaylistAudio, createNewPlaylist, addAudioToPlaylist}
+module.exports = {options, countryOptions, preLoadAllAudio, loadPlaylistAudio, createNewPlaylist, addAudioToPlaylist, deleteAudioFromPlaylist}

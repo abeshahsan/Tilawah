@@ -51,7 +51,7 @@ $(document).ready(function () {
                 type: $(form).attr('method'),
                 url: "/new-playlist",
                 data: $(form).serialize(),
-                dataType: 'json'
+                dataType: 'json',
             })
                 .done(function (response) {
                     if (response.success == true) {
@@ -79,6 +79,12 @@ $(document).ready(function () {
                     break;
             }
         })
+
+        //update context menu
+        console.log($(".add-to-playlist"));
+        // $(".audio-context-menu").items.append([playlist.id]={
+        //     name: playlist.name
+        // });
     }
 
 
