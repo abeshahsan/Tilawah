@@ -12,7 +12,6 @@ $(document).ready(function () {
     let seekSlider = $("#seek-slider");
 
     let playlists={};
-    let audioRow = $(".audio-row");
 
     $(".audio-row").each(function (i, element) {
         if (playingSongId == $(element).attr("id")) {
@@ -101,8 +100,7 @@ $(document).ready(function () {
             dataType : 'json',
         })
            .done(function(res){
-                console.log($(audioRow).attr("id", audioId));
-                $("#" + audioId).remove();
+            $(".audio-table #" + audioId).remove();
         });
     }
 
