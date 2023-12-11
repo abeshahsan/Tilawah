@@ -37,6 +37,12 @@ $(document).ready(function () {
             selector: '.audio-row',
             className: 'audio-context-menu',
             autoHide: true,
+            events: {
+                show: function(options){
+                    if(window.location.pathname != '/')return false;
+                }
+            },
+            
             callback:function(key, options){
                 // alert(key + " " + options.$trigger.attr("id"));
                 let audioId = options.$trigger.attr("id");
