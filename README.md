@@ -34,6 +34,7 @@ npm install
 If there occurs any error due to your Node version, run these commands
 
 ```
+npm init -y
 npm run prepare
 ```
 
