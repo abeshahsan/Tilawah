@@ -107,6 +107,16 @@ async function deleteAudioFromPlaylist(audioId, playlistId) {
         });
     });
 }
+async function deletePlaylist(playlistId){
+    return new Promise((resolve, reject) => {
+        database.deletePlaylist(playlistId, function (success) {
+            if(!success) {
+                reject(0);
+            }
+            resolve(1);
+        });
+    });
+}
 
 let options = {
     loginRegister: true,
@@ -359,4 +369,4 @@ let countryOptions = [
     "Zimbabwe",
 ]
 
-module.exports = {options, countryOptions, preLoadAllAudio, loadPlaylistAudio, createNewPlaylist, addAudioToPlaylist, deleteAudioFromPlaylist}
+module.exports = {options, countryOptions, preLoadAllAudio, loadPlaylistAudio, createNewPlaylist, addAudioToPlaylist, deleteAudioFromPlaylist, deletePlaylist}

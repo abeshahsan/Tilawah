@@ -55,7 +55,7 @@ router.get('/profile', function (req, res, next) {
     // console.log(req.session.allAudio)
     let options = {}
     let _audioList = req.session.allAudio;
-
+    let _playlists = req.session.user._playlists;
     options.loginRegister = false;
     options.hamburger = true;
 
@@ -63,6 +63,7 @@ router.get('/profile', function (req, res, next) {
         options: options,
         user: req.session.user,
         audioList: _audioList,
+        playlists: _playlists,
         countryOptions: controls.countryOptions,
         route: req.path
     });

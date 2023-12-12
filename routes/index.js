@@ -47,6 +47,17 @@ router.post('/delete-audio',async function(req, res, next){
     }
 }); 
 
+router.post('/delete-playlist/:id', async function(req, res, next){
+    try{
+        let status = await controls.deletePlaylist(req.params.id);
+        let i = req.session.user.playlists.findIndex(elem => elem.id == req.params.id);
+        req.session.user.playlists.splice(i, 1);
+        res.send({success: status});
+    } catch(error){
+        next();
+    }
+});
+
 
 
 module.exports = router;

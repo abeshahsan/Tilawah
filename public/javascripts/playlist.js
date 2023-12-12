@@ -8,6 +8,8 @@ $(document).ready(function () {
     let playlists = {};
     getPlaylists();
 
+    let currentPlaylistId;
+
     $(plusIcon).on("click", function (event) {
         openModal();
     });
@@ -61,7 +63,7 @@ $(document).ready(function () {
                         clearModal();
                         closeModal();
                         updatePlaylistItems(response.playlist);
-                        updateContextMenu(response.playlist);
+                        getPlaylistAudio(response.playlist.id);
 
                     } else {
                         alert('Something went wrong');
@@ -76,14 +78,14 @@ $(document).ready(function () {
         $(li).attr("id", playlist.id);
         $(li).attr("class", "item");
         $(playlistItems).append(li);
-        $(li).on("mouseup", function (event) {
-            // console.log(event.which)
-            switch (event.which) {
-                case 1:
-                    getPlaylistAudio(playlist.id);
-                    break;
-            }
-        });
+        // $(li).on("mouseup", function (event) {
+        //     // console.log(event.which)
+        //     switch (event.which) {
+        //         case 1:
+        //             getPlaylistAudio(playlist.id);
+        //             break;
+        //     }
+        // });
     }
 
 
@@ -93,6 +95,8 @@ $(document).ready(function () {
     });
 
     function getPlaylistAudio(playlistId) {
+
+        currentPlaylistId = playlistId;
         $.ajax({
             type: 'POST',
             url: '/playlist/' + playlistId,
@@ -134,9 +138,6 @@ $(document).ready(function () {
                         autoHide: true,
                         items: loadPlaylists(),
                         visible: function(key, opt){
-                            // if(window.location.pathname != '/' )
-                            //     return false;
-                            // else 
                             return true;
                         },
                     },
@@ -204,6 +205,49 @@ $(document).ready(function () {
     function loadPlaylists(){
         // getPlaylists();
         return playlists;
+    }
+
+    $.contextMenu({
+        selector: '.playlist-menu-items .item',
+        className: 'sidebar-playlist-context-menu',
+        autoHide: true,            
+        callback:function(key, options){
+            let playlistId = options.$trigger.attr("id");
+            if(key == "deletePlaylist") {
+                deletePlaylist(playlistId);
+            }
+        },
+        items: {
+            "deletePlaylist":{
+                name: "Delete playlist",
+                className: "delete-playlist",
+                icon: "delete",
+                autoHide: true,
+            },
+        },
+    });
+
+    function deletePlaylist(playlistId){
+        $.ajax({
+            type: 'POST',
+            url: '/delete-playlist/' + playlistId,
+            async: false
+        })
+        .done(function(res){
+            $('.playlist-menu-items #' + playlistId).remove();
+            if(currentPlaylistId == playlistId){
+                loadHome();
+            }
+        });
+    }
+    function loadHome() {
+        $.post("/home", function (res) {
+            $(".main-container").html(res.html);
+            if (res.loginRegister) loginRegisterDiv.removeClass("hidden");
+            else $(".login-register").addClass("hidden");
+            $(".sidebar").removeClass("hidden");
+            history.pushState("home", "", "/");
+        });
     }
     
 });
