@@ -139,7 +139,6 @@ $(document).ready(function () {
                         name: "Add to playlist",
                         className: "add-to-playlist",
                         icon: "add",
-                        autoHide: false,
                         items: Playlists(),
                         visible: function(key, opt){
                             return true;
@@ -149,7 +148,6 @@ $(document).ready(function () {
                         name: "Delete from this playlist",
                         className: "delete-from-playlist",
                         icon: "delete",
-                        autoHide: true,
                         visible: function(key, opt){
                             if(window.location.pathname == '/') 
                                 return false;
@@ -238,9 +236,7 @@ $(document).ready(function () {
 
         selector: '.playlist-menu-items .item',
 
-        className: 'sidebar-playlist-context-menu',
-
-        autoHide: true,            
+        className: 'sidebar-playlist-context-menu',            
 
         callback:function(key, options){
 
