@@ -63,7 +63,7 @@ $(document).ready(function () {
                         clearModal();
                         closeModal();
                         updatePlaylistItems(response.playlist);
-                        updateContextMenu(playlist);
+                        updateContextMenu(response.playlist);
                         getPlaylistAudio(response.playlist.id);
 
                     } else {
