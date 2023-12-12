@@ -2,7 +2,7 @@ $(document).ready(function () {
     let selectedRow;
     let isPlaying = 0;
     let I_PlayPause = $("#play-pause");
-    let playPause = $(".icons.play-pause");
+    let divPlayPauseIcon = $(".icons.play-pause");
     let currentTrack = document.querySelector("#current-track");
     let currentSrc = document.querySelector("#current-src");
 
@@ -11,49 +11,42 @@ $(document).ready(function () {
     let manualSeek = false;
     let seekSlider = $("#seek-slider");
 
+    
     $(".audio-row").each(function (i, element) {
         if (playingSongId == $(element).attr("id")) {
             if (localStorage.getItem("page-reloaded") == "1") {
                 localStorage.setItem("page-reloaded", "0");
                 currentSrc.setAttribute("src", "/song/" + playingSongId);
                 currentTrack.load();
+                currentTrack.volume = volumeValue / 100;
             }
             $(element).addClass("selected");
             selectedRow = element;
             updateSeekSlider();
         }
         $(element).on("mouseup", function (event) {
-            console.log(event.which)
             switch (event.which) {
                 case 1:
                     playAudio($(element))
                     break;
             }
         })
-        $.contextMenu({
-            selector: '.audio-row',
-            className: 'audio-context-menu',
-            callback: function (key, options) {
 
-            },
-            items: {
-                "edit": {name: "Edit", icon: "edit"},
-                "cut": {name: "Cut", icon: "cut"},
-                copy: {name: "Copy", icon: "copy"},
-                "paste": {name: "Paste", icon: "paste"},
-                "delete": {name: "Delete", icon: "delete"},
-            }
-        });
+        
+    });    
+        
+    $('.audio-row .three-dots').on('mouseup', function(e) {
+        e.preventDefault();
+        $('.audio-row').contextMenu({x: e.pageX, y: e.pageY});
+        e.stopPropagation();
     });
-
-
+    
     function updateSeekSlider() {
         currentTrack.onloadedmetadata = function () {
             $("#seek-slider").slider("option", {max: Math.floor(currentTrack.duration)});
             currentTrack.currentTime = localStorage.getItem("audio-current-time");
         };
     }
-
     window.onbeforeunload = function reloadHandler() {
         localStorage.setItem("page-reloaded", "1");
         localStorage.setItem("volume-value", volumeValue);
@@ -77,6 +70,9 @@ $(document).ready(function () {
             togglePlayPause()
         })
         setIsPlaying(1);
+        divPlayPauseIcon.tooltip({
+            content: "Pause"
+        });
         localStorage.setItem("song-id", songId);
         updateSeekSlider();
     }
@@ -94,13 +90,19 @@ $(document).ready(function () {
     function togglePlayPause() {
         if (isPlaying) {
             currentTrack.pause();
+            divPlayPauseIcon.tooltip({
+                content: "Play"
+            });
         } else {
             currentTrack.play();
+            divPlayPauseIcon.tooltip({
+                content: "Pause"
+            });
         }
         setIsPlaying(!isPlaying);
     }
 
-    $(playPause).on("click", function () {
+    $(divPlayPauseIcon).on("click", function () {
         togglePlayPause()
     });
 
@@ -143,6 +145,12 @@ $(document).ready(function () {
             $(seekSlider).slider('value', currentTrack.currentTime);
         }
     });
+
+    $(".controls .icons").tooltip({
+        tooltipClass: "control-panel-tooltip"
+    });
+
+    
 });
     
     

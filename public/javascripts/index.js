@@ -22,7 +22,7 @@ $(document).ready(function () {
             $(mainContainer).html(res.html);
             if (res.loginRegister) loginRegisterDiv.removeClass("hidden");
             else loginRegisterDiv.addClass("hidden");
-            sidebar.removeClass("hidden");
+            $(sidebar).removeClass("hidden");
             history.pushState("home", "", "/");
         });
     }
@@ -92,7 +92,7 @@ $(document).ready(function () {
 
     $(logo).on("click", function (event) {
         event.preventDefault();
-        loadHome()
+        loadHome();
     })
 
 

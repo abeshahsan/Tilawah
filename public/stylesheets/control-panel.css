@@ -46,6 +46,13 @@
     position: relative;
 }
 
+/********************************************************/
+
+/*.controls .icons[title]::after {*/
+/*    position: absolute;*/
+/*    top : 200px;*/
+/*}*/
+
 :root {
     --controls-color: rgba(117, 72, 211, 0.91);
 }
@@ -166,10 +173,11 @@
     outline: none;
 }
 
-
-/********************************************************/
-
-.controls .icons[title]:hover::after {
-    background-color: red;
+.control-panel-tooltip {
+    background-color: #4c4c4c;
+    position: absolute;
+    padding: 5px 7px;
+    border-radius: 5px;
+    color: whitesmoke;
+    transition: none;
 }
-

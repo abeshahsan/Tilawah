@@ -37,8 +37,21 @@ router.post('/login', function (req, res) {
             return res.send({success: 0})
         } else {
             req.session.user = user;
-            req.session.user.email = user.email
-            return res.send({success: 1})
+            req.session.user.email = user.email;
+            database.loadPlaylistsOfCurrentUser(user.userID, function (result, error) {
+                if(error) {
+                    res.send({success: 0});
+                }
+                let playlists = [];
+                result.forEach(function (entry) {
+                    playlists.push({
+                        id: entry.PLAYLIST_ID,
+                        name: entry.PLAYLIST_NAME
+                    });
+                });
+                req.session.user.playlists = playlists;
+                res.send({success: 1});
+            });
         }
     })
 });
