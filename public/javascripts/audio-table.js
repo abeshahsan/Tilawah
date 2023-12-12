@@ -59,13 +59,14 @@ $(document).ready(function () {
                             autoHide: true,
                             items: loadPlaylists(),
                             visible: function(key, opt){
-                                if(window.location.pathname != '/' )
-                                    return false;
-                                else return true;
+                                // if(window.location.pathname != '/' )
+                                //     return false;
+                                // else 
+                                return true;
                             },
                         },
                         "deleteFromPlaylist":{
-                            name: "Delete from playlist",
+                            name: "Delete from this playlist",
                             className: "delete-from-playlist",
                             icon: "delete",
                             autoHide: true,
