@@ -62,8 +62,8 @@ $(document).ready(function () {
                     if (response.success == true) {
                         clearModal();
                         closeModal();
-                        updatePlaylistItems(response.playlist);
-                        updateContextMenu(response.playlist);
+                        addPlaylistToSidebar(response.playlist);
+                        addPlaylistToContextMenu(response.playlist);
                         getPlaylistAudio(response.playlist.id);
 
                     } else {
@@ -73,26 +73,29 @@ $(document).ready(function () {
         },
     });
 
-    function updatePlaylistItems(playlist) {
+    function addPlaylistToSidebar(playlist) {
         let li = $('<li/>');
         $(li).append(document.createTextNode(playlist.name));
         $(li).attr("id", playlist.id);
         $(li).attr("class", "item");
         $(playlistItems).append(li);
-        // $(li).on("mouseup", function (event) {
-        //     // console.log(event.which)
-        //     switch (event.which) {
-        //         case 1:
-        //             getPlaylistAudio(playlist.id);
-        //             break;
-        //     }
-        // });
+        $(li).on("mouseup", function (event) {
+            switch (event.which) {
+                case 1:
+                    getPlaylistAudio(playlist.id);
+                    break;
+            }
+        });
     }
 
 
-    $(".item").click(function (event) {
-        let playlistId = $(this).attr("id");
-        getPlaylistAudio(playlistId);
+    $(".item").on("mouseup", function (event) {
+        switch (event.which) {
+            case 1:
+                let playlistId = $(this).attr("id");
+                getPlaylistAudio(playlistId);
+                break;
+        }
     });
 
     function getPlaylistAudio(playlistId) {
@@ -198,10 +201,13 @@ $(document).ready(function () {
                 console.log(playlists)
             })
     }
-    function updateContextMenu(playlist){
+    function addPlaylistToContextMenu(playlist){
         playlists[(playlist.id).toString()] = {
             name: playlist.name,
         }
+    }
+    function removePlaylistFromContextMenu(playlistId){
+        delete playlists[playlistId.toString()];
     }
     function loadPlaylists(){
         // getPlaylists();
@@ -236,6 +242,7 @@ $(document).ready(function () {
         })
         .done(function(res){
             $('.playlist-menu-items #' + playlistId).remove();
+            removePlaylistFromContextMenu(playlistId);
             if(currentPlaylistId == playlistId){
                 loadHome();
             }
