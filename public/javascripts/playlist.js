@@ -114,12 +114,13 @@ $(document).ready(function () {
             });
     }
 
+
     $.contextMenu({
         selector: '.audio-row',
+        trigger: 'right',
         build: function($triggerElement, e){
             return {
-                className: 'audio-context-menu',
-                autoHide: true,            
+                className: 'audio-context-menu',            
                 callback:function(key, options){
                     let audioId = options.$trigger.attr("id");
                     let playlistId;
@@ -138,7 +139,7 @@ $(document).ready(function () {
                         name: "Add to playlist",
                         className: "add-to-playlist",
                         icon: "add",
-                        autoHide: true,
+                        autoHide: false,
                         items: Playlists(),
                         visible: function(key, opt){
                             return true;

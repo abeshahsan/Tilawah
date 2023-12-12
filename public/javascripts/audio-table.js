@@ -11,6 +11,7 @@ $(document).ready(function () {
     let manualSeek = false;
     let seekSlider = $("#seek-slider");
 
+    
     $(".audio-row").each(function (i, element) {
         if (playingSongId == $(element).attr("id")) {
             if (localStorage.getItem("page-reloaded") == "1") {
@@ -30,11 +31,16 @@ $(document).ready(function () {
                     break;
             }
         })
+
         
-    
+    });    
+        
+    $('.audio-row .three-dots').on('mouseup', function(e) {
+        e.preventDefault();
+        $('.audio-row').contextMenu({x: e.pageX, y: e.pageY});
+        e.stopPropagation();
     });
-
-
+    
     function updateSeekSlider() {
         currentTrack.onloadedmetadata = function () {
             $("#seek-slider").slider("option", {max: Math.floor(currentTrack.duration)});

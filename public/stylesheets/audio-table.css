@@ -93,3 +93,7 @@
     background-color: red;
 }
 
+.three-dots{
+    width: 1%;
+    cursor: pointer;
+}
