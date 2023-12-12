@@ -5,6 +5,9 @@ $(document).ready(function () {
     let modalInput = $("#playlist-name");
     let playlistItems = $(".playlist-menu-items");
 
+    let playlists = {};
+    getPlaylists();
+
     $(plusIcon).on("click", function (event) {
         openModal();
     });
@@ -58,6 +61,8 @@ $(document).ready(function () {
                         clearModal();
                         closeModal();
                         updatePlaylistItems(response.playlist);
+                        updateContextMenu(response.playlist);
+
                     } else {
                         alert('Something went wrong');
                     }
@@ -101,4 +106,104 @@ $(document).ready(function () {
                 $(".main-container").html(response.html);
             });
     }
+
+    $.contextMenu({
+        selector: '.audio-row',
+        build: function($triggerElement, e){
+            return {
+                className: 'audio-context-menu',
+                autoHide: true,            
+                callback:function(key, options){
+                    let audioId = options.$trigger.attr("id");
+                    let playlistId;
+                    if(key == "deleteFromPlaylist") {
+                        let path = window.location.href;
+                        playlistId = path.substring(path.lastIndexOf('/') + 1);
+                        deleteAudioFromPlaylist(audioId, playlistId);
+                    }
+                    else {
+                        playlistId = key;
+                        addAudioToPlaylist(audioId, playlistId);
+                    }
+                },
+                items: {
+                    "addToPlaylist": {
+                        name: "Add to playlist",
+                        className: "add-to-playlist",
+                        icon: "add",
+                        autoHide: true,
+                        items: loadPlaylists(),
+                        visible: function(key, opt){
+                            // if(window.location.pathname != '/' )
+                            //     return false;
+                            // else 
+                            return true;
+                        },
+                    },
+                    "deleteFromPlaylist":{
+                        name: "Delete from this playlist",
+                        className: "delete-from-playlist",
+                        icon: "delete",
+                        autoHide: true,
+                        visible: function(key, opt){
+                            if(window.location.pathname == '/') 
+                                return false;
+                            else return true;
+                        }
+                    },
+                },
+            }
+        }
+    });
+
+    function addAudioToPlaylist(audioId, playlistId){
+        $.ajax({
+            type: 'POST',
+            url: '/add-audio-to-playlist',
+            data: {audioId, playlistId},
+            dataType : 'json',
+        })
+         .done(function(res){
+        });
+    }
+    function deleteAudioFromPlaylist(audioId, playlistId){
+        $.ajax({
+            type: 'POST',
+            url: '/delete-audio',
+            data: {audioId, playlistId},
+            dataType : 'json',
+        })
+           .done(function(res){
+            $(".audio-table #" + audioId).remove();
+        });
+    }
+
+    function getPlaylists(){
+        
+        $.ajax({
+            type: 'GET',
+            url: '/get-playlists',
+            dataType : 'json',
+            async: false
+        })
+            .done(function (res) {
+                res.playlists.forEach(elem=>{
+
+                    playlists[(elem.id).toString()]={
+                        name: elem.name,
+                    }                            
+                });
+                console.log(playlists)
+            })
+    }
+    function updateContextMenu(playlist){
+        playlists[(playlist.id).toString()] = {
+            name: playlist.name,
+        }
+    }
+    function loadPlaylists(){
+        // getPlaylists();
+        return playlists;
+    }
+    
 });
