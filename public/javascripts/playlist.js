@@ -64,8 +64,7 @@ $(document).ready(function () {
                         closeModal();
                         addPlaylistToSidebar(response.playlist);
                         addPlaylistToContextMenu(response.playlist);
-                        getPlaylistAudio(response.playlist.id);
-
+                        
                     } else {
                         alert('Something went wrong');
                     }
@@ -140,7 +139,7 @@ $(document).ready(function () {
                         className: "add-to-playlist",
                         icon: "add",
                         autoHide: true,
-                        items: loadPlaylists(),
+                        items: Playlists(),
                         visible: function(key, opt){
                             return true;
                         },
@@ -196,36 +195,66 @@ $(document).ready(function () {
 
                     playlists[(elem.id).toString()]={
                         name: elem.name,
+                        visible: function(){return true;}
                     }                            
                 });
                 console.log(playlists)
             })
     }
+
+
     function addPlaylistToContextMenu(playlist){
+
         playlists[(playlist.id).toString()] = {
+            
             name: playlist.name,
+
         }
     }
+
+
     function removePlaylistFromContextMenu(playlistId){
+
         delete playlists[playlistId.toString()];
-    }
-    function loadPlaylists(){
-        // getPlaylists();
-        return playlists;
+
     }
 
+
+    function Playlists(){
+        // getPlaylists();
+        let toShow = JSON.parse(JSON.stringify(playlists));
+
+        if(window.location.pathname.indexOf('playlist') !=-1)
+            toShow[currentPlaylistId.toString()].visible = function(){return false;}
+
+        console.log(currentPlaylistId);
+
+        return toShow;
+    }
+
+
     $.contextMenu({
+
         selector: '.playlist-menu-items .item',
+
         className: 'sidebar-playlist-context-menu',
+
         autoHide: true,            
+
         callback:function(key, options){
+
             let playlistId = options.$trigger.attr("id");
+
             if(key == "deletePlaylist") {
+
                 deletePlaylist(playlistId);
+
             }
         },
         items: {
+
             "deletePlaylist":{
+
                 name: "Delete playlist",
                 className: "delete-playlist",
                 icon: "delete",
