@@ -5,12 +5,15 @@ $(document).ready(function () {
     let divPlayPauseIcon = $(".icons.play-pause");
     let currentTrack = document.querySelector("#current-track");
     let currentSrc = document.querySelector("#current-src");
-
+    
     let playingSongId = localStorage.getItem("song-id");
     let volumeValue = localStorage.getItem("volume-value");
     let manualSeek = false;
     let seekSlider = $("#seek-slider");
-
+    
+    currentTrack.addEventListener("ended", function () {
+        togglePlayPause()
+    })
     
     $(".audio-row").each(function (i, element) {
         if (playingSongId == $(element).attr("id")) {
@@ -20,31 +23,30 @@ $(document).ready(function () {
                 currentTrack.load();
                 currentTrack.currentTime = localStorage.getItem("audio-current-time");
                 currentTrack.volume = volumeValue / 100;
+                updateSeekSlider();
             }
             $(element).addClass("selected");
             selectedRow = element;
-            updateSeekSlider();
         }
         $(element).on("mouseup", function (event) {
             switch (event.which) {
                 case 1:
                     playAudio($(element))
                     break;
-            }
-        })
-
+                }
+            })  
+            
+        });    
         
-    });    
-        
-    $('.audio-row .three-dots').on('mouseup', function(e) {
-        e.preventDefault();
-        $('.audio-row').contextMenu({x: e.pageX, y: e.pageY});
-        e.stopPropagation();
-    });
+        $('.audio-row .three-dots').on('mouseup', function(e) {
+            e.preventDefault();
+            $('.audio-row').contextMenu({x: e.pageX, y: e.pageY});
+            e.stopPropagation();
+        });
     
     function updateSeekSlider() {
         currentTrack.onloadedmetadata = function () {
-            $("#seek-slider").slider("option", {max: Math.floor(currentTrack.duration)});
+            $("#seek-slider").slider("option", {max: Math.floor(currentTrack.duration)});     
         };
     }
     window.onbeforeunload = function reloadHandler() {
@@ -65,9 +67,6 @@ $(document).ready(function () {
         currentTrack.load();
         currentTrack.volume = (volumeValue / 100);
         currentTrack.play();
-        currentTrack.addEventListener("ended", function () {
-            togglePlayPause()
-        })
         setIsPlaying(1);
         divPlayPauseIcon.tooltip({
             content: "Pause"
