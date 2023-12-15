@@ -29,7 +29,6 @@ $(document).ready(function () {
         }
     });
     let sliderWidget = $('#seek-slider').slider("widget");
-    $(".ui-slider-handle", sliderWidget).hide();
 
     currentTrack.onloadedmetadata = function () {
         $("#seek-slider").slider("option", {max: Math.floor(currentTrack.duration)}); 
