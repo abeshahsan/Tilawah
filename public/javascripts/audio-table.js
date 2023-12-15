@@ -10,6 +10,9 @@ $(document).ready(function () {
     let volumeValue = localStorage.getItem("volume-value");
     let manualSeek = false;
     let seekSlider = $("#seek-slider");
+    // let sliderHandle = $("#seek-slider .ui-slider-handle");
+  
+    // $("#seek-slider .ui-slider-handle", sliderWidget).hide();
     
     currentTrack.addEventListener("ended", function () {
         togglePlayPause()
@@ -46,7 +49,8 @@ $(document).ready(function () {
     
     function updateSeekSlider() {
         currentTrack.onloadedmetadata = function () {
-            $("#seek-slider").slider("option", {max: Math.floor(currentTrack.duration)});     
+            $("#seek-slider").slider("option", {max: Math.floor(currentTrack.duration)}); 
+            $(".ui-slider-handle").show();    
         };
     }
     window.onbeforeunload = function reloadHandler() {
@@ -54,7 +58,7 @@ $(document).ready(function () {
         localStorage.setItem("volume-value", volumeValue);
         localStorage.setItem("audio-current-time", currentTrack.currentTime);
     }
-
+    
     function playAudio(row) {
         if (selectedRow) {
             $(selectedRow).removeClass('selected');
@@ -62,7 +66,7 @@ $(document).ready(function () {
         $(row).addClass('selected');
         selectedRow = row
         let songId = $(row).attr("id");
-
+        
         currentSrc.setAttribute("src", "/song/" + songId);
         currentTrack.load();
         currentTrack.volume = (volumeValue / 100);
@@ -74,7 +78,7 @@ $(document).ready(function () {
         localStorage.setItem("song-id", songId);
         updateSeekSlider();
     }
-
+    
     function setIsPlaying(_isPlaying) {
         isPlaying = _isPlaying;
         $(I_PlayPause).removeClass("fa-play fa-pause");
@@ -84,7 +88,7 @@ $(document).ready(function () {
             $(I_PlayPause).addClass("fa-play");
         }
     }
-
+    
     function togglePlayPause() {
         if (isPlaying) {
             currentTrack.pause();
@@ -99,11 +103,11 @@ $(document).ready(function () {
         }
         setIsPlaying(!isPlaying);
     }
-
+    
     $(divPlayPauseIcon).on("click", function () {
         togglePlayPause()
     });
-
+        
     $("#volume-slider").slider({
         value: volumeValue,
         step: 0.01,
@@ -121,11 +125,12 @@ $(document).ready(function () {
             currentTrack.volume = (value / 100);
         }
     });
+  
     $(seekSlider).slider({
         value: currentTrack.currentTime,
         range: "min",
         min: 0,
-        // max: 100,
+        max: currentTrack.duration,
         step: 0.1,
         // animate: true,
         slide: function (event, ui) {
@@ -137,7 +142,11 @@ $(document).ready(function () {
             manualSeek = false;
         }
     });
+    
+    let sliderWidget = $('#seek-slider').slider("widget");
+    $(".ui-slider-handle", sliderWidget).hide();
 
+    
     $(currentTrack).on('timeupdate', function () {
         if (!manualSeek) {
             $(seekSlider).slider('value', currentTrack.currentTime);
@@ -147,8 +156,6 @@ $(document).ready(function () {
     $(".controls .icons").tooltip({
         tooltipClass: "control-panel-tooltip"
     });
-
     
 });
-    
-    
+
