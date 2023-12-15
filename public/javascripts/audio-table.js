@@ -18,6 +18,7 @@ $(document).ready(function () {
                 localStorage.setItem("page-reloaded", "0");
                 currentSrc.setAttribute("src", "/song/" + playingSongId);
                 currentTrack.load();
+                currentTrack.currentTime = localStorage.getItem("audio-current-time");
                 currentTrack.volume = volumeValue / 100;
             }
             $(element).addClass("selected");
@@ -44,7 +45,6 @@ $(document).ready(function () {
     function updateSeekSlider() {
         currentTrack.onloadedmetadata = function () {
             $("#seek-slider").slider("option", {max: Math.floor(currentTrack.duration)});
-            currentTrack.currentTime = localStorage.getItem("audio-current-time");
         };
     }
     window.onbeforeunload = function reloadHandler() {
@@ -64,8 +64,7 @@ $(document).ready(function () {
         currentSrc.setAttribute("src", "/song/" + songId);
         currentTrack.load();
         currentTrack.volume = (volumeValue / 100);
-        currentTrack.duration =
-            currentTrack.play();
+        currentTrack.play();
         currentTrack.addEventListener("ended", function () {
             togglePlayPause()
         })
