@@ -10,9 +10,27 @@ $(document).ready(function () {
     let volumeValue = localStorage.getItem("volume-value");
     let manualSeek = false;
     let seekSlider = $("#seek-slider");
-    // let sliderHandle = $("#seek-slider .ui-slider-handle");
-  
-    // $("#seek-slider .ui-slider-handle", sliderWidget).hide();
+    
+
+    $(seekSlider).slider({
+        value: currentTrack.currentTime,
+        range: "min",
+        min: 0,
+        max: currentTrack.duration,
+        step: 0.1,
+        // animate: true,
+        slide: function (event, ui) {
+            // console.log($("#seek-slider").slider("option", "max"));
+            manualSeek = true;
+        },
+        stop: function () {
+            currentTrack.currentTime = $(seekSlider).slider("value");
+            manualSeek = false;
+        }
+    });
+    
+    let sliderWidget = $('#seek-slider').slider("widget");
+    if(currentTrack.paused) $(".ui-slider-handle", sliderWidget).hide();
     
     currentTrack.addEventListener("ended", function () {
         togglePlayPause()
@@ -50,8 +68,13 @@ $(document).ready(function () {
     function updateSeekSlider() {
         currentTrack.onloadedmetadata = function () {
             $("#seek-slider").slider("option", {max: Math.floor(currentTrack.duration)}); 
-            $(".ui-slider-handle").show();    
+            $(".ui-slider-handle", sliderWidget).show();
         };
+    }
+    window.onbeforeunload = function reloadHandler() {
+        localStorage.setItem("page-reloaded", "1");
+        localStorage.setItem("volume-value", volumeValue);
+        localStorage.setItem("audio-current-time", currentTrack.currentTime);
     }
     window.onbeforeunload = function reloadHandler() {
         localStorage.setItem("page-reloaded", "1");
@@ -125,30 +148,9 @@ $(document).ready(function () {
             currentTrack.volume = (value / 100);
         }
     });
-  
-    $(seekSlider).slider({
-        value: currentTrack.currentTime,
-        range: "min",
-        min: 0,
-        max: currentTrack.duration,
-        step: 0.1,
-        // animate: true,
-        slide: function (event, ui) {
-            // console.log($("#seek-slider").slider("option", "max"));
-            manualSeek = true;
-        },
-        stop: function () {
-            currentTrack.currentTime = $(seekSlider).slider("value");
-            manualSeek = false;
-        }
-    });
-    
-    let sliderWidget = $('#seek-slider').slider("widget");
-    $(".ui-slider-handle", sliderWidget).hide();
 
-    
     $(currentTrack).on('timeupdate', function () {
-        if (!manualSeek) {
+        if (!manualSeek) { 
             $(seekSlider).slider('value', currentTrack.currentTime);
         }
     });
