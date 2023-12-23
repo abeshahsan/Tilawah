@@ -8,7 +8,7 @@
     padding-top: 2px;
     /* margin: 0 auto; */
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
 }
 
@@ -76,16 +76,18 @@
 #volume-controller {
     width: 250px;
     height: 50px;
-    position: absolute;
-    top: 25px;
+    display: flex;
+    flex-direction: row;
+    /* position: absolute; */
+    /* top: 25px;
     right: 10%;
-    margin: 0 auto;
+    margin: 0 auto; */
     /* align-items: center; */
 
 }
 
 #volume-controller i {
-    position: absolute;
+    /* position: absolute; */
     color: #666;
     margin-top: -10px;
 }
@@ -101,20 +103,22 @@
 }
 
 #volume-slider {
-    position: absolute;
-    left: 25px;
-    right: 25px;
     height: 5px;
     width: 100px;
     background: #938e8e;
     border-radius: 15px;
     cursor: pointer;
+
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 #volume-slider .ui-slider-range-min {
     height: 5px;
     width: 200px;
-    position: absolute;
+    /* position: absolute; */
     background: rgb(91, 93, 91);
     border: none;
     border-radius: 10px;
@@ -127,8 +131,6 @@
     border-radius: 20px;
     background: rgb(44, 212, 100);
     position: absolute;
-    margin-left: -8px;
-    margin-top: -8px;
     cursor: pointer;
     outline: none;
 }
