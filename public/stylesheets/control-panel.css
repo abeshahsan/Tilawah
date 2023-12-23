@@ -183,3 +183,9 @@
     color: whitesmoke;
     transition: none;
 }
+
+.current-song-details{
+    width: 200px;
+    margin-left: 40px;
+    display: block;
+}
