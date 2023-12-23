@@ -10,6 +10,8 @@ $(document).ready(function () {
     let volumeValue = localStorage.getItem("volume-value");
     let manualSeek = false;
     let seekSlider = $("#seek-slider");
+
+    let songArray = {};
     
 
     $(seekSlider).slider({
@@ -51,6 +53,12 @@ $(document).ready(function () {
             $(element).addClass("selected");
             selectedRow = element;
         }
+        songArray[$(element).attr("id")] = {
+            name: $(element).find(".title").text(),
+            creator: $(element).find(".creator").text(),
+            collection: $(element).find(".creator").text()
+
+        };
         $(element).on("mouseup", function (event) {
             switch (event.which) {
                 case 1:
@@ -60,6 +68,8 @@ $(document).ready(function () {
             })  
             
         });    
+        
+        setSongDetailsInControlPanel();
         
         $('.audio-row .three-dots').on('mouseup', function(e) {
             e.preventDefault();
@@ -93,6 +103,7 @@ $(document).ready(function () {
         });
         localStorage.setItem("song-id", songId);
         playingSongId = songId;
+        setSongDetailsInControlPanel();
     }
     
     function setIsPlaying(_isPlaying) {
@@ -151,6 +162,11 @@ $(document).ready(function () {
     $(".controls .icons").tooltip({
         tooltipClass: "control-panel-tooltip"
     });
+
+    function setSongDetailsInControlPanel(){
+        $(".current-song-details #name").text(songArray[playingSongId].name);
+        $(".current-song-details #creator").text(songArray[playingSongId].creator);
+    }
     
 });
 

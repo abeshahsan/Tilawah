@@ -74,16 +74,11 @@
 
 
 #volume-controller {
-    width: 250px;
+    /* width: 250px; */
     height: 50px;
     display: flex;
     flex-direction: row;
-    /* position: absolute; */
-    /* top: 25px;
-    right: 10%;
-    margin: 0 auto; */
-    /* align-items: center; */
-
+    margin-right: 5vw;
 }
 
 #volume-controller i {
@@ -147,7 +142,7 @@
     background: #756692;
     border-radius: 15px;
     cursor: pointer;
-    width: 35%;
+    width: 40%;
     position: relative;
 
     margin: 8px;
