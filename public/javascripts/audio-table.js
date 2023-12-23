@@ -11,8 +11,7 @@ $(document).ready(function () {
     let manualSeek = false;
     let seekSlider = $("#seek-slider");
 
-    let songArray = {};
-    
+    let songArray = {};    
 
     $(seekSlider).slider({
         value: currentTrack.currentTime,
@@ -56,9 +55,9 @@ $(document).ready(function () {
         songArray[$(element).attr("id")] = {
             name: $(element).find(".title").text(),
             creator: $(element).find(".creator").text(),
-            collection: $(element).find(".creator").text()
-
+            collection: $(element).find(".collection").text()
         };
+
         $(element).on("mouseup", function (event) {
             switch (event.which) {
                 case 1:
@@ -163,10 +162,21 @@ $(document).ready(function () {
         tooltipClass: "control-panel-tooltip"
     });
 
+    //using songArray was not necessary but used for convenience
     function setSongDetailsInControlPanel(){
         $(".current-song-details #name").text(songArray[playingSongId].name);
         $(".current-song-details #creator").text(songArray[playingSongId].creator);
     }
+
+    $(".icons #next").on("mouseup", function (event) {
+        if($(selectedRow).next("tr").index() != -1)
+            playAudio($(selectedRow).next("tr"));    
+    })   
+
+    $(".icons #prev").on("mouseup", function (event) {
+        if($(selectedRow).prev("tr").index() > 0)
+            playAudio($(selectedRow).prev("tr"));    
+    }) 
     
 });
 
