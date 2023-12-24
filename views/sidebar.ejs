@@ -17,20 +17,31 @@
                     <a>
                         <i class="fas fa-list"></i>
                         <span id="my-playlists">My Playlists</span>
-                        <div class="new-playlist" title="Create Playlist">
-                            <i class="fa-thin fa-plus"></i>                 
-                        </div>
+                        <% if (user) { %>
+                            <div class="new-playlist" title="Create Playlist">
+                                <i class="fa-thin fa-plus"></i>
+                            </div>
+                        <% } %>
                     </a>
-                    
-                    <div class="playlist-menu">
-                        <ul class="playlist-menu-items">
-                            <% if(user){ %>
+
+                    <% if(user){ %>
+                        <div class="playlist-menu">
+                            <ul class="playlist-menu-items">
                                 <% playlists.forEach(element=> { %>
-                                    <li class="item" id=<%=element.id%>><%=element.name %></li>
+                                    <li class="item" id=<%= element.id %>><%= element.name %></li>
                                 <% }) %>
-                            <%} %>
-                        </ul>
-                    </div>                    
+                            </ul>
+                        </div>
+                    <% } else { %>
+                        <div class="login-to-view-playlist-menu">
+                            <div class="message-to-login">
+                                <text>
+                                    If you have an account, login to view your library
+                                </text>
+                                <button type="button" class="sidebar-login-button">Login</button>
+                            </div>
+                        </div>
+                    <% } %>
                 </li>
             </ul>
         </div>

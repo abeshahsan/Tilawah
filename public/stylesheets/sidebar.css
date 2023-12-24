@@ -22,7 +22,7 @@
     user-select: none;
 }
 
-.sidebar ul li{
+.sidebar ul li {
     padding: 1rem;
     margin: 8px 0;
     border-radius: 8px;
@@ -30,11 +30,11 @@
     cursor: pointer;
 }
 
-.sidebar ul li.sidebar-home:hover{
+.sidebar ul li.sidebar-home:hover {
     background-color: #d3d3d3;
 }
 
-.sidebar ul li.item:hover{
+.sidebar ul li.item:hover {
     background-color: #d3d3d3;
 }
 
@@ -47,36 +47,37 @@
     gap: 1.5rem;
 }
 
-.sidebar.close{
-    width: 7%;
-}
+/*.sidebar.close{*/
+/*    width: 7%;*/
+/*}*/
 
-.sidebar.hidden{
+.sidebar.hidden {
     display: none;
 }
 
 
-.sidebar ul li a i{
+.sidebar ul li a i {
     font-size: 1.2rem;
 }
 
-.sidebar ul li a span{
+.sidebar ul li a span {
     overflow: hidden;
 }
 
-.playlist-menu{
+.playlist-menu {
     display: flex;
     flex-flow: column wrap;
     overflow: hidden;
 }
 
-.fa-thin.fa-plus{
+.fa-thin.fa-plus {
     scale: 1.5;
     position: absolute;
     right: 5px;
 }
-.fa-thin.fa-plus:hover{
-    background-color:#e3e3e3;
+
+.fa-thin.fa-plus:hover {
+    background-color: #e3e3e3;
 }
 
 .sidebar-tooltip {
@@ -93,4 +94,51 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+
+/*
+If the user is not logged in, He will not be able to view his/her playlists.
+So, a message will appear there to tell the user to login.
+*/
+
+.login-to-view-playlist-menu {
+    height: 350px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+}
+
+.message-to-login {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border: thin dashed green;
+
+    padding: 10px 10px;
+}
+
+.message-to-login text{
+    font-size: 13px;
+    margin-bottom: 10px;
+    text-align: justify;
+}
+
+.message-to-login .sidebar-login-button {
+    padding: 10px 15px 10px 15px;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #49fb49;
+}
+
+.message-to-login .sidebar-login-button:hover {
+    box-shadow: 0 0 6px 1px rgba(144, 238, 144, 0.65);
 }

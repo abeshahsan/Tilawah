@@ -1,7 +1,4 @@
 $(document).ready(function () {
-
-    console.log(playlistAudio)
-
     let selectedRow;
     let isPlaying = 0;
     let I_PlayPause = $("#play-pause");
