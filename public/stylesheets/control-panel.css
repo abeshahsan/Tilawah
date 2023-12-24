@@ -139,12 +139,26 @@
     align-items: center;
 }
 
+.audio-progress {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-progress text{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
 
 #seek-slider {
-    background: #756692;
+    background: #c0bfbf;
     border-radius: 15px;
     cursor: pointer;
-    width: 40%;
+    width: 50%;
     position: relative;
 
     margin: 8px;
@@ -155,21 +169,23 @@
 }
 
 #seek-slider .ui-slider-range-min {
-    height: 5px;
+    height: 4px;
     background: var(--controls-color);
     border: none;
     border-radius: 10px;
     outline: none;
+    position: relative;
 }
 
 #seek-slider .ui-slider-handle {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 20px;
+    --slider-handle: 12px;
+    width: var(--slider-handle);
+    height: var(--slider-handle);
+    border-radius: var(--slider-handle);
     background: var(--controls-color);
     cursor: pointer;
     outline: none;
+    position: absolute;
 }
 
 .control-panel-tooltip {

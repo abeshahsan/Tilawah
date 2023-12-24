@@ -5,13 +5,16 @@ $(document).ready(function () {
     let divPlayPauseIcon = $(".icons.play-pause");
     let currentTrack = document.querySelector("#current-track");
     let currentSrc = document.querySelector("#current-src");
-    
+
     let playingSongId = localStorage.getItem("song-id");
     let volumeValue = localStorage.getItem("volume-value");
     let manualSeek = false;
     let seekSlider = $("#seek-slider");
 
-    let songArray = {};    
+    let audioElapsedTime = $(".audio-progress .elapsed");
+    let audioDuration = $(".audio-progress .duration");
+
+    let songArray = {};
 
     $(seekSlider).slider({
         value: currentTrack.currentTime,
@@ -32,13 +35,14 @@ $(document).ready(function () {
     let sliderWidget = $('#seek-slider').slider("widget");
 
     currentTrack.onloadedmetadata = function () {
-        $("#seek-slider").slider("option", {max: Math.floor(currentTrack.duration)}); 
+        $("#seek-slider").slider("option", {max: Math.floor(currentTrack.duration)});
+        audioDuration.text(formatProgressTime(Math.floor(currentTrack.duration)));
     };
-    
+
     currentTrack.addEventListener("ended", function () {
         togglePlayPause()
     })
-    
+
     if (localStorage.getItem("page-reloaded") == "1") {
         localStorage.setItem("page-reloaded", "0");
         currentSrc.setAttribute("src", "/song/" + playingSongId);
@@ -63,27 +67,27 @@ $(document).ready(function () {
                 case 1:
                     playAudio($(element))
                     break;
-                }
-            })  
-            
-        });    
-        
-        setSongDetailsInControlPanel();
-        
-        $('.audio-row .three-dots').on('mouseup', function(e) {
-            e.preventDefault();
-            $('.audio-row').contextMenu({x: e.pageX, y: e.pageY});
-            e.stopPropagation();
-        });
-    
-   
+            }
+        })
+
+    });
+
+    setSongDetailsInControlPanel();
+
+    $('.audio-row .three-dots').on('mouseup', function (e) {
+        e.preventDefault();
+        $('.audio-row').contextMenu({x: e.pageX, y: e.pageY});
+        e.stopPropagation();
+    });
+
+
     window.onbeforeunload = function reloadHandler() {
         localStorage.setItem("page-reloaded", "1");
         localStorage.setItem("volume-value", volumeValue);
         localStorage.setItem("audio-current-time", currentTrack.currentTime);
         localStorage.setItem("song-id", playingSongId);
     }
-    
+
     function playAudio(row) {
         if (selectedRow) {
             $(selectedRow).removeClass('selected');
@@ -91,7 +95,7 @@ $(document).ready(function () {
         $(row).addClass('selected');
         selectedRow = row
         let songId = $(row).attr("id");
-        
+
         currentSrc.setAttribute("src", "/song/" + songId);
         currentTrack.load();
         currentTrack.volume = (volumeValue / 100);
@@ -104,7 +108,7 @@ $(document).ready(function () {
         playingSongId = songId;
         setSongDetailsInControlPanel();
     }
-    
+
     function setIsPlaying(_isPlaying) {
         isPlaying = _isPlaying;
         $(I_PlayPause).removeClass("fa-play fa-pause");
@@ -114,7 +118,7 @@ $(document).ready(function () {
             $(I_PlayPause).addClass("fa-play");
         }
     }
-    
+
     function togglePlayPause() {
         if (isPlaying) {
             currentTrack.pause();
@@ -129,11 +133,11 @@ $(document).ready(function () {
         }
         setIsPlaying(!isPlaying);
     }
-    
+
     $(divPlayPauseIcon).on("click", function () {
         togglePlayPause()
     });
-        
+
     $("#volume-slider").slider({
         value: volumeValue,
         step: 0.01,
@@ -153,8 +157,9 @@ $(document).ready(function () {
     });
 
     $(currentTrack).on('timeupdate', function () {
-        if (!manualSeek) { 
+        if (!manualSeek) {
             $(seekSlider).slider('value', currentTrack.currentTime);
+            audioElapsedTime.text(formatProgressTime(Math.floor(currentTrack.currentTime)));
         }
     });
 
@@ -163,20 +168,26 @@ $(document).ready(function () {
     });
 
     //using songArray was not necessary but used for convenience
-    function setSongDetailsInControlPanel(){
+    function setSongDetailsInControlPanel() {
         $(".current-song-details #name").text(songArray[playingSongId].name);
         $(".current-song-details #creator").text(songArray[playingSongId].creator);
     }
 
     $(".icons #next").on("mouseup", function (event) {
-        if($(selectedRow).next("tr").index() != -1)
-            playAudio($(selectedRow).next("tr"));    
-    })   
+        if ($(selectedRow).next("tr").index() != -1)
+            playAudio($(selectedRow).next("tr"));
+    })
 
     $(".icons #prev").on("mouseup", function (event) {
-        if($(selectedRow).prev("tr").index() > 0)
-            playAudio($(selectedRow).prev("tr"));    
-    }) 
-    
-});
+        if ($(selectedRow).prev("tr").index() > 0)
+            playAudio($(selectedRow).prev("tr"));
+    })
 
+    function formatProgressTime(seconds) {
+        let minutes = Math.floor(seconds / 60);
+        minutes = (minutes <= 9 ? `0${minutes}` : `${minutes}`);
+        seconds = seconds % 60;
+        seconds = (seconds <= 9 ? `0${seconds}` : `${seconds}`);
+        return `${minutes}:${seconds}`;
+    }
+});
