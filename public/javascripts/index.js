@@ -1,3 +1,5 @@
+let playlistAudio = ['audio1']
+
 $(document).ready(function () {
 
     let mainContainer = $(".main-container");
