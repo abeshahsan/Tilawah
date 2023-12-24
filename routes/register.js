@@ -1,5 +1,4 @@
 const express = require('express');
-const controls = require("../controls");
 const router = express.Router();
 
 const database = require('../database')

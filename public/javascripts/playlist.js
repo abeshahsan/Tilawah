@@ -149,9 +149,7 @@ $(document).ready(function () {
                         className: "delete-from-playlist",
                         icon: "delete",
                         visible: function(key, opt){
-                            if(window.location.pathname == '/') 
-                                return false;
-                            else return true;
+                            return window.location.pathname != '/';
                         }
                     },
                 },
@@ -184,7 +182,7 @@ $(document).ready(function () {
     function getPlaylists(){
         
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             url: '/get-playlists',
             dataType : 'json',
             async: false

@@ -5,23 +5,6 @@ const database = require('../database')
 const {data} = require("express-session/session/cookie");
 const mailer = require("../email");
 
-const controls = require
-
-/* GET home page. */
-// router.get('*', function (req, res) {
-//     res.render('index',
-//         {
-//             options: {
-//                 loginRegister: false,
-//                 hamburger: true
-//             },
-//             user: req.session.user,
-//             countryOptions:
-//             route: "/login"
-//         }
-//     );
-// });
-
 router.post('/login-DOM', function (req, res) {
     res.render('login-DOM', function (err, html) {
         if(err) {

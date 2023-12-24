@@ -19,7 +19,7 @@ router.post('/edit-personal-info', (req, res) => {
     let country = req.body.country
 
     database.updatePersonalInfo(req.session.user.userID, name, gender, country, (isUpdated) => {
-        if(isUpdated) {
+        if (isUpdated) {
             req.session.user.name = name
             req.session.user.gender = gender
             req.session.user.country = country
@@ -35,7 +35,7 @@ router.post('/edit-email', (req, res) => {
     let otp = createOTP()
 
     database.verifyMail(email, (isFound) => {
-        if(!isFound) {
+        if (!isFound) {
             req.session.temp = {
                 email: email,
                 otp: otp
@@ -51,33 +51,19 @@ router.post('/edit-email', (req, res) => {
 router.post('/change-email-otp', (req, res) => {
     let otp = req.body.otp
 
-    if(otp === req.session.temp.otp) {
+    if (otp === req.session.temp.otp) {
         req.session.user.email = req.session.temp.email
         database.updateEmail(req.session.user.userID, req.session.user.email, (isUpdated) => {
             return res.send({
                 success: isUpdated
             });
         })
-    }
-    else{
+    } else {
         return res.send({
             otpMatched: false
         });
     }
 
-});
-
-router.post('/get-username', (req, res) => {
-    let username;
-
-    if (req.session.user.username) {
-        username = req.session.user.username
-    } else {
-        username = 'User'
-    }
-    res.send( {
-        username: username
-    });
 });
 
 

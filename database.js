@@ -1,6 +1,5 @@
 const mysql = require('mysql');
 const dbTables = require('./database-tables');
-const {SERVER_STATUS_CURSOR_EXISTS} = require("mysql/lib/protocol/constants/server_status");
 const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
