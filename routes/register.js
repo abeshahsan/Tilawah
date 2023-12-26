@@ -52,6 +52,7 @@ router.post('/register-complete', function (req, res) {
                 userID: userID,
                 email: req.session.register.email,
                 name: name,
+                playlists: []
             }
             delete req.session.register
             res.send({success: 1})
