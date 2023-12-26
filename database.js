@@ -90,9 +90,9 @@ function insertUser(email, password, name, callback = function () {
                             VALUES (${pool.escape(email)},
                                     SHA2(${pool.escape(password)}, 256))`;
 
-    const sqlProfile = `INSERT INTO profile (USER_ID, NAME)
-                        VALUES (?,
-                                ${pool.escape(name)})`;
+    const sqlProfile = `UPDATE profile 
+                        set NAME = ${pool.escape(name)} 
+                        WHERE USER_ID = ?; `;
 
     pool.query(sqlCredentials, (err, results) => {
         if (err) {
@@ -270,6 +270,35 @@ function loadAudioOfPlaylist(playlistID, callback = function () {
     });
 }
 
+function updateLastPlayback(userID, audioID, minute, second, callback = function () {
+}) {
+    const sql = `UPDATE LAST_PLAYBACK
+                 SET AUDIO_ID = ${pool.escape(audioID)},
+                     MINUTE =${pool.escape(minute)},
+                     SECOND =${pool.escape(second)}
+                 WHERE USER_ID = ${pool.escape(userID)}`;
+
+    let SUCCESSFULLY_UPDATED = true;
+    pool.query(sql, (err) => {
+        if (err) {
+            SUCCESSFULLY_UPDATED = false;
+            console.log(err.sqlMessage + '\n' + err.sql);
+        }
+        return callback(SUCCESSFULLY_UPDATED);
+    });
+}
+
+function getLastPlayback(userID, callback = function () {
+}) {
+    const sql = `SELECT * FROM LAST_PLAYBACK
+                 WHERE USER_ID = ${pool.escape(userID)}`;
+    pool.query(sql, (err, result) => {
+        if (err) {
+            console.log(err.sqlMessage + '\n' + err.sql);
+        }
+        return callback(result);
+    });
+}
 module.exports = {
     findUser,
     insertUser,
@@ -283,5 +312,7 @@ module.exports = {
     addAudioToPlaylist,
     deleteAudioFromPlaylist,
     loadPlaylistsOfCurrentUser,
-    loadAudioOfPlaylist
+    loadAudioOfPlaylist,
+    updateLastPlayback,
+    getLastPlayback,
 }
