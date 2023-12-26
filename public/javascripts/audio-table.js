@@ -6,7 +6,7 @@ $(document).ready(function () {
     let currentTrack = document.querySelector("#current-track");
     let currentSrc = document.querySelector("#current-src");
 
-    let playingSongId = localStorage.getItem("song-id");
+    let playingAudioId = localStorage.getItem("audio-id");
     let volumeValue = localStorage.getItem("volume-value");
     let manualSeek = false;
     let seekSlider = $("#seek-slider");
@@ -14,7 +14,7 @@ $(document).ready(function () {
     let audioElapsedTime = $(".audio-progress .elapsed");
     let audioDuration = $(".audio-progress .duration");
 
-    let songArray = {};
+    let audioArray = {};
 
     $(seekSlider).slider({
         value: currentTrack.currentTime,
@@ -24,7 +24,6 @@ $(document).ready(function () {
         step: 0.1,
         // animate: true,
         slide: function (event, ui) {
-            // console.log($("#seek-slider").slider("option", "max"));
             manualSeek = true;
         },
         stop: function () {
@@ -45,18 +44,18 @@ $(document).ready(function () {
 
     if (localStorage.getItem("page-reloaded") == "1") {
         localStorage.setItem("page-reloaded", "0");
-        currentSrc.setAttribute("src", "/song/" + playingSongId);
+        currentSrc.setAttribute("src", "/song/" + playingAudioId);
         currentTrack.load();
         currentTrack.currentTime = localStorage.getItem("audio-current-time");
         currentTrack.volume = volumeValue / 100;
     }
 
     $(".audio-row").each(function (i, element) {
-        if (playingSongId == $(element).attr("id")) {
+        if (playingAudioId == $(element).attr("id")) {
             $(element).addClass("selected");
             selectedRow = element;
         }
-        songArray[$(element).attr("id")] = {
+        audioArray[$(element).attr("id")] = {
             name: $(element).find(".title").text(),
             creator: $(element).find(".creator").text(),
             collection: $(element).find(".collection").text()
@@ -72,7 +71,7 @@ $(document).ready(function () {
 
     });
 
-    setSongDetailsInControlPanel();
+    setAudioDetailsInControlPanel();
 
     $('.audio-row .three-dots').on('mouseup', function (e) {
         e.preventDefault();
@@ -85,7 +84,7 @@ $(document).ready(function () {
         localStorage.setItem("page-reloaded", "1");
         localStorage.setItem("volume-value", volumeValue);
         localStorage.setItem("audio-current-time", currentTrack.currentTime);
-        localStorage.setItem("song-id", playingSongId);
+        localStorage.setItem("audio-id", playingAudioId);
     }
 
     function playAudio(row) {
@@ -94,9 +93,9 @@ $(document).ready(function () {
         }
         $(row).addClass('selected');
         selectedRow = row
-        let songId = $(row).attr("id");
+        let audioId = $(row).attr("id");
 
-        currentSrc.setAttribute("src", "/song/" + songId);
+        currentSrc.setAttribute("src", "/song/" + audioId);
         currentTrack.load();
         currentTrack.volume = (volumeValue / 100);
         currentTrack.play();
@@ -104,9 +103,9 @@ $(document).ready(function () {
         divPlayPauseIcon.tooltip({
             content: "Pause"
         });
-        localStorage.setItem("song-id", songId);
-        playingSongId = songId;
-        setSongDetailsInControlPanel();
+        localStorage.setItem("audio-id", audioId);
+        playingAudioId = audioId;
+        setAudioDetailsInControlPanel();
     }
 
     function setIsPlaying(_isPlaying) {
@@ -167,10 +166,10 @@ $(document).ready(function () {
         tooltipClass: "control-panel-tooltip"
     });
 
-    //using songArray was not necessary but used for convenience
-    function setSongDetailsInControlPanel() {
-        $(".current-song-details #name").text(songArray[playingSongId].name);
-        $(".current-song-details #creator").text(songArray[playingSongId].creator);
+    //using audioArray was not necessary but used for convenience
+    function setAudioDetailsInControlPanel() {
+        $(".current-audio-details #name").text(audioArray[playingAudioId].name);
+        $(".current-audio-details #creator").text(audioArray[playingAudioId].creator);
     }
 
     $(".icons #next").on("mouseup", function (event) {
