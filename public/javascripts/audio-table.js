@@ -257,7 +257,7 @@ $(document).ready(function () {
         loop = (loop + 1) % 3;
         localStorage.setItem("loop", loop);
         $("#repeat-badge").text(loop);
-    })
+    });
 
     function formatProgressTime(seconds) {
         let minutes = Math.floor(seconds / 60);
