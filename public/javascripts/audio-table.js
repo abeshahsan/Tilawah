@@ -182,12 +182,6 @@ $(document).ready(function () {
         $(".current-audio-details #creator").text(playlistAudio[playingAudioId].creator);
     }
 
-    //current = 0
-    //playlistaudioarray : 4, 7, 9, 11, 12131, 13131, 13131, 3131
-    //: 7, 12121, 121221
-    //object: 4 => {}, 9 => {}
-
-
     function playNext() {
         console.log(playlistAudioArray[currentAudioIndex]);
         if (loop == LOOP_CURRENT_PLAYLIST) {
@@ -218,45 +212,67 @@ $(document).ready(function () {
 
     function applyShuffle() {
         playlistAudioArray.sort(() => (Math.random() > .3) ? 1 : -1);
-        console.log(playlistAudioArray);
     }
 
     function removeShuffle() {
         playlistAudioArray = JSON.parse(JSON.stringify(unshuffledPlaylistAudioArray));
     }
 
-    shuffle = localStorage.getItem("shuffle");
-
-    console.log(localStorage.getItem("shuffle"));
-
-    if (localStorage.getItem("shuffle") == 0) {
-
-    } else {
+    if (localStorage.getItem("shuffle") == SHUFFLE_ON) {
         $(divShuffleIcon).addClass("active");
+        divShuffleIcon.tooltip({
+            content: "Shuffle on"
+        });
         applyShuffle()
     }
 
     divShuffleIcon.on("click", function () {
-        if (localStorage.getItem("shuffle") == 0) {
-            localStorage.setItem("shuffle", 1);
+        if (localStorage.getItem("shuffle") == SHUFFLE_OFF) {
+            localStorage.setItem("shuffle", SHUFFLE_ON);
             $(divShuffleIcon).addClass("active");
+            divShuffleIcon.tooltip({
+                content: "Shuffle on"
+            });
             applyShuffle()
         } else {
-            localStorage.setItem("shuffle", 0);
+            localStorage.setItem("shuffle", SHUFFLE_OFF);
             $(divShuffleIcon).removeClass("active");
+            divShuffleIcon.tooltip({
+                content: "Shuffle off"
+            });
             removeShuffle();
         }
     });
 
     loop = localStorage.getItem("loop");
-    $("#repeat-badge").text(loop);
-
     if (!loop) loop = NO_LOOP;
+
+    $("#repeat-badge").text(loop);
+    setTooltipForLoop(divLoopIcon);
+
+    function setTooltipForLoop() {
+        if (loop == NO_LOOP) {
+            divLoopIcon.tooltip({
+                content: "No loop"
+            });
+        } else if (loop == LOOP_CURRENT_PLAYLIST) {
+            divLoopIcon.tooltip({
+                content: "Loop this playlist"
+            });
+        } else {
+            divLoopIcon.tooltip({
+                content: "Loop this audio"
+            });
+        }
+    }
+
     divLoopIcon.on("click", function () {
 
         loop = (loop + 1) % 3;
         localStorage.setItem("loop", loop);
         $("#repeat-badge").text(loop);
+
+        setTooltipForLoop();
     });
 
     function formatProgressTime(seconds) {
@@ -282,6 +298,6 @@ $(document).ready(function () {
 
         });
         unshuffledPlaylistAudioArray = JSON.parse(JSON.stringify(playlistAudioArray));
-        if (localStorage.getItem("shuffle") == 1) applyShuffle();
+        if (localStorage.getItem("shuffle") == SHUFFLE_ON) applyShuffle();
     }
 });
