@@ -296,7 +296,7 @@ function getLastPlayback(userID, callback = function () {
         if (err) {
             console.log(err.sqlMessage + '\n' + err.sql);
         }
-        return callback(result);
+        return callback(result[0]);
     });
 }
 module.exports = {

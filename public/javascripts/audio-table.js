@@ -1,4 +1,13 @@
 $(document).ready(function () {
+
+    /**
+     * In the beginning, load the last playlist the user was playing.
+     * Save all audio ID in playlistAudio array.
+     * It's declared in index.js
+     */
+
+
+
     let selectedRow;
     let isPlaying = 0;
     let I_PlayPause = $("#play-pause");
@@ -7,14 +16,16 @@ $(document).ready(function () {
     let currentSrc = document.querySelector("#current-src");
 
     let playingAudioId = localStorage.getItem("audio-id");
+    if(!playingAudioId) playingAudioId = 0;
     let volumeValue = localStorage.getItem("volume-value");
     let manualSeek = false;
     let seekSlider = $("#seek-slider");
 
     let audioElapsedTime = $(".audio-progress .elapsed");
     let audioDuration = $(".audio-progress .duration");
+    let divShuffleIcon = $(".icons.shuffle");
 
-    let audioArray = {};
+    let playlistAudio = {};
 
     $(seekSlider).slider({
         value: currentTrack.currentTime,
@@ -31,8 +42,7 @@ $(document).ready(function () {
             manualSeek = false;
         }
     });
-    let sliderWidget = $('#seek-slider').slider("widget");
-
+    $('#seek-slider').slider("widget");
     currentTrack.onloadedmetadata = function () {
         $("#seek-slider").slider("option", {max: Math.floor(currentTrack.duration)});
         audioDuration.text(formatProgressTime(Math.floor(currentTrack.duration)));
@@ -55,23 +65,23 @@ $(document).ready(function () {
             $(element).addClass("selected");
             selectedRow = element;
         }
-        audioArray[$(element).attr("id")] = {
-            name: $(element).find(".title").text(),
-            creator: $(element).find(".creator").text(),
-            collection: $(element).find(".collection").text()
-        };
 
         $(element).on("mouseup", function (event) {
             switch (event.which) {
                 case 1:
-                    playAudio($(element))
+                    extractAudioIDsFromTable();
+                    playAudio($(element));
+                    console.log(playlistAudio);
                     break;
             }
         })
-
     });
 
-    setAudioDetailsInControlPanel();
+    try {
+        setAudioDetailsInControlPanel();
+    }catch (e) {
+        console.log(e)
+    }
 
     $('.audio-row .three-dots').on('mouseup', function (e) {
         e.preventDefault();
@@ -79,7 +89,7 @@ $(document).ready(function () {
         e.stopPropagation();
     });
 
-
+    localStorage.user = {}
     window.onbeforeunload = function reloadHandler() {
         localStorage.setItem("page-reloaded", "1");
         localStorage.setItem("volume-value", volumeValue);
@@ -166,10 +176,10 @@ $(document).ready(function () {
         tooltipClass: "control-panel-tooltip"
     });
 
-    //using audioArray was not necessary but used for convenience
+    //using playlistAudio was not necessary but used for convenience
     function setAudioDetailsInControlPanel() {
-        $(".current-audio-details #name").text(audioArray[playingAudioId].name);
-        $(".current-audio-details #creator").text(audioArray[playingAudioId].creator);
+        $(".current-audio-details #name").text(playlistAudio[playingAudioId].name);
+        $(".current-audio-details #creator").text(playlistAudio[playingAudioId].creator);
     }
 
     $(".icons #next").on("mouseup", function (event) {
@@ -182,11 +192,29 @@ $(document).ready(function () {
             playAudio($(selectedRow).prev("tr"));
     })
 
+    divShuffleIcon.on("click", function () {
+        if (localStorage.user.shuffle) {
+            localStorage.user.shuffle = false;
+        } else {
+            localStorage.user.shuffle = true;
+        }
+    })
+
     function formatProgressTime(seconds) {
         let minutes = Math.floor(seconds / 60);
         minutes = (minutes <= 9 ? `0${minutes}` : `${minutes}`);
         seconds = seconds % 60;
         seconds = (seconds <= 9 ? `0${seconds}` : `${seconds}`);
         return `${minutes}:${seconds}`;
+    }
+
+    async function extractAudioIDsFromTable() {
+        $(".audio-row").each(function (i, element) {
+            playlistAudio[$(element).attr("id")] = {
+                name: $(element).find(".title").text(),
+                creator: $(element).find(".creator").text(),
+                collection: $(element).find(".collection").text()
+            };
+        });
     }
 });

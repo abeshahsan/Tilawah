@@ -1,4 +1,4 @@
-let playlistAudio = ['audio1']
+let playlistAudio = [1, 2, 3, 4];
 
 $(document).ready(function () {
     let mainContainer = $(".main-container");
@@ -117,4 +117,13 @@ $(document).ready(function () {
     function hideProfileMenu() {
         $(".profile-menu").addClass("hidden");
     }
+
+
+    /**
+     * This part is for the last playback of the user.
+     */
+    let playlistID = $(".audio-table-current-playlist").text();
+    $.post(`playlist/${playlistID}`, function (response) {
+        console.log(response.playListAudio);
+    });
 });
