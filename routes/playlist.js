@@ -4,16 +4,20 @@ const path = require('path');
 const controls = require('../controls');
 
 router.get('/playlist/:id', async function (req, res, next) {
+    if (!req.session.user) {
+        res.redirect("/");
+    }
+
     try {
         let playListAudio = await controls.loadPlaylistAudio(req.params.id, req.session.allAudio);
-        
+
         let _playlists = [];
-        if(req.session.user != null){
+        if (req.session.user != null) {
             _playlists = req.session.user.playlists;
         }
         let lastPlaylistID = -1;
 
-        if(req.session.user && req.session.user.lastPlayback) {
+        if (req.session.user && req.session.user.lastPlayback) {
             lastPlaylistID = req.session.user.lastPlayback["PLAYLIST_ID"];
         }
 
@@ -37,21 +41,22 @@ router.get('/playlist/:id', async function (req, res, next) {
 router.post('/playlist/:id', async function (req, res, next) {
     try {
         let playListAudio = await controls.loadPlaylistAudio(req.params.id, req.session.allAudio);
-        if(!playListAudio) playListAudio = req.session.allAudio;
+        if (!playListAudio) playListAudio = req.session.allAudio;
         res.render('audio-table', {
             tableRows: playListAudio
         }, function (err, html) {
             if (err) {
                 console.warn(err)
             }
-            res.send({html, loginRegister: !req.session.user, playListAudio});
+            res.send({html: html, loginRegister: !req.session.user, playListAudio: playListAudio});
         });
     } catch (error) {
+        console.log(error)
         next();
     }
 });
 
-router.post('/new-playlist', async function(req, res, next){
+router.post('/new-playlist', async function (req, res, next) {
     let playlistName = req.body.playlistName;
     try {
         let result = await controls.createNewPlaylist(req.session.user.userID, playlistName);
@@ -61,7 +66,7 @@ router.post('/new-playlist', async function(req, res, next){
         });
         res.send({
             success: 1,
-            playlist:{
+            playlist: {
                 id: result.insertId,
                 name: playlistName
             }

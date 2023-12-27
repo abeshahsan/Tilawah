@@ -6,6 +6,13 @@ $(document).ready(function () {
      * It's declared in index.js
      */
 
+    let divPlaylistID = $(".audio-table-current-playlist");
+    let playlistID;
+
+    playlistID = window.location.pathname.split("/")[2];
+    divPlaylistID.text(playlistID);
+
+    console.log(playlistAudio);
 
 
     let selectedRow;
@@ -24,8 +31,6 @@ $(document).ready(function () {
     let audioElapsedTime = $(".audio-progress .elapsed");
     let audioDuration = $(".audio-progress .duration");
     let divShuffleIcon = $(".icons.shuffle");
-
-    let playlistAudio = {};
 
     $(seekSlider).slider({
         value: currentTrack.currentTime,
@@ -71,10 +76,9 @@ $(document).ready(function () {
                 case 1:
                     extractAudioIDsFromTable();
                     playAudio($(element));
-                    console.log(playlistAudio);
                     break;
             }
-        })
+        });
     });
 
     try {
