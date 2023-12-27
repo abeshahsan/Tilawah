@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const database = require('../database')
+const controls = require('../controls')
 const {data} = require("express-session/session/cookie");
 const mailer = require("../email");
 
@@ -15,26 +16,34 @@ router.post('/login-DOM', function (req, res) {
 });
 
 router.post('/login', function (req, res) {
-    database.findUser(req.body.email.trim(), req.body.password.trim(), function (user) {
+    database.findUser(req.body.email.trim(), req.body.password.trim(), async function (user) {
         if (!user) {
             return res.send({success: 0})
         } else {
             req.session.user = user;
             req.session.user.email = user.email;
-            database.loadPlaylistsOfCurrentUser(user.userID, function (result, error) {
-                if(error) {
-                    res.send({success: 0});
-                }
-                let playlists = [];
-                result.forEach(function (entry) {
-                    playlists.push({
-                        id: entry.PLAYLIST_ID,
-                        name: entry.PLAYLIST_NAME
+
+            try {
+                req.session.user.lastPlayback = await controls.getLastPlayback(user.userID);
+
+                database.loadPlaylistsOfCurrentUser(user.userID, function (result, error) {
+                    if (error) {
+                        res.send({success: 0});
+                    }
+                    let playlists = [];
+                    result.forEach(function (entry) {
+                        playlists.push({
+                            id: entry.PLAYLIST_ID,
+                            name: entry.PLAYLIST_NAME
+                        });
                     });
+                    req.session.user.playlists = playlists;
+                    res.send({success: 1});
                 });
-                req.session.user.playlists = playlists;
-                res.send({success: 1});
-            });
+            } catch (e) {
+                console.log(e)
+            }
+
         }
     })
 });

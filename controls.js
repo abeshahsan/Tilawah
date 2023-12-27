@@ -45,7 +45,7 @@ async function preLoadAllAudio() {
 async function loadPlaylistAudio(playlistID, allAudio) {
     return new Promise((resolve, reject) => {
         database.loadAudioOfPlaylist(playlistID, function (result, error) {
-            if(error) {
+            if (error) {
                 return reject(error);
             }
             let playlistAudio = {};
@@ -53,6 +53,17 @@ async function loadPlaylistAudio(playlistID, allAudio) {
                 playlistAudio[entry.AUDIO_ID] = allAudio[entry.AUDIO_ID];
             });
             resolve(playlistAudio);
+        });
+    });
+}
+
+async function getLastPlayback(userID) {
+    return new Promise((resolve, reject) => {
+        database.getLastPlayback(userID, function (result, error) {
+            if (error) {
+                return reject(error);
+            }
+            resolve(result);
         });
     });
 }
@@ -78,7 +89,7 @@ async function loadPlaylistAudio(playlistID, allAudio) {
 async function createNewPlaylist(userID, playlistName) {
     return new Promise((resolve, reject) => {
         database.createPlaylist(playlistName, userID, function (result, error) {
-            if(error) {
+            if (error) {
                 reject(error);
             }
             resolve(result);
@@ -89,7 +100,7 @@ async function createNewPlaylist(userID, playlistName) {
 async function addAudioToPlaylist(audioId, playlistId) {
     return new Promise((resolve, reject) => {
         database.addAudioToPlaylist(audioId, playlistId, function (success) {
-            if(!success) {
+            if (!success) {
                 reject(0);
             }
             resolve(1);
@@ -100,17 +111,18 @@ async function addAudioToPlaylist(audioId, playlistId) {
 async function deleteAudioFromPlaylist(audioId, playlistId) {
     return new Promise((resolve, reject) => {
         database.deleteAudioFromPlaylist(audioId, playlistId, function (success) {
-            if(!success) {
+            if (!success) {
                 reject(0);
             }
             resolve(1);
         });
     });
 }
-async function deletePlaylist(playlistId){
+
+async function deletePlaylist(playlistId) {
     return new Promise((resolve, reject) => {
         database.deletePlaylist(playlistId, function (success) {
-            if(!success) {
+            if (!success) {
                 reject(0);
             }
             resolve(1);
@@ -369,4 +381,14 @@ let countryOptions = [
     "Zimbabwe",
 ]
 
-module.exports = {options, countryOptions, preLoadAllAudio, loadPlaylistAudio, createNewPlaylist, addAudioToPlaylist, deleteAudioFromPlaylist, deletePlaylist}
+module.exports = {
+    options,
+    countryOptions,
+    preLoadAllAudio,
+    loadPlaylistAudio,
+    createNewPlaylist,
+    addAudioToPlaylist,
+    deleteAudioFromPlaylist,
+    deletePlaylist,
+    getLastPlayback
+}

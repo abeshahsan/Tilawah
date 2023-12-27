@@ -12,12 +12,18 @@ router.get(['/', '/home'], function (req, res) {
     }
     options.loginRegister = !req.session.user;
     options.hamburger = true;
+    let lastPlaylistID = -1;
+
+    if(req.session.user && req.session.user.lastPlayback) {
+        lastPlaylistID = req.session.user.lastPlayback["PLAYLIST_ID"];
+    }
 
     res.render('index', {
         options: options,
         user: req.session.user,
         audioList: _audioList,
         playlists: _playlists,
+        playlistID: lastPlaylistID,
         countryOptions: controls.countryOptions,
         route: req.path
     });

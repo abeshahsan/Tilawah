@@ -1,4 +1,4 @@
-let playlistAudio = ['audio1']
+let playlistAudio = [1, 2, 3, 4];
 
 $(document).ready(function () {
     let mainContainer = $(".main-container");
@@ -66,11 +66,10 @@ $(document).ready(function () {
         loadHome();
     })
 
-    $(hamburger).on("click", function(event){
-        if(sidebar.hasClass('close')){
+    $(hamburger).on("click", function (event) {
+        if (sidebar.hasClass('close')) {
             sidebar.removeClass('close');
-        }
-        else{
+        } else {
             sidebar.addClass('close');
         }
     })
@@ -117,4 +116,24 @@ $(document).ready(function () {
     function hideProfileMenu() {
         $(".profile-menu").addClass("hidden");
     }
+
+
+    /**
+     * This part is for the last playback of the user.
+     */
+    let divPlaylistID = $(".audio-table-current-playlist");
+    let playlistID;
+
+    if (window.location.pathname === "/" || window.location.pathname === "/home") {
+        divPlaylistID.text(-1);
+        playlistID = -1;
+    } else {
+        playlistID = window.location.pathname.split("/")[2];
+        divPlaylistID.text(playlistID);
+    }
+
+    // $.post(`playlist/${playlistID}`, function (response) {
+    //     playlistAudio = response.playListAudio;
+    //     console.log(response.playListAudio)
+    // });
 });
