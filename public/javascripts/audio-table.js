@@ -18,7 +18,7 @@ $(document).ready(function () {
     let currentSrc = document.querySelector("#current-src");
 
     let playingAudioId = localStorage.getItem("audio-id");
-    if(!playingAudioId) playingAudioId = 0;
+    if (!playingAudioId) playingAudioId = 0;
     let volumeValue = localStorage.getItem("volume-value");
     let manualSeek = false;
     let seekSlider = $("#seek-slider");
@@ -50,10 +50,9 @@ $(document).ready(function () {
     };
 
     currentTrack.addEventListener("ended", function () {
-        if(loop == LOOP_CURRENT_AUDIO){
+        if (loop == LOOP_CURRENT_AUDIO) {
             playAudio(playingAudioId);
-        }
-        else {
+        } else {
             playNext();
         }
     })
@@ -71,7 +70,6 @@ $(document).ready(function () {
             $(element).addClass("selected");
         }
 
-       
 
         $(element).on("mouseup", function (event) {
             switch (event.which) {
@@ -87,7 +85,7 @@ $(document).ready(function () {
 
     try {
         setAudioDetailsInControlPanel();
-    }catch (e) {
+    } catch (e) {
         console.log(e)
     }
 
@@ -105,8 +103,8 @@ $(document).ready(function () {
         localStorage.setItem("audio-id", playingAudioId);
     }
 
-    function playAudio(audioId) {  
-      
+    function playAudio(audioId) {
+
         currentSrc.setAttribute("src", "/song/" + audioId);
         currentTrack.load();
         currentTrack.volume = (volumeValue / 100);
@@ -183,20 +181,26 @@ $(document).ready(function () {
         $(".current-audio-details #name").text(playlistAudio[playingAudioId].name);
         $(".current-audio-details #creator").text(playlistAudio[playingAudioId].creator);
     }
-    
-    function playNext(){
+
+    //current = 0
+    //playlistaudioarray : 4, 7, 9, 11, 12131, 13131, 13131, 3131
+    //: 7, 12121, 121221
+    //object: 4 => {}, 9 => {}
+
+
+    function playNext() {
+        console.log(playlistAudioArray[currentAudioIndex]);
         if (loop == LOOP_CURRENT_PLAYLIST) {
             currentAudioIndex = (currentAudioIndex + 1) % playlistAudioArray.length;
             playAudio(playlistAudioArray[currentAudioIndex]);
-        }
-        else if (currentAudioIndex + 1 < playlistAudioArray.length){
+        } else if (currentAudioIndex + 1 < playlistAudioArray.length) {
             currentAudioIndex++;
             playAudio(playlistAudioArray[currentAudioIndex]);
-        }
-        else if(currentAudioIndex + 1 == playlistAudioArray.length){
+        } else if (currentAudioIndex + 1 == playlistAudioArray.length) {
             togglePlayPause();
         }
     }
+
     $(".icons.next").on("mouseup", function (event) {
         playNext();
     })
@@ -206,35 +210,48 @@ $(document).ready(function () {
         if (loop == LOOP_CURRENT_PLAYLIST) {
             currentAudioIndex = (currentAudioIndex - 1 + playlistAudioArray.length) % playlistAudioArray.length;
             playAudio(playlistAudioArray[currentAudioIndex]);
-        }
-        else if (currentAudioIndex - 1 >= 0){
+        } else if (currentAudioIndex - 1 >= 0) {
             currentAudioIndex--;
             playAudio(playlistAudioArray[currentAudioIndex]);
         }
     });
 
+    function applyShuffle() {
+        playlistAudioArray.sort(() => (Math.random() > .3) ? 1 : -1);
+        console.log(playlistAudioArray);
+    }
+
+    function removeShuffle() {
+        playlistAudioArray = JSON.parse(JSON.stringify(unshuffledPlaylistAudioArray));
+    }
+
     shuffle = localStorage.getItem("shuffle");
 
-    if(!shuffle) shuffle = false;
-    else $(divShuffleIcon).addClass("active");
+    console.log(localStorage.getItem("shuffle"));
+
+    if (localStorage.getItem("shuffle") == 0) {
+
+    } else {
+        $(divShuffleIcon).addClass("active");
+        applyShuffle()
+    }
 
     divShuffleIcon.on("click", function () {
-        if(!shuffle){
-           shuffle = true;
-           localStorage.setItem("shuffle", shuffle);
-           $(divShuffleIcon).addClass("active");
-        } 
-        else {
-            shuffle = false;
-            localStorage.setItem("shuffle", shuffle);
+        if (localStorage.getItem("shuffle") == 0) {
+            localStorage.setItem("shuffle", 1);
+            $(divShuffleIcon).addClass("active");
+            applyShuffle()
+        } else {
+            localStorage.setItem("shuffle", 0);
             $(divShuffleIcon).removeClass("active");
+            removeShuffle();
         }
     });
-    
+
     loop = localStorage.getItem("loop");
     $("#repeat-badge").text(loop);
 
-    if(!loop) loop = NO_LOOP;
+    if (!loop) loop = NO_LOOP;
     divLoopIcon.on("click", function () {
 
         loop = (loop + 1) % 3;
@@ -264,7 +281,7 @@ $(document).ready(function () {
             }
 
         });
+        unshuffledPlaylistAudioArray = JSON.parse(JSON.stringify(playlistAudioArray));
+        if (localStorage.getItem("shuffle") == 1) applyShuffle();
     }
-
-    console.log(playlistAudio);
 });

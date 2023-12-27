@@ -1,5 +1,6 @@
-let playlistAudioArray = [];
 
+let playlistAudioArray = [];
+let unshuffledPlaylistAudioArray = [];
 let playlistAudio = {};
 
 let currentAudioIndex = 0;
@@ -9,7 +10,7 @@ let LOOP_CURRENT_PLAYLIST = 1;
 let LOOP_CURRENT_AUDIO = 2;
 
 let loop = NO_LOOP; 
-let shuffle = false;
+let shuffle = 0;
 
 $(document).ready(function () {
     let mainContainer = $(".main-container");
