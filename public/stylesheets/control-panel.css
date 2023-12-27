@@ -67,13 +67,20 @@
 /*    width: 20px;*/
 /*}*/
 
-#repeat_badge {
+#repeat-badge {
     position: absolute;
-    margin-left: -20px;
-    margin-top: 1px;
+    right: 2px;
+    top: 2px;
     background-color: transparent;
 }
 
+.icons.shuffle i{
+    color:rgb(133, 135, 133);
+}
+
+.icons.shuffle.active i{
+    color:var(--controls-color);
+}
 
 #volume-controller {
     /* width: 250px; */
