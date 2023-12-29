@@ -31,7 +31,7 @@ router.get(['/', '/home'], function (req, res) {
 
 router.get(['/login', '/register'], function (req, res) {
     if (req.session.user) {
-        res.redirect("/");
+        return res.redirect("/");
     }
 
     let options = {}
@@ -49,7 +49,7 @@ router.get(['/login', '/register'], function (req, res) {
 
 router.get('/profile', function (req, res, next) {
     if (!req.session.user) {
-        res.redirect("/");
+        return res.redirect("/");
     }
 
     let options = {}
