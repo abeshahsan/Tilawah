@@ -78,12 +78,25 @@ router.post('/new-playlist', async function (req, res, next) {
     }
 });
 
-router.post('/update-playlist', async function (req, res, next) {
+router.post('/update-playlist/:playlistID', async function (req, res, next) {
     let playlistName = req.body.playlistName;
-    let playlistID = req.body.playlistID;
-    database.updatePlaylistName(playlistID, playlistName, function (success) {
-        res.send({success});
-    });
+    let playlistID = req.params.playlistID;
+    try {
+        await controls.updatePlaylistName(playlistID, playlistName);
+
+        
+
+        res.send({
+            success: 1,
+            playlist: {
+                id: playlistID,
+                name: playlistName
+            }
+        });
+    } catch (error) {
+        res.send({success: 0});
+        next();
+    }
 });
 
 
