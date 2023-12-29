@@ -6,7 +6,7 @@ $(document).ready(function () {
     let playlistItems = $(".playlist-menu-items");
 
     let playlists = {};
-    
+
     getPlaylists();
 
     let currentPlaylistId;
@@ -70,7 +70,7 @@ $(document).ready(function () {
                             addPlaylistToContextMenu(response.playlist);
                         } else {
                             updatePlaylistInSidebar(response.playlist);
-                            addPlaylistToContextMenu(playlists.playlist);
+                            addPlaylistToContextMenu(response.playlist);
                         }
                     } else {
                         alert('Something went wrong');
@@ -95,7 +95,7 @@ $(document).ready(function () {
     }
 
     function updatePlaylistInSidebar(playlist) {
-        $(`playlist-menu #${playlist.id}`).text(playlist.name);
+        $(`.playlist-menu-items #${playlist.id}`).text(playlist.name);
     }
 
 
@@ -254,6 +254,12 @@ $(document).ready(function () {
                 deletePlaylist(playlistId);
 
             }
+            else if(key == "renamePlaylist") {
+
+                playListURL = "/update-playlist/" + playlistId;
+                openModal();
+
+            }
         },
         items: {
 
@@ -262,8 +268,13 @@ $(document).ready(function () {
                 name: "Delete playlist",
                 className: "delete-playlist",
                 icon: "delete",
-                autoHide: true,
             },
+
+            "renamePlaylist":{
+                name: "Rename",
+                className: "rename-playlist",
+                icon: "edit",
+            }
         },
     });
 
