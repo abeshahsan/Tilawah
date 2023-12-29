@@ -3,7 +3,7 @@
     height: 70%;
     min-width: 420px;
     min-height: 60%;
-    background-color: rgb(237, 237, 255);
+    background-color: #d8dedb;
     border-radius: 20px;
     box-shadow: 0 0 15px 1px rgba(229, 227, 227, 0.75);
 
@@ -51,7 +51,7 @@
     width: 75%;
     border: none;
     border-radius: 6px;
-    background-color: rgb(96, 252, 96);
+    background-color: #0b885ae8;
     cursor: pointer;
     letter-spacing: 1px;
     font-size: 16px;
@@ -59,7 +59,7 @@
 }
 
 .register-container form div input[type="submit"]:hover {
-    box-shadow: 0 0 6px 1px rgba(96, 252, 96, 0.60);
+    box-shadow: 0 0 6px 1px rgba(255, 252, 255, 0.60);
 }
 
 .register-container form div input[id="register-submit"] {
@@ -70,7 +70,7 @@
     font-size: small;
     font-weight: bold;
     float: right;
-    color: #6519fd;
+    color: midnightblue;
     cursor: pointer;
     align-content: center;
 }

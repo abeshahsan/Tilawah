@@ -23,7 +23,7 @@
     width: 150px;
     height: 40px;
     font-size: 1em;
-    background-color: rgb(89, 11, 184);
+    background-color: #0b885ae8;
     border-radius: 5px;
     color: whitesmoke;
     cursor: pointer;
@@ -59,7 +59,7 @@
 
 .edit-button {
     background-color: transparent;
-    color: rgb(42, 5, 231);
+    color: midnightblue;
     width: auto;
     height: auto;
     font-size: small;
@@ -73,7 +73,7 @@
     border-radius: 5px;
     color: whitesmoke;
     cursor: pointer;
-    background-color: rgb(4, 190, 41);
+    background-color: #0b885ae8;
     width: 90px;
     height: 40px;
     margin: 5px 0 5px 0;

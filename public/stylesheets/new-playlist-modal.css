@@ -79,7 +79,7 @@ input:-webkit-autofill:active{
     border: none;
     outline: none;
     font-size: 1em;
-    color: #162938;
+    color: #083c1c;
     padding: 5px 5px 5px 5px; 
 }
 
@@ -115,7 +115,7 @@ input:-webkit-autofill:active{
 #new-playlist-submit-button{
     width: 25%;
     height: 40px;
-    background: rgba(97, 76, 232, 0.626);
+    background: #0b885ae8;
     border: none;
     outline: none;
     border-radius: 5px;
