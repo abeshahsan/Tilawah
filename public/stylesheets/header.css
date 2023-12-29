@@ -199,10 +199,10 @@
 }
 
 .header-tooltip {
-    background-color: #e3ffe3;
+    background-color: #2f2f2f;
     position: absolute;
     border-radius: 5px;
-    color: #044e2b;
+    color: whitesmoke;
     transition: none;
     font-size: 12px;
     min-width: 50px;
