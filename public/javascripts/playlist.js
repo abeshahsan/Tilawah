@@ -6,6 +6,7 @@ $(document).ready(function () {
     let playlistItems = $(".playlist-menu-items");
 
     let playlists = {};
+    
     getPlaylists();
 
     let currentPlaylistId;
@@ -180,7 +181,7 @@ $(document).ready(function () {
     }
 
     function getPlaylists(){
-        
+
         $.ajax({
             type: 'POST',
             url: '/get-playlists',
@@ -223,8 +224,6 @@ $(document).ready(function () {
 
         if(window.location.pathname.indexOf('playlist') !=-1)
             toShow[currentPlaylistId.toString()].visible = function(){return false;}
-
-        console.log(currentPlaylistId);
 
         return toShow;
     }
