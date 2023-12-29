@@ -88,8 +88,10 @@ router.post('/update-playlist/:playlistID', async function (req, res, next) {
         await controls.updatePlaylistName(playlistID, playlistName);
 
         let playlist = req.session.user.playlists.find(obj => {
-            return obj.id === playlistID
+            return obj.id == playlistID
         });
+
+        playlist.name = playlistName;
 
         res.send({
             success: 1,
@@ -99,6 +101,7 @@ router.post('/update-playlist/:playlistID', async function (req, res, next) {
             }
         });
     } catch (error) {
+        console.log(error);
         res.send({success: 0});
         next();
     }
