@@ -131,7 +131,7 @@ $(document).ready(function () {
         trigger: 'right',
         build: function($triggerElement, e){
             return {
-                className: 'audio-context-menu',            
+                className: 'audio-context-menu',          
                 callback:function(key, options){
                     let audioId = options.$trigger.attr("id");
                     let playlistId;
@@ -235,7 +235,21 @@ $(document).ready(function () {
         if(window.location.pathname.indexOf('playlist') !=-1)
             toShow[currentPlaylistId.toString()].visible = function(){return false;}
 
-        return toShow;
+        let defaultVal = {};
+
+        defaultVal["0"] = {
+            name: "My Playlists",
+            className: "my-playlists",
+            callback: function(){
+                return false;
+            }
+        }
+
+        defaultVal["1"] = {
+            type: "cm_seperator",
+        }
+
+        return Object.assign(defaultVal, toShow);
     }
 
 

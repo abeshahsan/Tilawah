@@ -99,3 +99,7 @@
     width: 1%;
     cursor: pointer;
 }
+
+.audio-context-menu .my-playlists:hover{
+    background-color: white;
+}
