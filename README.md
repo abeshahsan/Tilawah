@@ -24,21 +24,27 @@ It was made as the Lab project for <br> CSE 4508: RDBMS Programming Lab.
 - Express.js
 - MySQL
 
+## Clone the repository
+To clone the repository, type the command in any folder.
+```
+git clone https://github.com/abeshahsan/Tilawah.git
+```
+This will create a folder 'Tilawah' in that directory. It will have a complete copy of this repository. With a '.git' folder inside.
 
-### Setup and run
-To install the necessary packages, run these commands:
+## Setup and run
+
+### Install packages
 ```
 npm init -y
 npm install
 ```
 If there occurs any error due to your Node version, run these commands
-
 ```
 npm init -y
 npm run prepare
 ```
 
-Then use the following command to start the app:
+### Run
 ```
 npm start
 ```

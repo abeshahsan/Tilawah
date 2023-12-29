@@ -1,4 +1,20 @@
-let playlistAudio = [1, 2, 3, 4];
+
+let playlistAudioArray = [];
+let unshuffledPlaylistAudioArray = [];
+let playlistAudio = {};
+
+let currentAudioIndex = 0;
+
+let NO_LOOP = 0;
+let LOOP_CURRENT_PLAYLIST = 1;
+let LOOP_CURRENT_AUDIO = 2;
+
+
+let SHUFFLE_OFF = 0;
+let SHUFFLE_ON = 1;
+
+let loop = NO_LOOP; 
+let shuffle = SHUFFLE_OFF;
 
 $(document).ready(function () {
     let mainContainer = $(".main-container");

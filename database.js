@@ -90,8 +90,8 @@ function insertUser(email, password, name, callback = function () {
                             VALUES (${pool.escape(email)},
                                     SHA2(${pool.escape(password)}, 256))`;
 
-    const sqlProfile = `UPDATE profile 
-                        set NAME = ${pool.escape(name)} 
+    const sqlProfile = `UPDATE profile
+                        set NAME = ${pool.escape(name)}
                         WHERE USER_ID = ?; `;
 
     pool.query(sqlCredentials, (err, results) => {
@@ -210,13 +210,30 @@ function deletePlaylist(playlistID, callback = function () {
     });
 }
 
+function updatePlaylistName(playlistID, name, callback = function () {
+}) {
+    const sql = `UPDATE PLAYLIST
+                 set PLAYLIST_NAME = ${pool.escape(name)}
+                 WHERE PLAYLIST_ID = ${pool.escape(playlistID)}; `;
+
+    let SUCCESSFULLY_UPDATED = true;
+
+    pool.query(sql, (err) => {
+        if (err) {
+            SUCCESSFULLY_UPDATED = false;
+            console.log(err.sqlMessage + '\n' + err.sql);
+        }
+        return callback(SUCCESSFULLY_UPDATED);
+    });
+}
+
 function addAudioToPlaylist(audioID, playlistID, callback = function () {
 }) {
     const sql = `INSERT INTO AUDIO_PLAYLIST (AUDIO_ID, PLAYLIST_ID)
                  VALUES (${pool.escape(audioID)}, ${pool.escape(playlistID)})`;
 
     let SUCCESSFULLY_ADDED = true;
-    
+
     pool.query(sql, (err) => {
         if (err) {
             SUCCESSFULLY_ADDED = false;
@@ -274,8 +291,8 @@ function updateLastPlayback(userID, audioID, minute, second, callback = function
 }) {
     const sql = `UPDATE LAST_PLAYBACK
                  SET AUDIO_ID = ${pool.escape(audioID)},
-                     MINUTE =${pool.escape(minute)},
-                     SECOND =${pool.escape(second)}
+                     MINUTE   =${pool.escape(minute)},
+                     SECOND   =${pool.escape(second)}
                  WHERE USER_ID = ${pool.escape(userID)}`;
 
     let SUCCESSFULLY_UPDATED = true;
@@ -290,7 +307,8 @@ function updateLastPlayback(userID, audioID, minute, second, callback = function
 
 function getLastPlayback(userID, callback = function () {
 }) {
-    const sql = `SELECT * FROM LAST_PLAYBACK
+    const sql = `SELECT *
+                 FROM LAST_PLAYBACK
                  WHERE USER_ID = ${pool.escape(userID)}`;
     pool.query(sql, (err, result) => {
         if (err) {
@@ -299,6 +317,7 @@ function getLastPlayback(userID, callback = function () {
         return callback(result[0]);
     });
 }
+
 module.exports = {
     findUser,
     insertUser,
@@ -309,6 +328,7 @@ module.exports = {
     loadAllAudios,
     createPlaylist,
     deletePlaylist,
+    updatePlaylistName,
     addAudioToPlaylist,
     deleteAudioFromPlaylist,
     loadPlaylistsOfCurrentUser,

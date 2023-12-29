@@ -68,13 +68,20 @@
 /*    width: 20px;*/
 /*}*/
 
-#repeat_badge {
+#repeat-badge {
     position: absolute;
-    margin-left: -20px;
-    margin-top: 1px;
+    right: 2px;
+    top: 2px;
     background-color: transparent;
 }
 
+.icons.shuffle i{
+    color:rgb(133, 135, 133);
+}
+
+.icons.shuffle.active i{
+    color:var(--controls-color);
+}
 
 #volume-controller {
     /* width: 250px; */
@@ -207,14 +214,14 @@
 }
 
 .current-audio-details #name {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: bold;
     width: 100%;
     height: 100%;
 }
 
 .current-audio-details #creator {
-    font-size: 12px;
+    font-size: 11px;
     height: 100%;
     width: 100%;
 }
