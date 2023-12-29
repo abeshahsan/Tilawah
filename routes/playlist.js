@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const controls = require('../controls');
+const database = require('../database');
 
 router.get('/playlist/:id', async function (req, res, next) {
     if (!req.session.user) {
@@ -75,6 +76,14 @@ router.post('/new-playlist', async function (req, res, next) {
         res.send({success: 0});
         next();
     }
+});
+
+router.post('/update-playlist', async function (req, res, next) {
+    let playlistName = req.body.playlistName;
+    let playlistID = req.body.playlistID;
+    database.updatePlaylistName(playlistID, playlistName, function (success) {
+        res.send({success});
+    });
 });
 
 
