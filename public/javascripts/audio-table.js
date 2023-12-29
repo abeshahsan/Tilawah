@@ -17,7 +17,7 @@ $(document).ready(function () {
     let currentTrack = document.querySelector("#current-track");
     let currentSrc = document.querySelector("#current-src");
 
-    let playingAudioId = localStorage.getItem("audio-id");
+    let playingAudioId = Number(localStorage.getItem("audio-id"));
     if (!playingAudioId) playingAudioId = 0;
     let volumeValue = localStorage.getItem("volume-value");
     let manualSeek = false;
@@ -27,6 +27,8 @@ $(document).ready(function () {
     let audioDuration = $(".audio-progress .duration");
     let divShuffleIcon = $(".icons.shuffle");
     let divLoopIcon = $(".icons.loop");
+
+
 
     $(seekSlider).slider({
         value: currentTrack.currentTime,
@@ -75,7 +77,9 @@ $(document).ready(function () {
             switch (event.which) {
                 case 1:
                     extractAudioIDsFromTable();
-                    playAudio($(element).attr("id"));
+                    $(`.audio-row#${playingAudioId}`).removeClass("selected");
+                    playingAudioId = $(element).attr("id");
+                    playAudio(playingAudioId);
                     $(element).addClass("selected");
                     currentAudioIndex = i;
                     break;
@@ -95,7 +99,6 @@ $(document).ready(function () {
         e.stopPropagation();
     });
 
-    localStorage.user = {}
     window.onbeforeunload = function reloadHandler() {
         localStorage.setItem("page-reloaded", "1");
         localStorage.setItem("volume-value", volumeValue);
@@ -178,6 +181,13 @@ $(document).ready(function () {
 
     //using playlistAudio was not necessary but used for convenience
     function setAudioDetailsInControlPanel() {
+
+        if(!playlistAudio.length) {
+            $(".current-audio-details #name").text($(`.audio-row#${playingAudioId} .title`).text());
+            $(".current-audio-details #creator").text($(`.audio-row#${playingAudioId} .creator`).text());
+            return;
+        }
+
         $(".current-audio-details #name").text(playlistAudio[playingAudioId].name);
         $(".current-audio-details #creator").text(playlistAudio[playingAudioId].creator);
     }
