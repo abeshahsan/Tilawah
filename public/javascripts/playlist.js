@@ -45,6 +45,8 @@ $(document).ready(function () {
         }
     });
 
+    let playListURL = "/new-playlist"
+
     $("#new-playlist-form").validate({
         rules: {},
         messages: {
@@ -55,7 +57,7 @@ $(document).ready(function () {
         submitHandler: function (form) {
             $.ajax({
                 type: $(form).attr('method'),
-                url: "/new-playlist",
+                url: playListURL,
                 data: $(form).serialize(),
                 dataType: 'json',
             })
@@ -63,9 +65,13 @@ $(document).ready(function () {
                     if (response.success == true) {
                         clearModal();
                         closeModal();
-                        addPlaylistToSidebar(response.playlist);
-                        addPlaylistToContextMenu(response.playlist);
-                        
+                        if(playListURL == "/new-playlist") {
+                            addPlaylistToSidebar(response.playlist);
+                            addPlaylistToContextMenu(response.playlist);
+                        } else {
+                            updatePlaylistInSidebar(response.playlist);
+                            addPlaylistToContextMenu(playlists.playlist);
+                        }
                     } else {
                         alert('Something went wrong');
                     }
@@ -86,6 +92,10 @@ $(document).ready(function () {
                     break;
             }
         });
+    }
+
+    function updatePlaylistInSidebar(playlist) {
+        $(`playlist-menu #${playlist.id}`).text(playlist.name);
     }
 
 

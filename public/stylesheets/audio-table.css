@@ -7,7 +7,7 @@
 
 .audio-table-container {
     align-items: center;
-    background-color: #e2f9fa;
+    background-color: transparent;
     /*width: calc(100% - 50px);*/
     height: 100%;
     overflow-x: hidden;
@@ -78,11 +78,12 @@
 }
 
 .audio-table .audio-row:hover {
-    background-color: #cae0fa;
+    background-color: #dbe4f0;
 }
 
 .audio-table .audio-row.selected {
-    background-color: #c3cdda;
+    background-color: #9bdeaa;
+    color: #0d3d0d;
 }
 
 .audio-context-menu li {
@@ -90,7 +91,8 @@
 }
 
 .audio-context-menu li:hover {
-    background-color: red;
+    background-color: #add8e6;
+    color: black;
 }
 
 .three-dots{

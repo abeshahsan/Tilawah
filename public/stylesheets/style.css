@@ -18,3 +18,62 @@ body {
 .main-container::-webkit-scrollbar {
     visibility: hidden;
 }
+
+.search {
+    width: 400px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 10px;
+  }
+  
+  .searchTerm {
+    width: 400px;
+    border: 2px solid #147a57;
+    border-right: none;
+    padding: 5px;
+    height: 35px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #0d8559;
+    font-size: 15px;
+  }
+  
+  .searchTerm:focus{
+    color: black;
+  }
+
+  .searchButton {
+    width: 40px;
+    height: 35px;
+    border: 1px solid #0d8559;
+    background: linear-gradient(to top, #06aa7a 0%, #0d8559 80%);
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  
+.search-filter select {
+    /* border:none;
+    padding: 10px 20px;
+    border-radius:5px; */
+    margin: 0 0 0 10px;
+    padding: 0 0 0 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #0d8559;
+    border-radius: 5px;
+    width: 200px;
+    height: 35px;
+    font-size: medium;
+  }
+
+.searchbar, .search-filter {
+    flex: 1;
+    margin-right: 10px;
+}

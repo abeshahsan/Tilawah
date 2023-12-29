@@ -97,6 +97,17 @@ async function createNewPlaylist(userID, playlistName) {
     });
 }
 
+async function updatePlaylistName(playlistID, name) {
+    return new Promise((resolve, reject) => {
+        database.updatePlaylistName(playlistID, name, function (result, error) {
+            if (error) {
+                reject(error);
+            }
+            resolve(result);
+        });
+    });
+}
+
 async function addAudioToPlaylist(audioId, playlistId) {
     return new Promise((resolve, reject) => {
         database.addAudioToPlaylist(audioId, playlistId, function (success) {
@@ -390,5 +401,6 @@ module.exports = {
     addAudioToPlaylist,
     deleteAudioFromPlaylist,
     deletePlaylist,
-    getLastPlayback
+    getLastPlayback,
+    updatePlaylistName
 }
