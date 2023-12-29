@@ -6,7 +6,7 @@ const database = require('../database');
 
 router.get('/playlist/:id', async function (req, res, next) {
     if (!req.session.user) {
-        res.redirect("/");
+        return res.redirect("/");
     }
 
     try {
@@ -43,6 +43,7 @@ router.post('/playlist/:id', async function (req, res, next) {
     try {
         let playListAudio = await controls.loadPlaylistAudio(req.params.id, req.session.allAudio);
         if (!playListAudio) playListAudio = req.session.allAudio;
+
         res.render('audio-table', {
             tableRows: playListAudio
         }, function (err, html) {
@@ -80,11 +81,16 @@ router.post('/new-playlist', async function (req, res, next) {
 
 router.post('/update-playlist/:playlistID', async function (req, res, next) {
     let playlistName = req.body.playlistName;
+    playlistName = playlistName.trim();
     let playlistID = req.params.playlistID;
     try {
         await controls.updatePlaylistName(playlistID, playlistName);
 
-        
+        let playlist = req.session.user.playlists.find(obj => {
+            return obj.id === playlistID
+        });
+
+        playlist.name = playlistName;
 
         res.send({
             success: 1,
