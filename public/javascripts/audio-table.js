@@ -117,6 +117,8 @@ $(document).ready(function () {
             content: "Pause"
         });
         localStorage.setItem("audio-id", audioId);
+        $(`.audio-row#${playingAudioId}`).removeClass("selected");
+        $(`.audio-row#${audioId}`).addClass("selected");
         playingAudioId = audioId;
         setAudioDetailsInControlPanel();
     }
