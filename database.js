@@ -11,41 +11,36 @@ const pool = mysql.createPool({
 });
 
 function findUser(email, password, callback) {
-    const sqlCredentials = `SELECT *
-                            FROM credentials
+    const sql = `SELECT *
+                            FROM CREDENTIALS, PROFILE
                             WHERE EMAIL = ${pool.escape(email)}
-                              and PASSWORD_HASH = SHA2(${pool.escape(password)}, 256);`;
-
-    const sqlProfile = `SELECT *
-                        FROM PROFILE
-                        WHERE USER_ID = ?`;
+                              and PASSWORD_HASH = SHA2(${pool.escape(password)}, 256)
+                              and CREDENTIALS.USER_ID = PROFILE.USER_ID;`;
 
     let user = {};
 
-    pool.query(sqlCredentials, (err, credentialResults) => {
+    pool.query(sql, (err, result) => {
+
         if (err) {
             console.error(err.sql);
-            return callback(null)
-        } else if (!credentialResults.length) {
-            console.log(credentialResults.length)
-            console.log('credentials not found')
+            return callback(null);
+        } 
+
+        else if (!result.length) {
+            console.log(result.length);
+            console.log('credentials not found');
             return callback(null);
         }
-        //else the user has been found
-        user.userID = credentialResults[0][dbTables.credentials.userID]
-        pool.query(sqlProfile, user.userID, (err, profileResults) => {
-            if (err) {
-                console.log(err.sql);
-                return callback(null)
-            }
-            const {GENDER, COUNTRY, NAME} = profileResults[0];
-            user.name = NAME
-            user.gender = GENDER === 0 || null ? "Female" : "Male"
-            user.country = COUNTRY
-            user.email = email
-            return callback(user);
-        });
+        
+        user.userID = result[0]["USER_ID"];
+        user.name = result[0]["NAME"];
+        user.gender = result[0]["GENDER"] == 0 || null ? "Female" : "Male"
+        user.country = result[0]["COUNTRY"]
+        user.email = email
+        return callback(user);
     });
+
+
 }
 
 /**

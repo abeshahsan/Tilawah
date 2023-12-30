@@ -71,6 +71,7 @@ $(document).ready(function () {
                         } else {
                             updatePlaylistInSidebar(response.playlist);
                             addPlaylistToContextMenu(response.playlist);
+                            playListURL = "/new-playlist";
                         }
                     } else {
                         alert('Something went wrong');

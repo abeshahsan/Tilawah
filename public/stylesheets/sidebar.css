@@ -45,6 +45,7 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    position: relative;
 }
 
 /*.sidebar.close{*/
@@ -71,12 +72,22 @@
 }
 
 .fa-thin.fa-plus {
-    scale: 1.5;
+    scale: 1.2;
+}
+
+.new-playlist{
+    height: 30px;
+    width: 30px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     right: 5px;
 }
 
-.fa-thin.fa-plus:hover {
+.new-playlist:hover {
     background-color: #e3e3e3;
 }
 
