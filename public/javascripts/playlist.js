@@ -107,6 +107,7 @@ $(document).ready(function () {
                 getPlaylistAudio(playlistId);
                 break;
         }
+        $(".search").show();
     });
 
     function getPlaylistAudio(playlistId) {
