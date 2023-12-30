@@ -6,7 +6,7 @@
     height: 100%;
     padding-top: 25px;
     padding-bottom: 25px;
-    background-color: rgb(231, 221, 252, .5);
+    background-color: whitesmoke;
 }
 
 .error {
@@ -41,8 +41,8 @@
 }
 
 .form-input input:disabled, #country:disabled {
-    background-color: rgb(215, 212, 243);
-    border-color: rgb(169, 166, 166);
+    background-color: rgb(225, 242, 235);
+    border-color: rgb(202, 202, 202);
     color: #494949;
 }
 

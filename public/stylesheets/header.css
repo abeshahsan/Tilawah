@@ -154,7 +154,7 @@
 
 .profile-panel .profile-menu ul {
     list-style: none;
-    color: #bdb9fa;
+    color: rgba(144, 238, 144, 0.65);
     margin: 10px auto;
     padding: 0 20px 0 20px;
 }
@@ -187,7 +187,7 @@
 }
 
 .profile-panel .profile-menu-item:hover {
-    background-color: #ded1f8;
+    background-color: #daf2eb;
 }
 
 .profile-panel.hidden {
