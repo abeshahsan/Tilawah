@@ -154,3 +154,21 @@ So, a message will appear there to tell the user to login.
 .message-to-login .sidebar-login-button:hover {
     box-shadow: 0 0 6px 1px rgba(144, 238, 144, 0.65);
 }
+
+.playlist-menu-items .item{
+    font-weight: 600;
+    color: #03432d;
+    background-color: #cbefe2;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #b2ddce;
+    margin: 5px;
+}
+
+.playlist-menu{
+    margin-top: 20px;
+}
+
+.playlist-menu-items .item:hover{
+    background-color: #add8e69d !important;
+}
