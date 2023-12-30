@@ -90,6 +90,7 @@ $(document).ready(function () {
             switch (event.which) {
                 case 1:
                     getPlaylistAudio(playlist.id);
+                    $(".playlist-name").text(playlist.name);
                     break;
             }
         });
@@ -104,6 +105,7 @@ $(document).ready(function () {
         switch (event.which) {
             case 1:
                 let playlistId = $(this).attr("id");
+                $(".playlist-name").text(playlists[playlistId].name);
                 getPlaylistAudio(playlistId);
                 break;
         }
@@ -302,6 +304,7 @@ $(document).ready(function () {
         })
         .done(function(res){
             $('.playlist-menu-items #' + playlistId).remove();
+            $('.playlist-name').text('');
             removePlaylistFromContextMenu(playlistId);
             if(currentPlaylistId == playlistId){
                 loadHome();

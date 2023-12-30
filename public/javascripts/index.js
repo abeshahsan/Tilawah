@@ -99,6 +99,7 @@ $(document).ready(function () {
             history.pushState("login", "", "/login");
         });
         $(".search").hide();
+        $(".playlist-name").text("");
     }
 
     function loadHome() {
@@ -110,10 +111,12 @@ $(document).ready(function () {
             history.pushState("home", "", "/");
         });
         $(".search").show();
+        $(".playlist-name").text("");
     }
 
     if(window.location.pathname == "/login" || window.location.pathname == "/register" || window.location.pathname == "/profile") {
         $(".search").hide();
+        $(".playlist-name").text("");
     }
 
     function loadRegisterDOM() {
@@ -127,6 +130,7 @@ $(document).ready(function () {
             history.pushState("register", "", "/register");
         });
         $(".search").hide();
+        $(".playlist-name").text("");
     }
 
     function loadProfileDOM() {
@@ -135,6 +139,7 @@ $(document).ready(function () {
             history.pushState("profile", "", "/profile");
         });
         $(".search").hide();
+        $(".playlist-name").text("");
     }
 
     function hideProfileMenu() {

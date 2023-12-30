@@ -19,17 +19,17 @@
             <% if (options.hamburger) { %>
                 <%- include('sidebar.ejs') %>
             <% } %>
-            <div style="display: flex; flex-direction: column; width: 100%; height: 100%; gap: 5px">
-
-                    <div class="search">
-                        <div class="searchbar">
-                            <%- include('searchbar.ejs') %>
-                        </div>
-                        <div class="search-filter">
-
-                            <%- include('search-filter.ejs') %>
-                        </div>
+            <div style="display: flex; flex-direction: column; width: 100%; height: 100%; gap: 5px;">
+                <div class="search">
+                    <div class="searchbar">
+                        <%- include('searchbar.ejs') %>
                     </div>
+                    <div class="search-filter">
+                        
+                        <%- include('search-filter.ejs') %>
+                    </div>
+                </div>
+                <div class="playlist-name"></div>
 
                 <div style="width: 100%; height: 100%" class="main-container">
                     <% if (route === "/" || route === "/home" || route === "/playlist" ) { %>
