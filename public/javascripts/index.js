@@ -98,6 +98,7 @@ $(document).ready(function () {
             $(mainContainer).html(html);
             history.pushState("login", "", "/login");
         });
+        $(".search").hide();
     }
 
     function loadHome() {
@@ -108,6 +109,11 @@ $(document).ready(function () {
             $(sidebar).removeClass("hidden");
             history.pushState("home", "", "/");
         });
+        $(".search").show();
+    }
+
+    if(window.location.pathname == "/login" || window.location.pathname == "/register" || window.location.pathname == "/profile") {
+        $(".search").hide();
     }
 
     function loadRegisterDOM() {
@@ -120,6 +126,7 @@ $(document).ready(function () {
             $(mainContainer).html(html);
             history.pushState("register", "", "/register");
         });
+        $(".search").hide();
     }
 
     function loadProfileDOM() {
@@ -127,6 +134,7 @@ $(document).ready(function () {
             $(mainContainer).html(html);
             history.pushState("profile", "", "/profile");
         });
+        $(".search").hide();
     }
 
     function hideProfileMenu() {
