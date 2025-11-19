@@ -9,7 +9,7 @@ It was made as the Lab project for <br> CSE 4508: RDBMS Programming Lab.
 
 - [Abesh Ahsan](https://github.com/abeshahsan)
 - [Anika Farzana](https://github.com/Ani445)
-- [Sayema Amin](https://github.com/SayemaSaj)
+- [Sayemah Amin](https://github.com/SayemaSaj)
 
 ## Technologies Used
 
